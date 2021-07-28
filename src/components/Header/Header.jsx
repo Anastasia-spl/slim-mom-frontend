@@ -2,6 +2,7 @@ import Logo from '../Logo';
 import Nav from '../Nav';
 import NavAuth from '../NavAuth';
 import NavNotAuth from '../NavNotAuth';
+
 import { ReactComponent as ArrowBack } from '../../assets/pictures/arrowBack.svg';
 import { useHistory } from 'react-router-dom';
 
@@ -18,6 +19,7 @@ export default function Header({ goBack }) {
     <div className={styles.HeaderWrapper}>
       <div className={styles.navWrapper}>
         <Logo isAuthorized={isAuthenticated} />
+        {/* <Nav> {isAuthenticated ? <NavNotAuth /> : <NavAuth />} </Nav> */}
         <Nav> {isAuthenticated ? <NavAuth /> : <NavNotAuth />} </Nav>
         {goBack && (
           <button type="button" className={styles.arrowBtn}>
