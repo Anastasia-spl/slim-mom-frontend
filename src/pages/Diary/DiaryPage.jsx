@@ -9,13 +9,15 @@ import ButtonAdd from '../../components/ButtonAdd';
 import { useDispatch, useSelector } from 'react-redux';
 import { dowloadProducts } from '../../redux/products/products-operations';
 import { productsSelectors } from '../../redux/products';
-// import ListSearchProducts from '../../components/ListSearchProducts';
+import Loader from '../../components/Loader';
+import Header from '../../components/Header';
 
 const Diary = () => {
   const [isModal, setIsModal] = useState(false);
   const classNameModal = style.diary__formModal;
   const classNameMobile = style.diary__formMobile;
   const isListProducts = useSelector(productsSelectors.getStateProducts);
+  const isLoader = useSelector(productsSelectors.getLoader);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +30,16 @@ const Diary = () => {
 
   return (
     <Container>
+      <Header />
       <div className={style.diary}>
         <Date />
         <FormProduct className={classNameMobile} />
-        {isListProducts.length > 0 ? <ListProducts /> : null}
+        {isLoader ? (
+          <Loader />
+        ) : isListProducts.length > 0 ? (
+          <ListProducts />
+        ) : null}
+
         <ButtonAdd onHandleToggleModal={handleToggleModal} />
         {isModal ? (
           <ModalAddProducts
@@ -39,7 +47,6 @@ const Diary = () => {
             onHandleToggleModal={handleToggleModal}
           />
         ) : null}
-        {/* <ListSearchProducts /> */}
       </div>
     </Container>
   );

@@ -16,6 +16,7 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
   const dispatch = useDispatch();
 
   const isModal = onHandleToggleModal ? true : false;
+  const [isDisabledBtn, setIsDisabledBtn] = useState(true);
 
   const handleAddProduct = event => {
     event.preventDefault();
@@ -51,6 +52,7 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
 
   const handelSelectItem = name => {
     setNameProduct(name);
+    setIsDisabledBtn(false);
     dispatch(productsReducer.actions.searchProductsSuccess([]));
   };
 
@@ -71,9 +73,14 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
         name={volumProduct}
         value={volumProduct}
         placeholder="Граммы"
+        required
         onChange={handleChangeVolumProduct}
       />
-      <button className={style.diary__btnAddProduct} type="submit">
+      <button
+        className={style.diary__btnAddProduct}
+        type="submit"
+        disabled={isDisabledBtn}
+      >
         {document.documentElement.clientWidth < 768 ? 'Добавить' : '+'}
       </button>
       <ListSearchProducts onHandleSelectItem={handelSelectItem} />

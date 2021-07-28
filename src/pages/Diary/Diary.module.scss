@@ -24,12 +24,12 @@
 .diary {
   @include for-size(desktop) {
     // padding: 137px 30px 60px 115px;
-    padding-top: 137px;
-    padding-right: 30px;
-    padding-bottom: 60px;
+    margin-top: 137px;
+    margin-bottom: 60px;
     margin-right: auto;
-    margin-left: auto;
-    width: 600px;
+    padding-left: 115px;
+    padding-right: 30px;
+    width: 745px;
   }
 
   @include for-size(desktop-only) {
