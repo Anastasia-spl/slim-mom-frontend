@@ -16,11 +16,11 @@
     width: 100%;
   }
   @include for-size(tablet) {
-    padding: 17px 49px 17px 49px;
+    padding: 17px 87px 17px 69px;
   }
   @include for-size(desktop) {
     justify-content: start;
-    padding: 129px 0 0 90px;
+    padding: 79px 129px 20px 90px;
     &:after {
       content: '';
       border: none;

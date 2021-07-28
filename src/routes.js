@@ -39,16 +39,18 @@ const routes = [
   {
     exact: false,
     path: '/login',
-    label: 'Login',
+    label: 'Вход',
     component: LoginPage,
     isProtected: false,
+    isNav: false,
   },
   {
     exact: false,
     path: '/register',
-    label: 'Signup',
+    label: 'Регистрация',
     component: RegistrationPage,
     isProtected: false,
+    isNav: false,
   },
   {
     component: Page404,

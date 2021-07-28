@@ -4,46 +4,54 @@ import { NavLink } from 'react-router-dom';
 //   authOperations,
 // } from '../../redux/auth/auth-operations';
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+
+import routes from '../../routes';
 import styles from './NavAuth.module.scss';
 import BurgerBtn from '../BurgerBtn';
 
 export default function NavAuth() {
+  const [menuActive, setMenuActive] = useState(false);
+
   const dispatch = useDispatch();
   // const name = useSelector(authSelectors.getUsername);
   const name = 'CurrentUser';
-
+  const navLinks = useMemo(() => routes.filter(route => route.isNav), []);
   // const onLogOut = useCallback(() => {
   //   dispatch(authOperations.logOut());
   // }, [dispatch]);
-  const onLogOut = console.log('logout');
+  const onLogOut = () => {
+    console.log('logout');
+  };
+
   return (
     <div className={styles.NavAuthWrapper}>
-      <div className={styles.linksWapper}>
-        <NavLink
-          to="/diary"
-          className={styles.enter}
-          activeClassName={styles.activeEnter}
-        >
-          дневник
-        </NavLink>
-        <NavLink
-          to="/calculator"
-          className={styles.enter}
-          activeClassName={styles.activeEnter}
-        >
-          калькулятор
-        </NavLink>
+      <div
+        className={
+          menuActive
+            ? `${styles.linksWrapper} ${styles.active}`
+            : `${styles.linksWrapper}`
+        }
+      >
+        {navLinks.map(link => (
+          <NavLink
+            to={link.path}
+            exact
+            className={styles.enter}
+            activeClassName={styles.activeEnter}
+          >
+            {link.label}
+          </NavLink>
+        ))}
       </div>
+
+      <BurgerBtn active={menuActive} setActive={setMenuActive} />
 
       <div className={styles.userWrapper}>
         <p className={styles.userName}>{name}</p>
         <button onClick={onLogOut} className={styles.logout}>
           Выйти
         </button>
-      </div>
-      <div className={styles.burgerWrapper}>
-        <BurgerBtn />
       </div>
     </div>
   );
