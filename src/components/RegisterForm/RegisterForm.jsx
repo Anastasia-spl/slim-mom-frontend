@@ -27,8 +27,7 @@ const RegisterForm = () => {
       .required('Обязательное поле'),
   });
 
-  const login = routes.find(route => route.label === 'Login');
-
+  const login = routes.find(route => route.label === 'Вход');
   return (
     <div className={styles.registration}>
       <Formik

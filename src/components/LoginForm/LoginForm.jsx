@@ -22,7 +22,7 @@ const LoginForm = () => {
       .required('Обязательное поле'),
   });
 
-  const signup = routes.find(route => route.label === 'Signup');
+  const signup = routes.find(route => route.label === 'Регистрация');
 
   return (
     <div className={styles.loginisation}>
