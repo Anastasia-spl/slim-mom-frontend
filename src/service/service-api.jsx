@@ -10,7 +10,7 @@ const apiService = {
   getnotAllowedProducts() {
     return axios.get(`/products/recomendation'`);
   },
-
+    
   logInUser(credentials) {
     return axios.post(`/users/login`, credentials);
   },

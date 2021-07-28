@@ -1,0 +1,155 @@
+@import '../../assets/baseStyles.scss';
+
+.NavAuthWrapper {
+  text-transform: uppercase;
+  font-family: $secondary-font;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: $primary-letter-spacing;
+  display: flex;
+}
+
+.linksWrapper {
+  transition: $cubic;
+  background-color: $decorative-color;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // margin-top: 140px;
+
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 80px;
+  left: 0;
+  transform: translateX(-100%);
+  z-index: 100;
+
+  @include for-size(tablet) {
+    top: 78px;
+  }
+
+  // @include for-size(desktop) {
+    
+  // }
+}
+
+.linksWrapper.active {
+  transform: translateX(0);
+  transition: $cubic;
+  z-index: 100;
+}
+
+// .NavAuthWrapper {
+//   text-transform: uppercase;
+//   font-family: $secondary-font;
+//   font-size: 14px;
+//   font-weight: 700;
+//   letter-spacing: $primary-letter-spacing;
+//   transition: $cubic;
+//   display: flex;
+//   position: fixed;
+//   width: 100vw;
+//   height: 100vh;
+//   top: 80px;
+//   right: 0;
+//   & a:first-child {
+//     margin-right: 14px;
+//   }
+
+//   @include for-size(tablet) {
+//     margin-left: auto;
+//   }
+//   @include for-size(desktop) {
+//     border-left: 2px solid $light-gray;
+//     height: 32px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding-left: 22px;
+//   }
+// }
+
+// .linksWrapper {
+//   text-transform: uppercase;
+//   display: none;
+
+//   @include for-size(desktop) {
+//     display: block;
+//   }
+// }
+
+.enter {
+  margin-top: 60px;
+  text-decoration: none;
+  color: $secondary-text-color;
+  &:hover {
+    color: $primary-text-color;
+  }
+}
+
+.activeEnter {
+  color: $primary-text-color;
+}
+
+.userWrapper {
+  color: $secondary-text-color;
+  text-transform: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  right: 0;
+  background-color: #eff1f3;
+  bottom: -40px;
+  height: 40px;
+
+  @include for-size(tablet) {
+    position: static;
+    background-color: transparent;
+    width: unset;
+  }
+  @include for-size(desktop) {
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+  }
+}
+
+.logout {
+  font-family: $secondary-font;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: $primary-letter-spacing;
+  transition: $cubic;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+  padding-right: 15px;
+  &:hover {
+    color: $primary-text-color;
+  }
+  @include for-size(tablet) {
+    margin-right: 50px;
+    padding-right: 0;
+  }
+}
+
+.userName {
+  margin-right: 15px;
+  border-right: 2px solid $light-gray;
+  padding-right: 15px;
+  text-transform: capitalize;
+  transition: $cubic;
+  color: $primary-text-color;
+}
+
+//  {
+//   outline: solid red;
+// }

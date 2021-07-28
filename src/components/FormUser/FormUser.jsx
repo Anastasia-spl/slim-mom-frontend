@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import styles from './FormUser.module.scss';
-<<<<<<< Updated upstream
-import { Formik, Field, Form } from 'formik';
-import Modal from '../Modal/Modal';
-import products from '../../JsonData/products.json';
-
-export default function FormUser() {
-  const [modalActive, setModalActive] = useState(false);
-  const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
-=======
-import React, { useState, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import React, { useState, useEffect } from 'react';
+import Modal from '../Modal/Modal'; 
 import * as Yup from 'yup';
-import Modal from '../../components/Modal/Modal';
+import products from '../../JsonData/products.json';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -46,85 +37,103 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function FormUser() {
-  const [modalActive, setModalActive] = useState(false);
->>>>>>> Stashed changes
-
-  useEffect(() => {
+   const [modalActive, setModalActive] = useState(false);
+  const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
+  
+   useEffect(() => {
+      const handleKeyDown = event => {
+    if (event.code === 'Escape') {
+      setModalActive(false);
+    }
+  };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
-  const handleKeyDown = event => {
-    if (event.code === 'Escape') {
-      setModalActive(false);
-    }
-  };
-
+  
   return (
     <div className={styles.formWrapper}>
       <h1 className={styles.header}>
         Просчитай свою суточную норму калорий прямо сейчас
       </h1>
       <Formik
+        validationSchema={SignupSchema}
+        className={styles.formWrapper}
         initialValues={{
           height: '',
           age: '',
           weight: '',
           desiredWeight: '',
+          bloodGroup: '',
         }}
-        onSubmit={async values => {
-          await new Promise(r => setTimeout(r, 500));
-          alert(JSON.stringify(values, null, 2));
+        onSubmit={async (values, { resetForm }) => {
+          await localStorage.setItem('user', JSON.stringify(values));
+          resetForm();
         }}
       >
-        {({ values }) => (
-          <Form>
-            <label htmlFor="height">
+        {({ values, handleSubmit, isValid, dirty, handleChange }) => (
+          <Form className={styles.form} onSubmit={handleSubmit}>
+            <label>
               <Field
+                value={values.height}
+                onChange={handleChange}
                 id="height"
                 name="height"
                 placeholder="Рост *"
                 type="text"
                 className={styles.input}
               />
+              <ErrorMessage name="height">
+                {msg => <p className={styles.notification}>{msg}</p>}
+              </ErrorMessage>
             </label>
-            <label>
+
+            <label className={styles.age}>
               <Field
+                value={values.age}
+                onChange={handleChange}
                 id="age"
                 name="age"
                 className={styles.input}
                 placeholder="Возраст *"
               />
+              <ErrorMessage name="age">
+                {msg => <p className={styles.notification}>{msg}</p>}
+              </ErrorMessage>
             </label>
-            <label>
+
+            <label className={styles.weight}>
               <Field
+                value={values.weight}
+                onChange={handleChange}
                 id="weight"
                 name="weight"
                 className={styles.input}
                 placeholder="Текущий вес *"
               />
+              <ErrorMessage name="weight">
+                {msg => <p className={styles.notification}>{msg}</p>}
+              </ErrorMessage>
             </label>
+
             <label>
               <Field
+                value={values.desiredWeight}
+                onChange={handleChange}
                 id="desiredWeight"
                 name="desiredWeight"
                 type="text"
                 className={styles.input}
                 placeholder="Желаемый вес *"
               />
+              <ErrorMessage name="desiredWeight">
+                {msg => <p className={styles.notification}>{msg}</p>}
+              </ErrorMessage>
             </label>
-            <label>
+
+            <div id="bloodGroup" className={styles.label}>
               Группа крови *
-<<<<<<< Updated upstream
-              <Field id="" type="radio" value="1" />
-              <Field id="" type="radio" value="2" />
-              <Field id="" type="radio" value="3" />
-              <Field id="" type="radio" value="4" />
-            </label>
-            <button type="submit" onClick={toggleModal}>
-=======
               <div
                 role="group"
                 aria-labelledby="bloodGroup"
@@ -176,7 +185,6 @@ export default function FormUser() {
               className={styles.btnSubmit}
               onClick={() => setModalActive(true)}
             >
->>>>>>> Stashed changes
               Похудеть
             </button>
           </Form>
@@ -184,13 +192,6 @@ export default function FormUser() {
       </Formik>
       {modalActive && <Modal active={modalActive} setActive={setModalActive} />}
       <form className={styles.formUser}></form>
-      {modalActive && (
-        <Modal
-          products={products}
-          active={modalActive}
-          setActive={setModalActive}
-        />
-      )}
     </div>
   );
 }

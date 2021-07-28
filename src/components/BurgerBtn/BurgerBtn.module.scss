@@ -1,0 +1,91 @@
+@import '../../assets/baseStyles.scss';
+
+.burgerBtnWrapper {
+  // height: 50px;
+  // width: 100%;
+  position: relative;
+  // z-index: 50;
+  display: flex;
+  align-items: center;
+  width: 18px;
+  height: 12px;
+  cursor: pointer;
+  // justify-content: flex-end;
+  // margin-left: auto;
+
+  @include for-size(tablet) {
+    position: absolute;
+    right: 50px;
+    top: 33px;
+  }
+
+  @include for-size(desktop) {
+    display: none;
+  }
+}
+
+.burgerBtn .burgerBtn__line,
+.burgerBtn .burgerBtn__line::before,
+.burgerBtn .burgerBtn__line::after {
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background-color: $primary-text-color;
+}
+
+.burgerBtn .burgerBtn__line::before,
+.burgerBtn .burgerBtn__line::after {
+  content: '';
+}
+.burgerBtn .burgerBtn__line::before {
+  transform: translateY(-5px);
+}
+
+.burgerBtn .burgerBtn__line::after {
+  transform: translateY(5px);
+}
+
+.cross .burgerBtn__line {
+  height: 0;
+}
+
+.cross .burgerBtn__line::before {
+  transform: rotate(45deg);
+}
+
+.cross .burgerBtn__line::after {
+  transform: rotate(-45deg);
+}
+// .burgerBtn {
+//   width: 18px;
+//   height: 12px;
+//   margin-left: auto;
+//   position: relative;
+//   cursor: pointer;
+// }
+
+// .burgerBtn:after {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   width: 18px;
+//   background-color: black;
+//   height: 2px;
+// }
+
+// .burgerBtn__line {
+//   position: absolute;
+//   top: 5px;
+//   width: 18px;
+//   background-color: black;
+//   height: 2px;
+// }
+
+// .burgerBtn:before {
+//   content: '';
+//   position: absolute;
+//   bottom: 0;
+//   width: 18px;
+//   background-color: black;
+//   height: 2px;
+// }

@@ -6,7 +6,13 @@ const LoginPage = lazy(() =>
 const RegistrationPage = lazy(() =>
   import('./pages/RegistrationPage' /*webpackChunkName: "registration-page" */),
 );
-const Diary = lazy(() => import('./pages/Diary'));
+const Diary = lazy(() =>
+  import('./pages/Diary' /*webpackChunkName: "diary-page" */),
+);
+
+const CalculatorPage = lazy(() =>
+  import('./pages/Calculator' /*webpackChunkName: "calculator-page" */),
+);
 const Page404 = lazy(() => import('./pages/Page404'));
 
 const routes = [
@@ -19,21 +25,32 @@ const routes = [
   {
     path: '/diary',
     component: Diary,
+    label: 'Дневик',
     isProtected: false,
+    isNav: true,
+  },
+  {
+    path: '/calculator',
+    component: CalculatorPage,
+    label: 'Калькулятор',
+    isProtected: false,
+    isNav: true,
   },
   {
     exact: false,
     path: '/login',
-    label: 'Login',
+    label: 'Вход',
     component: LoginPage,
     isProtected: false,
+    isNav: false,
   },
   {
     exact: false,
     path: '/register',
-    label: 'Signup',
+    label: 'Регистрация',
     component: RegistrationPage,
     isProtected: false,
+    isNav: false,
   },
   {
     component: Page404,
