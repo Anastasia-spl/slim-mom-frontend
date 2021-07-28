@@ -15,6 +15,11 @@
     "react-scripts": "4.0.3",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+<<<<<<< Updated upstream
+=======
+    "shortid": "^2.2.16",
+    "simplebar": "^5.3.5",
+>>>>>>> Stashed changes
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },

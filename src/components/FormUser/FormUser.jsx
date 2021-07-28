@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './FormUser.module.scss';
+<<<<<<< Updated upstream
 import { Formik, Field, Form } from 'formik';
 import Modal from '../Modal/Modal';
 import products from '../../JsonData/products.json';
@@ -7,6 +8,46 @@ import products from '../../JsonData/products.json';
 export default function FormUser() {
   const [modalActive, setModalActive] = useState(false);
   const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
+=======
+import React, { useState, useEffect } from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import Modal from '../../components/Modal/Modal';
+
+const SignupSchema = Yup.object().shape({
+  height: Yup.number()
+    .min(145, 'Слишком мало...')
+    .typeError('Рост должен быть числом')
+    .positive()
+    .integer('Введите число')
+    .max(224, 'Слишком много...')
+    .required('Заполните все поля'),
+  age: Yup.number()
+    .positive()
+    .typeError('Возраст должен быть числом')
+    .integer()
+    .min(6, 'Слишком мало...')
+    .max(110, 'Слишком много...')
+    .required('Заполните все поля'),
+  weight: Yup.number()
+    .typeError('Вес должен быть числом')
+    .positive()
+    .integer()
+    .min(35, 'Слишком мало...')
+    .max(350, 'Слишком много...')
+    .required('Заполните все поля'),
+  desiredWeight: Yup.number()
+    .typeError('Желаемый вес должен быть числом')
+    .positive()
+    .integer()
+    .min(35, 'Слишком мало...')
+    .max(300, 'Слишком много...')
+    .required('Заполните все поля'),
+});
+
+export default function FormUser() {
+  const [modalActive, setModalActive] = useState(false);
+>>>>>>> Stashed changes
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -76,17 +117,72 @@ export default function FormUser() {
             </label>
             <label>
               Группа крови *
+<<<<<<< Updated upstream
               <Field id="" type="radio" value="1" />
               <Field id="" type="radio" value="2" />
               <Field id="" type="radio" value="3" />
               <Field id="" type="radio" value="4" />
             </label>
             <button type="submit" onClick={toggleModal}>
+=======
+              <div
+                role="group"
+                aria-labelledby="bloodGroup"
+                className={styles.radiogroup}
+              >
+                <label className={styles.label}>
+                  <Field
+                    onChange={handleChange}
+                    className={styles.radio}
+                    type="radio"
+                    name="bloodGroup"
+                    value="1"
+                    checked={true}
+                  />
+                  1
+                </label>
+                <label className={styles.label}>
+                  <Field
+                    className={styles.radio}
+                    type="radio"
+                    name="bloodGroup"
+                    value="2"
+                  />
+                  2
+                </label>
+                <label className={styles.label}>
+                  <Field
+                    className={styles.radio}
+                    type="radio"
+                    name="bloodGroup"
+                    value="3"
+                  />
+                  3
+                </label>
+                <label className={styles.label}>
+                  <Field
+                    className={styles.radio}
+                    type="radio"
+                    name="bloodGroup"
+                    value="4"
+                  />
+                  4
+                </label>
+              </div>
+            </div>
+            <button
+              type="submit"
+              disabled={!isValid || !dirty}
+              className={styles.btnSubmit}
+              onClick={() => setModalActive(true)}
+            >
+>>>>>>> Stashed changes
               Похудеть
             </button>
           </Form>
         )}
       </Formik>
+      {modalActive && <Modal active={modalActive} setActive={setModalActive} />}
       <form className={styles.formUser}></form>
       {modalActive && (
         <Modal
