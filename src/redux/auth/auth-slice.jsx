@@ -13,7 +13,6 @@ const { actions, reducer } = createSlice({
   initialState: initialUserState,
   reducers: {
     registerRequest: state => {
-      console.log(state);
       state.isLoading = true;
     },
     registerSuccess: (state, { payload }) => {
@@ -23,7 +22,6 @@ const { actions, reducer } = createSlice({
       state.isLoggedOn = true;
     },
     registerError: (state, { payload }) => {
-      console.log(state, payload);
       state.error = payload;
       state.isLoading = false;
       state.isLoggedOn = false;

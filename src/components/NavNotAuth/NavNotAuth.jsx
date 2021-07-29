@@ -8,16 +8,20 @@ export default function NavNotAuth() {
   const navLinks = useMemo(() => routes.filter(route => !route.isNav), []);
   return (
     <div className={styles.NavNotAuthWrapper}>
-      {navLinks.map(link => (
-        <NavLink
-          to={link.path}
-          exact
-          className={styles.enter}
-          activeClassName={styles.activeEnter}
-        >
-          {link.label}
-        </NavLink>
-      ))}
+      <NavLink
+        to="/login"
+        className={styles.enter}
+        activeClassName={styles.activeEnter}
+      >
+        вход
+      </NavLink>
+      <NavLink
+        to="/register"
+        className={styles.enter}
+        activeClassName={styles.activeEnter}
+      >
+        регистрация
+      </NavLink>
     </div>
   );
 }
