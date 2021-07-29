@@ -1,6 +1,9 @@
 import styles from './FormUser.module.scss';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import React, { useState, useEffect } from 'react';
+import Modal from '../Modal/Modal'; 
 import * as Yup from 'yup';
+import products from '../../JsonData/products.json';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -34,6 +37,21 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function FormUser() {
+   const [modalActive, setModalActive] = useState(false);
+  const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
+  
+   useEffect(() => {
+      const handleKeyDown = event => {
+    if (event.code === 'Escape') {
+      setModalActive(false);
+    }
+  };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+  
   return (
     <div className={styles.formWrapper}>
       <h1 className={styles.header}>
@@ -161,17 +179,18 @@ export default function FormUser() {
                 </label>
               </div>
             </div>
-
             <button
               type="submit"
               disabled={!isValid || !dirty}
               className={styles.btnSubmit}
+              onClick={() => setModalActive(true)}
             >
               Похудеть
             </button>
           </Form>
         )}
       </Formik>
+      {modalActive && <Modal active={modalActive} setActive={setModalActive} />}
       <form className={styles.formUser}></form>
     </div>
   );

@@ -15,6 +15,7 @@ import logger from 'redux-logger';
 /* ПРИМЕР ИМПОРТА РЕДЬЮСЕРОВ*/
 
 
+import { notAllowedProductsReducer } from './notAllowedProducts';
 import { productsReducer } from './products';
 import { authSlice } from './auth';
 
@@ -33,10 +34,20 @@ const authPersistConfig = {
   whitelist: ['token'],
 };
 
+// const store = configureStore({
+//   reducer: {
+//     // foodOrDate: someReducer,
+//     auth: persistReducer(usersPersistConfig, usersReducer)
+//   },
+//   middleWare,
+//   devTools: process.env.NODE_ENV === "development",
+// });
+
 const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authSlice.reducer),
     products: productsReducer.reducer,
+    notAllowedProducts: notAllowedProductsReducer.reducer,
   },
   middleWare,
   devTools: process.env.NODE_ENV === 'development',
