@@ -1,27 +1,27 @@
 import { NavLink } from 'react-router-dom';
 import { useMemo } from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import routes from '../../routes';
 import styles from './NavNotAuth.module.scss';
 
 export default function NavNotAuth() {
-  const navLinks = useMemo(() => routes.filter(route => !route.isNav), []);
+  const navLinks = useMemo(() => routes.filter(route => route.isLogBar), []);
+
   return (
     <div className={styles.NavNotAuthWrapper}>
-      <NavLink
-        to="/login"
-        className={styles.enter}
-        activeClassName={styles.activeEnter}
-      >
-        вход
-      </NavLink>
-      <NavLink
-        to="/register"
-        className={styles.enter}
-        activeClassName={styles.activeEnter}
-      >
-        регистрация
-      </NavLink>
+      {navLinks.map(link => (
+        <NavLink
+          key={uuidv4()}
+          to={link.path}
+          exact
+          className={styles.enter}
+          activeClassName={styles.activeEnter}
+        >
+          {link.label}
+        </NavLink>
+      ))}
     </div>
   );
 }

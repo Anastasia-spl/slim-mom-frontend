@@ -14,12 +14,6 @@ const BurgerBtn = ({ active, setActive }) => {
         <span className={styles.burgerBtn__line} />
       </div>
     </div>
-
-    // <div className={styles.burgerBtnWrapper}>
-    //   <div className={styles.burgerBtn} onClick={() => setActive(!active)}>
-    //     <span className={styles.burgerBtn__line} />
-    //   </div>
-    // </div>
   );
 };
 
