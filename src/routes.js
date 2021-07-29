@@ -25,7 +25,7 @@ const routes = [
   {
     path: '/diary',
     component: Diary,
-    label: 'Дневик',
+    label: 'Дневник',
     isProtected: false,
     isNav: true,
   },
@@ -42,7 +42,7 @@ const routes = [
     label: 'Вход',
     component: LoginPage,
     isProtected: false,
-    isNav: false,
+    isLogBar: true,
   },
   {
     exact: false,
@@ -50,7 +50,7 @@ const routes = [
     label: 'Регистрация',
     component: RegistrationPage,
     isProtected: false,
-    isNav: false,
+    isLogBar: true,
   },
   {
     component: Page404,
