@@ -1,4 +1,4 @@
-import styles from './FormUser.module.scss';
+import styles from './DailyCaloriesForm.module.scss';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React, { useState, useEffect } from 'react';
 import Modal from '../Modal/Modal';
@@ -36,7 +36,7 @@ const SignupSchema = Yup.object().shape({
     .required('Заполните все поля'),
 });
 
-export default function FormUser() {
+export default function DailyCaloriesForm() {
   const [modalActive, setModalActive] = useState(false);
   const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
 
