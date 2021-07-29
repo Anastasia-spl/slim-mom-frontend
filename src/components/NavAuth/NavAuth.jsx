@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
-// import {
-//   authSelectors,
-//   authOperations,
-// } from '../../redux/auth/auth-operations';
+import {
+  // authSelectors,
+  authOperations,
+} from '../../redux/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -17,12 +17,10 @@ export default function NavAuth() {
   // const name = useSelector(authSelectors.getUsername);
   const name = 'CurrentUser';
   const navLinks = useMemo(() => routes.filter(route => route.isNav), []);
-  // const onLogOut = useCallback(() => {
-  //   dispatch(authOperations.logOut());
-  // }, [dispatch]);
-  const onLogOut = () => {
-    console.log('logout');
-  };
+
+  const onLogOut = useCallback(() => {
+    dispatch(authOperations.logOut());
+  }, [dispatch]);
 
   return (
     <div className={styles.NavAuthWrapper}>

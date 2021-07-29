@@ -2,8 +2,8 @@
 const value = localStorage.getItem('user');
 const parsData = JSON.parse(value);
 
-// console.log(value);
-// console.log(parsData);
+console.log(value);
+console.log(parsData);
 
 // const formula =
 //   10 * parsData.weight +
