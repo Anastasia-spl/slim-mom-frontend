@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = `https://connections-api.herokuapp.com/`;
+axios.defaults.baseURL = `https://slim-mom-5group.herokuapp.com`;
 
 const apiService = {
   getCurrentUser() {
@@ -10,13 +10,13 @@ const apiService = {
   getnotAllowedProducts() {
     return axios.get(`/products/recomendation'`);
   },
-    
+
   logInUser(credentials) {
     return axios.post(`/users/login`, credentials);
   },
 
   registerUser(credentials) {
-    return axios.post(`/users/signup`, credentials);
+    return axios.post(`/users/registration`, credentials);
   },
 
   logOutUser() {

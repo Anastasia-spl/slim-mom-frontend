@@ -13,17 +13,15 @@ const { actions, reducer } = createSlice({
   initialState: initialUserState,
   reducers: {
     registerRequest: state => {
-      console.log(state);
       state.isLoading = true;
     },
     registerSuccess: (state, { payload }) => {
       state.user = payload.user;
-      state.token = payload.token;
+      state.token = payload.user.token;
       state.isLoading = false;
       state.isLoggedOn = true;
     },
     registerError: (state, { payload }) => {
-      console.log(state, payload);
       state.error = payload;
       state.isLoading = false;
       state.isLoggedOn = false;
@@ -33,7 +31,7 @@ const { actions, reducer } = createSlice({
     },
     loginSuccess: (state, { payload }) => {
       state.user = payload.user;
-      state.token = payload.token;
+      state.token = payload.user.token;
       state.isLoading = false;
       state.isLoggedOn = true;
     },

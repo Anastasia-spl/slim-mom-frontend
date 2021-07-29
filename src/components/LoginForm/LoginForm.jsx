@@ -12,7 +12,7 @@ const LoginForm = () => {
   const onLogin = credentials => dispatch(authOperations.logIn(credentials));
 
   const validationSchema = yup.object().shape({
-    email: yup
+    login: yup
       .string()
       .typeError('Должно быть строкой')
       .required('Обязательное поле'),
@@ -27,11 +27,10 @@ const LoginForm = () => {
   return (
     <div className={styles.loginisation}>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ login: '', password: '' }}
         validateOnBlur
         onSubmit={(values, { resetForm }) => {
           onLogin(values);
-          console.log(values);
           resetForm();
         }}
         validationSchema={validationSchema}
@@ -53,19 +52,19 @@ const LoginForm = () => {
                 Логин*
                 <input
                   className={
-                    errors.email && touched.email
+                    errors.login && touched.login
                       ? styles.input__error
                       : styles.input
                   }
                   type="text"
-                  name="email"
+                  name="login"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.email}
+                  value={values.login}
                 />
               </label>
-              {errors.email && touched.email && (
-                <p className={styles.notification}>{errors.email}</p>
+              {errors.login && touched.login && (
+                <p className={styles.notification}>{errors.login}</p>
               )}
             </div>
             <div className={styles.input__form}>
@@ -98,7 +97,7 @@ const LoginForm = () => {
                 Вход
               </button>
               <NavLink className={styles.btn__register} to={`${signup.path}`}>
-                Регистрация
+                {signup.label}
               </NavLink>
             </div>
           </form>
@@ -108,24 +107,3 @@ const LoginForm = () => {
   );
 };
 export default LoginForm;
-
-// {/* <div className={styles.input__form}>
-//               <label className={styles.label}>
-//                 Логин*
-//                 <input
-//                   className={
-//                     errors.login && touched.login
-//                       ? styles.input__error
-//                       : styles.input
-//                   }
-//                   type="text"
-//                   name="login"
-//                   onChange={handleChange}
-//                   onBlur={handleBlur}
-//                   value={values.login}
-//                 />
-//               </label>
-//               {errors.login && touched.login && (
-//                 <p className={styles.notification}>{errors.login}</p>
-//               )}
-//             </div> */}
