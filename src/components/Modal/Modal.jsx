@@ -1,11 +1,13 @@
+import formula from './Formula';
 import styles from './Modal.module.scss';
-import propTypes from 'prop-types';
-
-// const formula = 10 * вес + 6.25 * рост - 5 * возраст - 161 - 10 * (вес - желаемый вес);
-
-const formula = 2800;
+const shortid = require('shortid');
 
 export default function Modal({ active, setActive, products }) {
+  const buttonClose = () => {
+    const closeModal = () => setActive(false);
+    const redirect = (window.location.href = '/register');
+  };
+
   return (
     <>
       <div
@@ -14,10 +16,13 @@ export default function Modal({ active, setActive, products }) {
         }
         onClick={() => setActive(false)}
       >
+        <div className={styles.modalClose2}></div>
+        <div className={styles.modalRectangle}></div>
         <div className={styles.modal} onClick={e => e.stopPropagation()}>
-          <div className={styles.modalClose} onClick={() => setActive(false)}>
-            x
-          </div>
+          <div
+            className={styles.modalClose}
+            onClick={() => setActive(false)}
+          ></div>
           <h2 className={styles.modalTitle}>
             Ваша рекомендуемая суточная норма калорий составляет
           </h2>
@@ -33,7 +38,7 @@ export default function Modal({ active, setActive, products }) {
             </h3>
             {/* <ol className={styles.modalBlockList}>
               {products.map(product => (
-                <li className={styles.modalList} key={product.id}>
+                <li className={styles.modalList} key={shortid.generate()}>
                   {product.title.ru}
                 </li>
               ))}
@@ -48,7 +53,7 @@ export default function Modal({ active, setActive, products }) {
           <button
             type="button"
             className={styles.modalButton}
-            onClick={() => setActive(false)}
+            onClick={buttonClose}
           >
             Начать худеть
           </button>
@@ -57,12 +62,3 @@ export default function Modal({ active, setActive, products }) {
     </>
   );
 }
-
-// Modal.propTypes = {
-//   products: propTypes.arrayOf(
-//     propTypes.shape({
-//       id: propTypes.string.isRequired,
-//       title: propTypes.string.isRequired,
-//     }).isRequired,
-//   ),
-// };

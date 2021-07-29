@@ -2,14 +2,14 @@ import Container from '../components/Container';
 import Nav from '../components/Nav';
 import Header from '../components/Header';
 import HomePageBackground from '../components/HomePageBackground';
-import FormUser from '../components/FormUser';
+import DailyCaloriesForm from '../components/DailyCaloriesForm';
 
 export default function HomePage() {
   return (
     <HomePageBackground>
       <Header goBack={false} />
       <Container>
-        <FormUser />
+        <DailyCaloriesForm />
       </Container>
     </HomePageBackground>
   );

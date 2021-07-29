@@ -26,6 +26,7 @@ const { actions, reducer } = createSlice({
     },
     deleteProductSuccess: (state, { payload }) => {
       state.products = state.products.filter(product => product.id !== payload);
+      state.isLoading = false;
     },
     deleteProductRequest: state => {
       state.isLoading = true;
@@ -48,6 +49,7 @@ const { actions, reducer } = createSlice({
     },
     searchProductsSuccess: (state, { payload }) => {
       state.searchList = payload;
+      state.isLoading = false;
     },
     searchProductsRequest: (state, { payload }) => {
       state.isLoading = true;

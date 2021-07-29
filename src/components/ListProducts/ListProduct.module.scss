@@ -4,12 +4,12 @@
   display: block;
   margin: 0;
   padding: 0;
-  max-height: 270;
+  max-height: 270px;
   overflow: auto;
 
   @include for-size(desktop-only) {
     margin-top: 30px;
-    max-height: 240;
+    max-height: 240px;
   }
 
   @include for-size(tablet-only) {

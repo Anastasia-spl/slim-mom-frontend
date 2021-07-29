@@ -78,6 +78,15 @@
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
   cursor: pointer;
 
+  &:hover,
+  &:focus {
+    box-shadow: 1px -1px 92px 1px rgba(255, 0, 0, 0.75);
+    -webkit-box-shadow: 1px -1px 92px 1px rgba(255, 0, 0, 0.75);
+    -moz-box-shadow: 1px -1px 92px 1px rgba(255, 0, 0, 0.75);
+  }
+
+  transition: box-shadow, 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
   @include for-size(tablet-only) {
     position: relative;
     left: 50%;
