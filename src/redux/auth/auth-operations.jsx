@@ -15,11 +15,10 @@ const token = {
 
 const register = credentials => async dispatch => {
   dispatch(authSlice.actions.registerRequest());
-  console.log(credentials);
+
   try {
     const { data } = await apiService.registerUser(credentials);
-    console.log(data.token);
-    token.set(data.token);
+    token.set(data.user.token);
     dispatch(authSlice.actions.registerSuccess(data));
   } catch (error) {
     // toast.error(error.message);
@@ -33,8 +32,7 @@ const logIn = credentials => async dispatch => {
 
   try {
     const { data } = await apiService.logInUser(credentials);
-    console.log(data.token);
-    token.set(data.token);
+    token.set(data.user.token);
     dispatch(authSlice.actions.loginSuccess(data));
   } catch (error) {
     // toast.error(error.message);
