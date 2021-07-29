@@ -5,50 +5,110 @@ body {
 }
 
 .backdrop {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background: #212121;
-  z-index: 2;
-  transform: scale(0);
-}
-
-// .backdrop.active {
-//   transform: scale(1);
-// }
-
-.modal {
   @include for-size(mobile) {
-    max-width: 320px;
-    padding: 15px 40px 15px 80px;
-    background-color: $accent-text-color;
-    top: 110px;
-    left: 0px;
-    position: absolute;
+    // display: none;
   }
   @include for-size(tablet) {
-    max-width: 594px;
-    padding: 43px 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #21212112;
+    z-index: 1;
+    transform: scale(0);
   }
+  @include for-size(desktop) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #21212112;
+    z-index: 1;
+    transform: scale(0);
+  }
+}
+
+.backdrop.active {
+  transform: scale(1);
+}
+
+.modalRectangle {
+  @include for-size(mobile) {
+    background-color: #eff1f3;
+    width: 320px;
+    height: 40px;
+    position: absolute;
+    top: -590px;
+    left: -20px;
+  }
+  @include for-size(tablet) {
+    display: none;
+  }
+  @include for-size(desktop) {
+    display: none;
+  }
+}
+
+.modal {
+  background-color: $accent-text-color;
+
+  @include for-size(mobile) {
+    max-width: 320px;
+    padding: 40px 15px 80px 15px;
+    position: absolute;
+    top: -550px;
+    left: -20px;
+  }
+
+  @include for-size(tablet) {
+    max-width: 594px;
+    padding: 64px 64px 80px 64px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    box-shadow: 0px 22px 40px rgba(0, 0, 0, 0.1);
+  }
+
   @include for-size(desktop) {
     max-width: 690px;
     padding: 64px 110px;
-    top: 25%;
-    left: 25%;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
     position: absolute;
     box-shadow: 0px 22px 40px rgba(0, 0, 0, 0.1);
   }
 }
 
+.modalClose2 {
+  @include for-size(mobile) {
+    background: url(../../pictures/close2.svg) no-repeat;
+    position: absolute;
+    left: 0px;
+    top: -575px;
+    width: 30px;
+    height: 30px;
+    z-index: 4;
+  }
+  @include for-size(tablet) {
+    display: none;
+  }
+  @include for-size(desktop) {
+    display: none;
+  }
+}
+
 .modalClose {
-  // @include for-size(mobile) {
-  //   display: none;
-  // }
   @include for-size(tablet) {
     background: url(../../pictures/close.svg) no-repeat;
     position: absolute;
@@ -56,9 +116,8 @@ body {
     top: 24px;
     width: 11px;
     height: 11px;
-    max-width: 594px;
-    padding: 43px 64px;
   }
+
   @include for-size(desktop) {
     background: url(../../pictures/close.svg) no-repeat;
     position: absolute;
@@ -72,18 +131,25 @@ body {
 .modalTitle {
   font-family: $primary-font;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 1.2;
-  text-align: center;
-  color: $primary-text-color;
-  max-width: 509px;
+  display: inline-block;
   margin: 0px;
+  color: $primary-text-color;
+  @include for-size(mobile) {
+    font-size: 18px;
+    line-height: 1.44;
+  }
+  @include for-size(tablet) {
+    font-size: 15px;
+    line-height: 1.44;
+    text-align: center;
+  }
 
-  // @include for-size(mobile) {
-  //   font-size: 18px;
-  //   line-height: 1.44;
-  //   max-width: 290px;
-  // }
+  @include for-size(desktop) {
+    font-size: 24px;
+    line-height: 1.2;
+    text-align: center;
+    max-width: 509px;
+  }
 }
 
 .modalData,
@@ -95,6 +161,10 @@ body {
   letter-spacing: 0.04em;
   color: $decorative-color;
   margin: 40px 0px 0px 0px;
+
+  @include for-size(tablet) {
+    margin: 22px 0px 0px 0px;
+  }
 }
 .modalData {
   font-size: 48px;
@@ -104,14 +174,23 @@ body {
 }
 
 .modalLine {
-  width: 330px;
-  height: 1px;
-  margin: 40px auto 0px auto;
-  text-align: center;
   background-color: $light-gray;
-  // @include for-size(mobile) {
-  //   width: 290px;
-  // }
+  height: 1px;
+
+  @include for-size(mobile) {
+    width: 290px;
+    margin: 40px auto 0px auto;
+  }
+
+  @include for-size(mobile) {
+    width: 290px;
+    margin: 30px 0px 0px 0px;
+  }
+
+  @include for-size(desktop) {
+    width: 330px;
+    margin: 40px auto 0px auto;
+  }
 }
 
 .modalText {
@@ -124,13 +203,10 @@ body {
 }
 
 .modalAlignment {
-  display: block;
-  // @include for-size(tablet) {
-  //   margin-left: 50px;
-  // }
-  // @include for-size(desktop) {
-  //   margin-left: 70px;
-  // }
+  @include for-size(desktop) {
+    display: block;
+    margin-left: 70px;
+  }
 }
 .modalProducts {
   font-family: $primary-font;
@@ -139,7 +215,12 @@ body {
   line-height: 1.2;
   letter-spacing: 0.04em;
   color: $primary-text-color;
-  margin: 12px 0px 0px 0px;
+  @include for-size(mobile) {
+    margin: 20px 0px 0px 0px;
+  }
+  @include for-size(desktop) {
+    margin: 12px 0px 0px 0px;
+  }
 }
 
 .modalBlockList {
@@ -157,7 +238,12 @@ body {
   line-height: 1.2;
   letter-spacing: 0.04em;
   color: $secondary-text-color;
-  margin: 22px 0px 0px 0px;
+  @include for-size(mobile) {
+    margin: 20px 0px 0px 0px;
+  }
+  @include for-size(desktop) {
+    margin: 22px 0px 0px 0px;
+  }
 }
 
 .modalButton {

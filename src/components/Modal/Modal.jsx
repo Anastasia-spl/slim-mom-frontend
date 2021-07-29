@@ -12,10 +12,12 @@ export default function Modal({ active, setActive, products }) {
     <>
       <div
         className={
-          active ? `[${styles.backdrop} ${styles.active}]` : styles.backdrop
+          active ? `${styles.backdrop} ${styles.active}` : styles.backdrop
         }
         onClick={() => setActive(false)}
       >
+        <div className={styles.modalClose2}></div>
+        <div className={styles.modalRectangle}></div>
         <div className={styles.modal} onClick={e => e.stopPropagation()}>
           <div
             className={styles.modalClose}
@@ -50,7 +52,6 @@ export default function Modal({ active, setActive, products }) {
           </div>
           <button
             type="button"
-            to="/register"
             className={styles.modalButton}
             onClick={buttonClose}
           >
