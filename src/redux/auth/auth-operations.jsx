@@ -18,6 +18,7 @@ const register = credentials => async dispatch => {
   console.log(credentials);
   try {
     const { data } = await apiService.registerUser(credentials);
+    console.log(data.token);
     token.set(data.token);
     dispatch(authSlice.actions.registerSuccess(data));
   } catch (error) {
@@ -32,7 +33,7 @@ const logIn = credentials => async dispatch => {
 
   try {
     const { data } = await apiService.logInUser(credentials);
-
+    console.log(data.token);
     token.set(data.token);
     dispatch(authSlice.actions.loginSuccess(data));
   } catch (error) {
