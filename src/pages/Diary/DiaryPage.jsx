@@ -8,7 +8,7 @@ import ModalAddProducts from '../../components/ModalAddProducts';
 import ButtonAdd from '../../components/ButtonAdd';
 import { useDispatch, useSelector } from 'react-redux';
 import { dowloadProducts } from '../../redux/products/products-operations';
-import { productsSelectors } from '../../redux/products';
+import { productsSelectors, productsReducer } from '../../redux/products';
 import Loader from '../../components/Loader';
 import Header from '../../components/Header';
 
@@ -18,11 +18,28 @@ const Diary = () => {
   const classNameMobile = style.diary__formMobile;
   const isListProducts = useSelector(productsSelectors.getStateProducts);
   const isLoader = useSelector(productsSelectors.getLoader);
+  const isCurrentDate = useSelector(productsSelectors.getCurrentDate);
   const dispatch = useDispatch();
 
+  const getDateString = date => {
+    const month = date.getMonth() + 1;
+    const value = pad(month);
+    const datestring = date.getDate() + '.' + value + '.' + date.getFullYear();
+    return datestring;
+  };
+
+  const pad = value => {
+    return String(value).padStart(2, '0');
+  };
+
   useEffect(() => {
-    dispatch(dowloadProducts());
+    const isDate = getDateString(isCurrentDate);
+    dispatch(productsReducer.actions.currentDateSuccess(isDate));
   }, []);
+
+  useEffect(() => {
+    dispatch(dowloadProducts(isCurrentDate));
+  }, [isCurrentDate]);
 
   const handleToggleModal = () => {
     setIsModal(!isModal);
@@ -32,7 +49,7 @@ const Diary = () => {
     <Container>
       <Header />
       <div className={style.diary}>
-        <Date />
+        <Date onDate={getDateString} />
         <FormProduct className={classNameMobile} />
         {isLoader ? (
           <Loader />

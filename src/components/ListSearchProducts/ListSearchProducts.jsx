@@ -9,7 +9,7 @@ const ListSearchProducts = ({ onHandleSelectItem }) => {
     <ul className={style.listSearchProducts}>
       {listSearchProducts.map(product => (
         <ItemSearchProducts
-          key={product.name}
+          key={product._id}
           isProduct={product}
           handleSelectItem={onHandleSelectItem}
         />

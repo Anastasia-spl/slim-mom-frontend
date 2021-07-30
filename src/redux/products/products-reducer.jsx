@@ -4,7 +4,7 @@ const initialProductsState = {
   products: [],
   isLoading: false,
   searchList: [],
-  filter: '',
+  currentDate: new Date(),
   error: null,
 };
 
@@ -25,7 +25,9 @@ const { actions, reducer } = createSlice({
       state.isLoading = false;
     },
     deleteProductSuccess: (state, { payload }) => {
-      state.products = state.products.filter(product => product.id !== payload);
+      state.products = state.products.filter(
+        product => product._id !== payload,
+      );
       state.isLoading = false;
     },
     deleteProductRequest: state => {
@@ -55,6 +57,17 @@ const { actions, reducer } = createSlice({
       state.isLoading = true;
     },
     searchProductsError: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    },
+    currentDateSuccess: (state, { payload }) => {
+      state.currentDate = payload;
+      state.isLoading = false;
+    },
+    currentDateRequest: (state, { payload }) => {
+      state.isLoading = true;
+    },
+    currentDateError: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
     },

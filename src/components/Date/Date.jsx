@@ -1,11 +1,11 @@
 import Calendar from '../Calendar';
 import style from './Date.module.scss';
 
-const Date = () => {
+const Date = ({ onDate }) => {
   return (
     <div className={style.diary__date}>
       <label className={style.diary__lableDate}>
-        <Calendar />
+        <Calendar onDate={onDate} />
         <div className={style.boxIcon}>
           <svg
             className={style.diary__iconDate}

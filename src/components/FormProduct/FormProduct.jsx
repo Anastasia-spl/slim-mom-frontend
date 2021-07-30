@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { productsReducer } from '../../redux/products';
+import { productsReducer, productsSelectors } from '../../redux/products';
 import {
   addProducts,
   searchProducts,
 } from '../../redux/products/products-operations';
-import { productsSelectors } from '../../redux/products';
 import style from './FormProduct.module.scss';
 import ListSearchProducts from '../ListSearchProducts';
 
 const FormProduct = ({ className, onHandleToggleModal }) => {
-  const [nameProduct, setNameProduct] = useState('');
-  const [volumProduct, setVolumProduct] = useState('');
-  const listSearchProducts = useSelector(productsSelectors.getSearchList);
+  const [titleProduct, setTitleProduct] = useState('');
+  const [weightProduct, setWeightProduct] = useState('');
+  const [caloriesProduct, setCaloriesProduct] = useState(Number());
+  const currentDate = useSelector(productsSelectors.getCurrentDate);
   const dispatch = useDispatch();
 
   const isModal = onHandleToggleModal ? true : false;
@@ -21,12 +21,14 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
   const handleAddProduct = event => {
     event.preventDefault();
     const newProduct = {
-      name: nameProduct,
-      number: volumProduct,
+      title: titleProduct,
+      weight: weightProduct,
+      calories: (caloriesProduct * weightProduct) / 100,
+      date: currentDate,
     };
     dispatch(addProducts(newProduct));
-    setNameProduct('');
-    setVolumProduct('');
+    setTitleProduct('');
+    setWeightProduct('');
     if (isModal) {
       onHandleToggleModal();
     }
@@ -42,17 +44,18 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
       dispatch(productsReducer.actions.searchProductsSuccess([]));
     }
 
-    setNameProduct(event.target.value);
+    setTitleProduct(event.target.value);
   };
 
   const handleChangeVolumProduct = event => {
     event.preventDefault();
-    setVolumProduct(event.target.value);
+    setWeightProduct(event.target.value);
   };
 
-  const handelSelectItem = name => {
-    setNameProduct(name);
+  const handelSelectItem = isProduct => {
+    setTitleProduct(isProduct.title.ru);
     setIsDisabledBtn(false);
+    setCaloriesProduct(isProduct.calories);
     dispatch(productsReducer.actions.searchProductsSuccess([]));
   };
 
@@ -60,8 +63,8 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
     <form className={className} onSubmit={handleAddProduct}>
       <input
         className={style.diary__nameProduct}
-        name={nameProduct}
-        value={nameProduct}
+        name={titleProduct}
+        value={titleProduct}
         label="Name"
         autoFocus
         required
@@ -70,8 +73,8 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
       />
       <input
         className={style.diary__volumProduct}
-        name={volumProduct}
-        value={volumProduct}
+        name={weightProduct}
+        value={weightProduct}
         placeholder="Граммы"
         required
         onChange={handleChangeVolumProduct}
