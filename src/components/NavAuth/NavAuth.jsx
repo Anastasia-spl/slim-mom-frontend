@@ -1,8 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import {
-  // authSelectors,
-  authOperations,
-} from '../../redux/auth';
+import { authSelectors, authOperations } from '../../redux/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback, useMemo, useState } from 'react';
 
@@ -17,8 +14,10 @@ export default function NavAuth() {
   const [menuActive, setMenuActive] = useState(false);
 
   const dispatch = useDispatch();
-  // const name = useSelector(authSelectors.getUsername);
-  const name = 'CurrentUser';
+  const name = useSelector(authSelectors.getUserName);
+
+  console.log(name);
+  // const name = 'CurrentUser';
   const navLinks = useMemo(() => routes.filter(route => route.isNav), []);
 
   const onLogOut = useCallback(() => {

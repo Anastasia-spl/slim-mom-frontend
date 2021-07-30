@@ -15,6 +15,7 @@ export default function Header({ goBack }) {
     goBack = false;
   }
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
+
   return (
     <div className={styles.HeaderWrapper}>
       <div className={styles.navWrapper}>
