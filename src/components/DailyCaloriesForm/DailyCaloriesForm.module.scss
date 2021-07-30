@@ -6,7 +6,7 @@
     padding: 100px 67px 60px 67px;
   }
   @include for-size(desktop) {
-    padding: 146px 0 0 90px;
+    padding: 146px 0 60px 90px;
     width: 60vw;
   }
 }
@@ -69,7 +69,7 @@
   outline: transparent;
 
   @include for-size(tablet) {
-    padding: 0 0 19px 0;
+    padding: 19px 19px 19px 0;
     width: 100%;
   }
 
