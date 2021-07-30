@@ -8,8 +8,9 @@ import { useSelector } from 'react-redux';
 import styles from './Header.module.scss';
 import { authSelectors } from '../../redux/auth';
 
-export default function Header({ goBack }) {
+export default function Header() {
   let history = useHistory();
+  let goBack;
   function handleGoBack() {
     history.push('/');
     goBack = false;
