@@ -10,7 +10,8 @@ import { authOperations } from '../redux/auth';
 
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
-
+import Layout from './Layout';
+import Loader from './Loader'
 // import { Component } from 'react';
 // import Loader from './components/Loader';
 
@@ -32,30 +33,35 @@ export default function App() {
     // getCurrentUser
   }, []);
 
+  let isLoading = false;
+
   return (
     <div className="App">
-      <Suspense fallback={'loading'} /* fallback={Loader} */>
-        {/* {isLoading ? <Loader /> : */}
-        <Switch>
-          {routes.map(({ path, isProtected, exact, component: Component }) =>
-            isProtected ? (
-              <PrivateRoute
-                exact={exact}
-                key={path}
-                path={path}
-                component={Component}
-              />
-            ) : (
-              <PublicRoute
-                exact={exact}
-                key={[path]}
-                path={path}
-                component={Component}
-              />
-            ),
-          )}
-        </Switch>
-      </Suspense>
+      <Layout>
+        <Suspense fallback={Loader} >
+          {isLoading ? <Loader /> :
+            <Switch>
+              {routes.map(({ path, isProtected, exact, component: Component }) =>
+                isProtected ? (
+                  <PrivateRoute
+                    exact={exact}
+                    key={path}
+                    path={path}
+                    component={Component}
+                  />
+                ) : (
+                    <PublicRoute
+                      exact={exact}
+                      key={[path]}
+                      path={path}
+                      component={Component}
+                    />
+                  ),
+              )}
+            </Switch>
+          }
+       </Suspense>
+      </Layout>
     </div>
   );
 }
