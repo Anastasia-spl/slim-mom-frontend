@@ -1,28 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
+// import { createSlice } from '@reduxjs/toolkit';
 
-const initialProductsState = {
-  products: [],
-  isLoading: false,
-  error: null,
-};
+// const initialProductsState = {
+//   notAllowedProducts: [],
+//   isLoading: false,
+//   error: null,
+// };
 
-const { actions, reducer } = createSlice({
-  name: 'notAllowedProducts',
-  initialState: initialProductsState,
-  reducers: {
-    getProductRequest: (state, { payload }) => {
-      state.products = [...state.products, payload];
-      state.isLoading = false;
-      state.error = null;
-    },
-    getProductSuccess: state => {
-      state.isLoading = true;
-    },
-    getProductError: (state, { payload }) => {
-      state.error = payload;
-      state.isLoading = false;
-    },
-  },
-});
+// const { actions, reducer } = createSlice({
+//   name: 'notAllowedProducts',
+//   initialState: initialProductsState,
+//   reducers: {
+//     fetchRecommendationRequest: state => {
+//       state.isLoading = true;
+//       state.error = null;
+//     },
+//     fetchRecommendationSuccess: (state, { payload }) => {
+//       state.notAllowedProducts = payload;
+//       state.isLoading = false;
+//     },
+//     fetchRecommendationError: (state, { payload }) => {
+//       state.error = payload;
+//       state.isLoading = false;
+//     },
+//   },
+// });
 
-export default { actions, reducer };
+// export default { actions, reducer };

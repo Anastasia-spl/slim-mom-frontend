@@ -5,6 +5,7 @@ const initialProductsState = {
   isLoading: false,
   searchList: [],
   filter: '',
+  currentDate: '',
   error: null,
 };
 
@@ -55,6 +56,18 @@ const { actions, reducer } = createSlice({
       state.isLoading = true;
     },
     searchProductsError: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    },
+    fetchRecommendationRequest: state => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    fetchRecommendationSuccess: (state, { payload }) => {
+      state.notAllowedProducts = payload;
+      state.isLoading = false;
+    },
+    fetchRecommendationError: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
     },

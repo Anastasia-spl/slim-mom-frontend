@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import style from './Diary.module.scss';
-import Date from '../../components/Date';
+import DatePicker from '../../components/DatePicker';
 import FormProduct from '../../components/FormProduct';
 import ListProducts from '../../components/ListProducts';
 import ModalAddProducts from '../../components/ModalAddProducts';
 import ButtonAdd from '../../components/ButtonAdd';
 import { useDispatch, useSelector } from 'react-redux';
 import { dowloadProducts } from '../../redux/products/products-operations';
-import { productsSelectors } from '../../redux/products';
+import { productsSelectors, productsReducer } from '../../redux/products';
 import Loader from '../../components/Loader';
+import DiaryContainer from '../../components/DiaryContainer';
+import RightInfoPanel from '../../components/RightInfoPanel';
 
 const Diary = () => {
   const [isModal, setIsModal] = useState(false);
@@ -16,34 +18,53 @@ const Diary = () => {
   const classNameMobile = style.diary__formMobile;
   const isListProducts = useSelector(productsSelectors.getStateProducts);
   const isLoader = useSelector(productsSelectors.getLoader);
+  const isCurrentDate = useSelector(productsSelectors.getCurrentDate);
   const dispatch = useDispatch();
 
+  const getDateString = date => {
+    const month = date.getMonth() + 1;
+    const value = pad(month);
+    const datestring = date.getDate() + '.' + value + '.' + date.getFullYear();
+    return datestring;
+  };
+
+  const pad = value => {
+    return String(value).padStart(2, '0');
+  };
+
   useEffect(() => {
-    dispatch(dowloadProducts());
-  }, []);
+    const isDate = getDateString(new Date());
+    isCurrentDate === ''
+      ? dispatch(productsReducer.actions.currentDateSuccess(isDate))
+      : dispatch(dowloadProducts(isCurrentDate));
+  }, [isCurrentDate]);
 
   const handleToggleModal = () => {
     setIsModal(!isModal);
   };
 
   return (
-    <div className={style.diary}>
-      <Date />
-      <FormProduct className={classNameMobile} />
-      {isLoader ? (
-        <Loader />
-      ) : isListProducts.length > 0 ? (
-        <ListProducts />
-      ) : null}
-
-      <ButtonAdd onHandleToggleModal={handleToggleModal} />
-      {isModal ? (
-        <ModalAddProducts
-          className={classNameModal}
-          onHandleToggleModal={handleToggleModal}
-        />
-      ) : null}
-    </div>
+    <DiaryContainer style={{ padding: 0 }}>
+      <div className={style.flexContainer}>
+        <div className={style.diary}>
+          <DatePicker onDate={getDateString} />
+          <FormProduct className={classNameMobile} />
+          {isLoader ? (
+            <Loader />
+          ) : isListProducts.length > 0 ? (
+            <ListProducts />
+          ) : null}
+          <ButtonAdd onHandleToggleModal={handleToggleModal} />
+          {isModal ? (
+            <ModalAddProducts
+              className={classNameModal}
+              onHandleToggleModal={handleToggleModal}
+            />
+          ) : null}
+        </div>
+        <RightInfoPanel />
+      </div>
+    </DiaryContainer>
   );
 };
 

@@ -34,6 +34,7 @@ const SignupSchema = Yup.object().shape({
     .min(35, 'Слишком мало...')
     .max(300, 'Слишком много...')
     .required('Заполните все поля'),
+  bloodGroup: Yup.string().required('Выберите свою группу крови'),
 });
 
 export default function DailyCaloriesForm() {
@@ -145,12 +146,12 @@ export default function DailyCaloriesForm() {
                     type="radio"
                     name="bloodGroup"
                     value="1"
-                    checked={true}
                   />
                   1
                 </label>
                 <label className={styles.label}>
                   <Field
+                    onChange={handleChange}
                     className={styles.radio}
                     type="radio"
                     name="bloodGroup"
@@ -160,6 +161,7 @@ export default function DailyCaloriesForm() {
                 </label>
                 <label className={styles.label}>
                   <Field
+                    onChange={handleChange}
                     className={styles.radio}
                     type="radio"
                     name="bloodGroup"
@@ -169,6 +171,7 @@ export default function DailyCaloriesForm() {
                 </label>
                 <label className={styles.label}>
                   <Field
+                    onChange={handleChange}
                     className={styles.radio}
                     type="radio"
                     name="bloodGroup"

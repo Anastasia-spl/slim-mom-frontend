@@ -46,7 +46,7 @@ const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authSlice.reducer),
     products: productsReducer.reducer,
-    notAllowedProducts: notAllowedProductsReducer.reducer,
+    // notAllowedProducts: notAllowedProductsReducer.reducer,
   },
   middleWare,
   devTools: process.env.NODE_ENV === 'development',

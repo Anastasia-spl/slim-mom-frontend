@@ -7,8 +7,8 @@ const apiService = {
     return axios.get(`/users/current`);
   },
 
-  getnotAllowedProducts() {
-    return axios.get(`/products/recomendation'`);
+  getnotAllowedProducts(bloodGroup) {
+    return axios.get(`/products/recomendation?bloodGroup=${bloodGroup}'`);
   },
 
   logInUser(credentials) {
@@ -23,24 +23,20 @@ const apiService = {
     return axios.post(`/users/logout`);
   },
   addProductQuery(payload) {
-    return axios.post('/contacts', payload);
+    return axios.post('/products', payload);
   },
 
-  getProductsQuery() {
-    return axios.get('/contacts');
+  getProductsQuery(date) {
+    console.log(date);
+    return axios.get(`/products/eaten?date=${date}`);
   },
 
   deletProductQuery(id) {
-    return axios.delete(`/contacts/${id}`);
+    return axios.delete(`/products/${id}`);
   },
 
   searchProductQuery(value) {
-    const url = `https://restcountries.eu/rest/v2/name/${value}`;
-
-    return fetch(url)
-      .then(res => res.json())
-      .catch(error => console.log(error));
-    // https: return axios.get(`/contacts/value`);
+    return axios.get(`products/search?query=${value}`);
   },
 };
 

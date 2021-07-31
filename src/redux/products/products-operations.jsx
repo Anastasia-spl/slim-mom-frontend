@@ -15,6 +15,9 @@ const {
   searchProductsSuccess,
   searchProductsRequest,
   searchProductsError,
+  fetchRecommendationSuccess,
+  fetchRecommendationRequest,
+  fetchRecommendationError,
 } = productsReducer.actions;
 
 const addProducts = payload => async dispatch => {
@@ -62,4 +65,20 @@ const searchProducts = value => async dispatch => {
   }
 };
 
-export { addProducts, deleteProducts, dowloadProducts, searchProducts };
+const getProducts = bloodGroup => async dispatch => {
+  dispatch(fetchRecommendationRequest());
+  try {
+    const { data } = await serviceAPI.getnotAllowedProducts(bloodGroup);
+    dispatch(fetchRecommendationSuccess(data.productsNotAllowed));
+  } catch (error) {
+    dispatch(fetchRecommendationError(error.message));
+  }
+};
+
+export {
+  addProducts,
+  deleteProducts,
+  dowloadProducts,
+  searchProducts,
+  getProducts,
+};

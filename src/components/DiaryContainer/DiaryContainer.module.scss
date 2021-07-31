@@ -1,0 +1,12 @@
+@import '../../assets/baseStyles.scss';
+
+.Container {
+  font-family: Verdana, sans-serif;
+  padding: 0;
+  @include for-size(tablet) {
+    padding: 0;
+  }
+  @include for-size(desktop) {
+    padding: 0 0 0 20px;
+  }
+}
