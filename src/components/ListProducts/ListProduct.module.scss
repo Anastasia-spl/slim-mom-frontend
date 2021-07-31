@@ -6,11 +6,6 @@
   padding: 0;
   max-height: 270px;
   overflow: auto;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.8) 32%
-  );
 
   @include for-size(desktop-only) {
     margin-top: 30px;
