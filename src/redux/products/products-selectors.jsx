@@ -2,6 +2,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const getStateProducts = state => state.products.products;
 const getSearchList = state => state.products.searchList;
+const getCurrentDate = state => state.products.currentDate;
+
 const getLoader = state => state.products.isLoading;
 
 // const getFilterProducts = createSelector(
@@ -14,4 +16,4 @@ const getLoader = state => state.products.isLoading;
 //   },
 // );
 
-export default { getStateProducts, getSearchList, getLoader };
+export default { getStateProducts, getSearchList, getLoader, getCurrentDate };

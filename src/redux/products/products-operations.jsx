@@ -21,7 +21,8 @@ const addProducts = payload => async dispatch => {
   dispatch(addProductsRequest());
   try {
     const { data } = await serviceAPI.addProductQuery(payload);
-    dispatch(addProductsSuccess(data));
+    console.log(data.product);
+    dispatch(addProductsSuccess(data.product));
   } catch (error) {
     dispatch(addProductsError(error.massage));
   }
@@ -37,11 +38,13 @@ const deleteProducts = id => async dispatch => {
   }
 };
 
-const dowloadProducts = () => async dispatch => {
+const dowloadProducts = isCurrentDate => async dispatch => {
   dispatch(downloadProductsRequest());
   try {
-    const { data } = await serviceAPI.getProductsQuery();
-    dispatch(downloadProductsSuccess(data));
+    const { data } = await serviceAPI.getProductsQuery(isCurrentDate);
+
+    console.log(data.userFoodListByDay);
+    dispatch(downloadProductsSuccess(data.userFoodListByDay));
   } catch (error) {
     dispatch(downloadProductsError(error.message));
   }
@@ -50,11 +53,12 @@ const dowloadProducts = () => async dispatch => {
 const searchProducts = value => async dispatch => {
   dispatch(searchProductsRequest());
   try {
-    // const { data } = await serviceAPI.searchProductQuery(value);
-    const data = await serviceAPI.searchProductQuery(value);
+    const {
+      data: { productsList },
+    } = await serviceAPI.searchProductQuery(value);
     if (
-      data.length < 10
-        ? dispatch(searchProductsSuccess(data))
+      productsList.length < 10
+        ? dispatch(searchProductsSuccess(productsList))
         : console.log('Введите точнее запрос')
     );
   } catch (error) {

@@ -1,15 +1,12 @@
 import style from './ItemSearchProducts.module.scss';
 
-const ItemSearchProducts = ({ isProduct: { name }, handleSelectItem }) => {
-  // const handleClick = () => {
-  //     handleSelectItem
-  // }
+const ItemSearchProducts = ({ isProduct, handleSelectItem }) => {
   return (
     <li
       className={style.itemSearchProducts}
-      onClick={() => handleSelectItem(name)}
+      onClick={() => handleSelectItem(isProduct)}
     >
-      {name}
+      {isProduct.title.ru}
     </li>
   );
 };
