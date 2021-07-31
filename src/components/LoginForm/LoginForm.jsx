@@ -39,12 +39,6 @@ const LoginForm = () => {
         initialValues={{ login: '', password: '' }}
         validateOnBlur
         onSubmit={(values, { resetForm }) => {
-          let dataUser;
-          if (localStorage.getItem('user') !== null) {
-            return (dataUser = JSON.parse(localStorage.getItem('user')));
-          }
-          console.log(dataUser);
-          console.log({ values, ...dataUser });
           onLogin(values);
           resetForm();
         }}
