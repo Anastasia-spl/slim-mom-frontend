@@ -1,7 +1,7 @@
 import axios from 'axios';
 import apiService from '../../service/service-api';
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { authSlice } from '.';
 
 const token = {
@@ -21,8 +21,8 @@ const register = credentials => async dispatch => {
     token.set(data.user.token);
     dispatch(authSlice.actions.registerSuccess(data));
   } catch (error) {
-    // toast.error(error.message);
-    console.log(error.message);
+    console.dir(error);
+    toast.error(error.response.data);
     dispatch(authSlice.actions.registerError(error.message));
   }
 };
@@ -35,7 +35,8 @@ const logIn = credentials => async dispatch => {
     token.set(data.user.token);
     dispatch(authSlice.actions.loginSuccess(data));
   } catch (error) {
-    // toast.error(error.message);
+    console.dir(error);
+    toast.error(error.response.data);
     dispatch(authSlice.actions.loginError(error.message));
   }
 };
@@ -49,7 +50,7 @@ const logOut = () => async dispatch => {
     token.unset();
     dispatch(authSlice.actions.logoutSuccess());
   } catch (error) {
-    //   toast.error(error.message);
+    toast.error(error.response.data);
     dispatch(authSlice.actions.logoutError(error.message));
   }
 };
@@ -72,7 +73,7 @@ const currentUser = () => async (dispatch, getState) => {
 
     dispatch(authSlice.actions.getCurrentUserSuccess(data));
   } catch (error) {
-    // toast.error(error.message);
+    toast.error(error.response.data);
     dispatch(authSlice.actions.getCurrentUserError(error.message));
   }
 };

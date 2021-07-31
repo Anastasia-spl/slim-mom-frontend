@@ -14,6 +14,9 @@ const {
   searchProductsSuccess,
   searchProductsRequest,
   searchProductsError,
+  fetchRecommendationSuccess,
+  fetchRecommendationRequest,
+  fetchRecommendationError,
 } = productsReducer.actions;
 
 const addProducts = payload => async dispatch => {
@@ -36,11 +39,10 @@ const deleteProducts = id => async dispatch => {
   }
 };
 
-const dowloadProducts = isCurrentDate => async dispatch => {
+const dowloadProducts = (isCurrentDate)  => async dispatch => {
   dispatch(downloadProductsRequest());
   try {
     const { data } = await serviceAPI.getProductsQuery(isCurrentDate);
-
     dispatch(downloadProductsSuccess(data.userFoodListByDay));
   } catch (error) {
     dispatch(downloadProductsError(error.message));
@@ -51,12 +53,11 @@ const dowloadProducts = isCurrentDate => async dispatch => {
 const searchProducts = value => async dispatch => {
   dispatch(searchProductsRequest());
   try {
-    const {
-      data: { productsList },
-    } = await serviceAPI.searchProductQuery(value);
+    // const { data } = await serviceAPI.searchProductQuery(value);
+    const data = await serviceAPI.searchProductQuery(value);
     if (
-      productsList.length < 10
-        ? dispatch(searchProductsSuccess(productsList))
+      data.length < 10
+        ? dispatch(searchProductsSuccess(data))
         : console.log('Введите точнее запрос')
     );
   } catch (error) {
@@ -64,4 +65,20 @@ const searchProducts = value => async dispatch => {
   }
 };
 
-export { addProducts, deleteProducts, dowloadProducts, searchProducts };
+const getProducts = bloodGroup => async dispatch => {
+  dispatch(fetchRecommendationRequest());
+  try {
+    const { data } = await serviceAPI.getnotAllowedProducts(bloodGroup);
+    dispatch(fetchRecommendationSuccess(data.productsNotAllowed));
+  } catch (error) {
+    dispatch(fetchRecommendationError(error.message));
+  }
+};
+
+export {
+  addProducts,
+  deleteProducts,
+  dowloadProducts,
+  searchProducts,
+  getProducts,
+};

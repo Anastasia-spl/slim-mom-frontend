@@ -1,8 +1,25 @@
-import formula from './Formula';
+import { useSelector } from 'react-redux';
+import { productsSelectors } from '../../redux/products';
+// import { getProducts } from '../../redux/products/products-operations';
+// import { formula } from './Formula';
+import Loader from '../Loader';
 import styles from './Modal.module.scss';
+// import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
 const shortid = require('shortid');
 
-export default function Modal({ active, setActive, products }) {
+export default function Modal({ active, setActive, calories }) {
+  const isLoading = useSelector(productsSelectors.isLoading);
+  // const dispath = useDispatch();
+
+  // useEffect(() => {
+  //   const { bloodGroup } = JSON.parse(localStorage.getItem('user'));
+  //   console.log(bloodGroup);
+  //   const fetchProducts = () => dispath(getProducts(bloodGroup));
+  //   fetchProducts();
+  // }, [dispath]);
+
+  const products = useSelector(productsSelectors.getNotAllowedProducts);
   const buttonClose = () => {
     const closeModal = () => setActive(false);
     const redirect = (window.location.href = '/register');
@@ -16,8 +33,6 @@ export default function Modal({ active, setActive, products }) {
         }
         onClick={() => setActive(false)}
       >
-        <div className={styles.modalClose2}></div>
-        <div className={styles.modalRectangle}></div>
         <div className={styles.modal} onClick={e => e.stopPropagation()}>
           <div
             className={styles.modalClose}
@@ -27,7 +42,7 @@ export default function Modal({ active, setActive, products }) {
             Ваша рекомендуемая суточная норма калорий составляет
           </h2>
           <p className={styles.modalData}>
-            {formula}
+            {calories}
             <span className={styles.madalCalories}>ккал</span>
           </p>
           <div className={styles.modalLine}></div>
@@ -36,19 +51,17 @@ export default function Modal({ active, setActive, products }) {
               Продукты, которые вам <br />
               не рекомендуется употреблять
             </h3>
-            {/* <ol className={styles.modalBlockList}>
-              {products.map(product => (
-                <li className={styles.modalList} key={shortid.generate()}>
-                  {product.title.ru}
-                </li>
-              ))}
-            </ol> */}
-            <ol className={styles.modalBlockList}>
-              <li className={styles.modalList}>Мучные продукты</li>
-              <li className={styles.modalList}>Молоко</li>
-              <li className={styles.modalList}>Красное мясо</li>
-              <li className={styles.modalList}>Копчённости</li>
-            </ol>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <ol className={styles.modalBlockList}>
+                {products.map(product => (
+                  <li className={styles.modalList} key={shortid.generate()}>
+                    {product}
+                  </li>
+                ))}
+              </ol>
+            )}
           </div>
           <button
             type="button"

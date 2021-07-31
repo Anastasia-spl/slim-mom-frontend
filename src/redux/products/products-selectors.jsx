@@ -2,9 +2,9 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const getStateProducts = state => state.products.products;
 const getSearchList = state => state.products.searchList;
-const getCurrentDate = state => state.products.currentDate;
-
 const getLoader = state => state.products.isLoading;
+const getNotAllowedProducts = state => state.products.notAllowedProducts;
+const isLoading = state => state.products.isLoading;
 
 // const getFilterProducts = createSelector(
 //   [getStateProducts, getStateFilterProducts],
@@ -16,4 +16,10 @@ const getLoader = state => state.products.isLoading;
 //   },
 // );
 
-export default { getStateProducts, getSearchList, getLoader, getCurrentDate };
+export default {
+  getStateProducts,
+  getSearchList,
+  getLoader,
+  getNotAllowedProducts,
+  isLoading,
+};

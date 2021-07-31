@@ -92,6 +92,23 @@
   }
 }
 
+.btn__eye {
+  position: absolute;
+  bottom: 25%;
+  right: 0;
+  @include flexbox();
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.img {
+  display: block;
+  width: 20px;
+}
+
 .btn__login {
   @include flexbox();
   width: 176px;

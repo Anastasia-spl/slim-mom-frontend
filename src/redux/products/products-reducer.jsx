@@ -4,8 +4,10 @@ const initialProductsState = {
   products: [],
   isLoading: false,
   searchList: [],
+  filter: '',
   currentDate: '',
   error: null,
+  notAllowedProducts: [],
 };
 
 const { actions, reducer } = createSlice({
@@ -25,9 +27,7 @@ const { actions, reducer } = createSlice({
       state.isLoading = false;
     },
     deleteProductSuccess: (state, { payload }) => {
-      state.products = state.products.filter(
-        product => product._id !== payload,
-      );
+      state.products = state.products.filter(product => product.id !== payload);
       state.isLoading = false;
     },
     deleteProductRequest: state => {
@@ -60,14 +60,15 @@ const { actions, reducer } = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
-    currentDateSuccess: (state, { payload }) => {
-      state.currentDate = payload;
+    fetchRecommendationRequest: state => {
+      state.isLoading = true;
+      state.error = null;
+    },
+    fetchRecommendationSuccess: (state, { payload }) => {
+      state.notAllowedProducts = payload;
       state.isLoading = false;
     },
-    currentDateRequest: (state, { payload }) => {
-      state.isLoading = true;
-    },
-    currentDateError: (state, { payload }) => {
+    fetchRecommendationError: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
     },

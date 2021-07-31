@@ -1,8 +1,11 @@
 import styles from './DailyCaloriesForm.module.scss';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React, { useState, useEffect } from 'react';
+import { getProducts } from '../../redux/products/products-operations';
+import { useDispatch } from 'react-redux';
 import Modal from '../Modal/Modal';
 import * as Yup from 'yup';
+import { result } from '../Modal/Formula';
 import products from '../../JsonData/products.json';
 
 const SignupSchema = Yup.object().shape({
@@ -34,11 +37,15 @@ const SignupSchema = Yup.object().shape({
     .min(35, 'Слишком мало...')
     .max(300, 'Слишком много...')
     .required('Заполните все поля'),
+  bloodGroup: Yup.string().required('Выберите свою группу крови'),
 });
 
 export default function DailyCaloriesForm() {
   const [modalActive, setModalActive] = useState(false);
   const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
+  const [calories, setCalories] = useState('');
+  const dispath = useDispatch();
+  const fetchProducts = bloodGroup => dispath(getProducts(bloodGroup));
 
   useEffect(() => {
     const handleKeyDown = event => {
@@ -67,8 +74,10 @@ export default function DailyCaloriesForm() {
           desiredWeight: '',
           bloodGroup: '',
         }}
-        onSubmit={async values => {
-          await localStorage.setItem('user', JSON.stringify(values));
+        onSubmit={values => {
+          setCalories(result(values));
+          fetchProducts(values.bloodGroup);
+          localStorage.setItem('user', JSON.stringify(values));
         }}
       >
         {({ values, handleSubmit, isValid, dirty, handleChange }) => (
@@ -145,12 +154,12 @@ export default function DailyCaloriesForm() {
                     type="radio"
                     name="bloodGroup"
                     value="1"
-                    checked={true}
                   />
                   1
                 </label>
                 <label className={styles.label}>
                   <Field
+                    onChange={handleChange}
                     className={styles.radio}
                     type="radio"
                     name="bloodGroup"
@@ -160,6 +169,7 @@ export default function DailyCaloriesForm() {
                 </label>
                 <label className={styles.label}>
                   <Field
+                    onChange={handleChange}
                     className={styles.radio}
                     type="radio"
                     name="bloodGroup"
@@ -169,6 +179,7 @@ export default function DailyCaloriesForm() {
                 </label>
                 <label className={styles.label}>
                   <Field
+                    onChange={handleChange}
                     className={styles.radio}
                     type="radio"
                     name="bloodGroup"
@@ -189,7 +200,13 @@ export default function DailyCaloriesForm() {
           </Form>
         )}
       </Formik>
-      {modalActive && <Modal active={modalActive} setActive={setModalActive} />}
+      {modalActive && (
+        <Modal
+          active={modalActive}
+          setActive={setModalActive}
+          calories={calories}
+        />
+      )}
       <form className={styles.formUser}></form>
     </div>
   );

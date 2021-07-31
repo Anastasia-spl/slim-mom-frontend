@@ -16,13 +16,14 @@ const { actions, reducer } = createSlice({
       state.isLoading = true;
     },
     registerSuccess: (state, { payload }) => {
+      console.log(payload);
       state.user = payload.user;
       state.token = payload.user.token;
       state.isLoading = false;
       state.isLoggedOn = true;
     },
     registerError: (state, { payload }) => {
-      state.error = payload;
+      state.error = payload.message;
       state.isLoading = false;
       state.isLoggedOn = false;
     },
@@ -36,7 +37,7 @@ const { actions, reducer } = createSlice({
       state.isLoggedOn = true;
     },
     loginError: (state, { payload }) => {
-      state.error = payload;
+      state.error = payload.message;
       state.isLoading = false;
       state.isLoggedOn = false;
     },
@@ -50,14 +51,14 @@ const { actions, reducer } = createSlice({
       state.isLoggedOn = false;
     },
     logoutError: (state, { payload }) => {
-      state.error = payload;
+      state.error = payload.message;
       state.isLoading = false;
     },
     getCurrentUserRequest: (state, { payload }) => {
       state.isLoading = true;
     },
     getCurrentUserSuccess: (state, { payload }) => {
-      state.user = payload;
+      state.user = payload.user;
       state.isLoading = false;
       state.isLoggedOn = true;
     },
