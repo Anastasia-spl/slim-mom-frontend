@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dowloadProducts } from '../../redux/products/products-operations';
 import { productsSelectors, productsReducer } from '../../redux/products';
 import Loader from '../../components/Loader';
+import DiaryContainer from '../../components/DiaryContainer';
+import RightInfoPanel from '../../components/RightInfoPanel';
 
 const Diary = () => {
   const [isModal, setIsModal] = useState(false);
@@ -42,22 +44,27 @@ const Diary = () => {
   };
 
   return (
-    <div className={style.diary}>
-      <DatePicker onDate={getDateString} />
-      <FormProduct className={classNameMobile} />
-      {isLoader ? (
-        <Loader />
-      ) : isListProducts.length > 0 ? (
-        <ListProducts />
-      ) : null}
-      <ButtonAdd onHandleToggleModal={handleToggleModal} />
-      {isModal ? (
-        <ModalAddProducts
-          className={classNameModal}
-          onHandleToggleModal={handleToggleModal}
-        />
-      ) : null}
-    </div>
+    <DiaryContainer style={{ padding: 0 }}>
+      <div className={style.flexContainer}>
+        <div className={style.diary}>
+          <DatePicker onDate={getDateString} />
+          <FormProduct className={classNameMobile} />
+          {isLoader ? (
+            <Loader />
+          ) : isListProducts.length > 0 ? (
+            <ListProducts />
+          ) : null}
+          <ButtonAdd onHandleToggleModal={handleToggleModal} />
+          {isModal ? (
+            <ModalAddProducts
+              className={classNameModal}
+              onHandleToggleModal={handleToggleModal}
+            />
+          ) : null}
+        </div>
+        <RightInfoPanel />
+      </div>
+    </DiaryContainer>
   );
 };
 

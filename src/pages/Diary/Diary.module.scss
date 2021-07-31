@@ -61,3 +61,10 @@
   //   width: 1182px;
   // }
 }
+.flexContainer {
+  @include for-size(desktop) {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+  }
+}
