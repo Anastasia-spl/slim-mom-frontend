@@ -16,7 +16,7 @@ const PublicRoute = ({ component: Component, redirectTo, ...routeProps }) => {
       {...routeProps}
       render={props =>
         isAuthenticated && routeProps.restricted ? (
-          <Redirect to={redirectTo} />
+          <Redirect to="/diary" />
         ) : (
           <Component {...props} />
         )

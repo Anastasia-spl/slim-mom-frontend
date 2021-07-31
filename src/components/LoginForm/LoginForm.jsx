@@ -1,15 +1,24 @@
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
-import styles from './LoginForm.module.scss';
-import * as yup from 'yup';
 import { NavLink } from 'react-router-dom';
-import routes from '../../routes';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { authOperations } from '../../redux/auth';
+import styles from './LoginForm.module.scss';
+import eye from '../../assets/pictures/eye.svg';
+import eyeCrossed from '../../assets/pictures/eye-crossed.svg';
+import * as yup from 'yup';
+import routes from '../../routes';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
 
   const onLogin = credentials => dispatch(authOperations.logIn(credentials));
+
+  const [cross, setCross] = useState(true);
+
+  const handleClick = () => {
+    setCross(!cross);
+  };
 
   const validationSchema = yup.object().shape({
     login: yup
@@ -30,6 +39,12 @@ const LoginForm = () => {
         initialValues={{ login: '', password: '' }}
         validateOnBlur
         onSubmit={(values, { resetForm }) => {
+          let dataUser;
+          if (localStorage.getItem('user') !== null) {
+            return (dataUser = JSON.parse(localStorage.getItem('user')));
+          }
+          console.log(dataUser);
+          console.log({ values, ...dataUser });
           onLogin(values);
           resetForm();
         }}
@@ -76,12 +91,23 @@ const LoginForm = () => {
                       ? styles.input__error
                       : styles.input
                   }
-                  type="password"
+                  type={cross ? 'password' : 'text'}
                   name="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
                 />
+                <button
+                  type="button"
+                  className={styles.btn__eye}
+                  onClick={handleClick}
+                >
+                  {cross ? (
+                    <img className={styles.img} src={eyeCrossed} alt="Eye" />
+                  ) : (
+                    <img className={styles.img} src={eye} alt="Eye" />
+                  )}
+                </button>
               </label>
               {errors.password && touched.password && (
                 <p className={styles.notification}>{errors.password}</p>

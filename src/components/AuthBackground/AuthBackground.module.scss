@@ -2,47 +2,36 @@
 
 .background {
   position: relative;
+  flex: 0 1 auto;
   overflow: hidden;
   width: 100%;
   max-width: 100%;
-  transition: 250ms cubic-bezier(linear);
   @include for-size(tablet) {
-    min-height: 100vh;
+    min-height: calc(100vh - 78px);
     background-image: url('../../assets/pictures/shapeGrayAuthTablet.svg');
     background-position: bottom 0px right 0px;
     background-repeat: no-repeat;
     background-size: 70% auto;
   }
   @include for-size(desktop) {
-    min-height: 100vh;
+    min-height: calc(100vh - 131px);
     background-image: url('../../assets/pictures/shapeGrayAuth.svg');
     background-position: bottom 0px right 0px;
     background-repeat: no-repeat;
     background-size: 62% auto;
-    //   min-height: 100vh;
-    //   background-image: url('../../assets/pictures/Strawberry-Big-PNG@2x.png'),
-    //     url('../../assets/pictures/banana-desktop.png'),
-    //     url('../../assets/pictures/auth-leaves-desktop.png'),
-    //     url('../../assets/pictures/shapeGrayAuth.svg');
-    //   background-position: top 200px right 40px, bottom -50px right -220px,
-    //     bottom 0px right 250px, bottom 0px right 0px;
-    //   background-repeat: no-repeat;
-    //   background-size: 380px auto, 880px auto, 840px auto, 62% auto;
   }
 }
 
 .strowberry {
   display: none;
-  transition: 250ms cubic-bezier(linear);
   @include for-size(tablet) {
     display: block;
     position: absolute;
     right: -85px;
     bottom: 200px;
+    pointer-events: none;
   }
   @include for-size(desktop) {
-    display: block;
-    position: absolute;
     right: 45px;
     top: 150px;
   }
@@ -50,7 +39,6 @@
 
 .banana {
   display: none;
-  transition: 250ms cubic-bezier(linear);
   @include for-size(tablet) {
     display: block;
     position: absolute;
@@ -59,17 +47,13 @@
     pointer-events: none;
   }
   @include for-size(desktop) {
-    display: block;
-    position: absolute;
     right: -220px;
     bottom: -50px;
-    pointer-events: none;
   }
 }
 
 .leaves {
   display: none;
-  transition: 250ms cubic-bezier(linear);
   @include for-size(tablet) {
     display: block;
     position: absolute;
@@ -78,10 +62,7 @@
     pointer-events: none;
   }
   @include for-size(desktop) {
-    display: block;
-    position: absolute;
     right: 250px;
     bottom: 0px;
-    pointer-events: none;
   }
 }
