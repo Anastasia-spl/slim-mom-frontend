@@ -7,6 +7,7 @@ const initialProductsState = {
   filter: '',
   currentDate: '',
   error: null,
+  notAllowedProducts: [],
 };
 
 const { actions, reducer } = createSlice({
