@@ -41,6 +41,11 @@ const Diary = () => {
 
   const handleToggleModal = () => {
     setIsModal(!isModal);
+    if (document.body.style.overflow !== 'hidden') {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'scroll';
+    }
   };
 
   return (
@@ -48,7 +53,10 @@ const Diary = () => {
       <div className={style.flexContainer}>
         <div className={style.diary}>
           <DatePicker onDate={getDateString} />
-          <FormProduct className={classNameMobile} />
+          <FormProduct
+            className={classNameMobile}
+            onDateString={getDateString}
+          />
           {isLoader ? (
             <Loader />
           ) : isListProducts.length > 0 ? (
@@ -59,6 +67,7 @@ const Diary = () => {
             <ModalAddProducts
               className={classNameModal}
               onHandleToggleModal={handleToggleModal}
+              onDateString={getDateString}
             />
           ) : null}
         </div>

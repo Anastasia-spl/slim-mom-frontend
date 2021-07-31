@@ -16,9 +16,9 @@ function productsToString(productsArray) {
 
 const RightInfoPanel = () => {
   //const isAuthenticated = useSelector(usersSelectors.getIsAuthenticated);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const name = useSelector(authSelectors.getUsername);
-  const name = 'CurrentUser';
+  // const name = 'CurrentUser';
   const date = '20.06.2020'; // Дата для отображаемого списка
 
   const eating = 980; //Употреблено
@@ -35,17 +35,16 @@ const RightInfoPanel = () => {
   // const onLogOut = useCallback(() => {
   //   dispatch(authOperations.logOut());
   // }, [dispatch]);
-  const onLogOut = console.log('logout');
+  // const onLogOut = console.log('logout');
 
   return (
     <div className={styles.panelContainer}>
-      <div className={styles.userWrapper}>
-        <p className={styles.userName}>{name}</p>
+      {/* <div className={styles.userWrapper}>
+        // <p className={styles.userName}>{name}</p>
         <button onClick={onLogOut} className={styles.logout}>
-          Выйти
+          // Выйти //{' '}
         </button>
-      </div>
-
+      </div> */}
       <div className={styles.panelContainerInner}>
         <div className={styles.contentBlock}>
           <div className={styles.informationListBlock}>

@@ -1,6 +1,5 @@
 import serviceAPI from '../../service';
 import { productsReducer } from '.';
-import axios from 'axios';
 
 const {
   addProductsSuccess,
@@ -24,7 +23,7 @@ const addProducts = payload => async dispatch => {
   dispatch(addProductsRequest());
   try {
     const { data } = await serviceAPI.addProductQuery(payload);
-    dispatch(addProductsSuccess(data));
+    dispatch(addProductsSuccess(data.product));
   } catch (error) {
     dispatch(addProductsError(error.massage));
   }
@@ -40,13 +39,14 @@ const deleteProducts = id => async dispatch => {
   }
 };
 
-const dowloadProducts = () => async dispatch => {
+const dowloadProducts = (isCurrentDate)  => async dispatch => {
   dispatch(downloadProductsRequest());
   try {
-    const { data } = await serviceAPI.getProductsQuery();
-    dispatch(downloadProductsSuccess(data));
+    const { data } = await serviceAPI.getProductsQuery(isCurrentDate);
+    dispatch(downloadProductsSuccess(data.userFoodListByDay));
   } catch (error) {
     dispatch(downloadProductsError(error.message));
+    dispatch(downloadProductsSuccess([]));
   }
 };
 

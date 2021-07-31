@@ -19,7 +19,7 @@
 
 .diary__itemNameProduct {
   width: 242px;
-  height: 36px;
+  // height: 36px;
   margin: 0;
   margin-right: 30px;
   padding-bottom: 19px;
@@ -35,7 +35,7 @@
 
   @include for-size(tablet-only) {
     width: 138px;
-    height: 26px;
+    // height: 26px;
     margin-right: 9px;
     padding-bottom: 10px;
   }
@@ -43,7 +43,7 @@
 
 .diary__itemVolumProduct {
   width: 106px;
-  height: 36px;
+  // height: 36px;
   margin: 0;
   margin-right: 30px;
   padding-bottom: 19px;
@@ -58,7 +58,7 @@
 
   @include for-size(tablet-only) {
     width: 50px;
-    height: 26px;
+    // height: 26px;
     margin-right: 10px;
     padding-bottom: 10px;
   }
@@ -66,7 +66,7 @@
 
 .diary__itemCcalProduct {
   width: 106px;
-  height: 36px;
+  // height: 36px;
   margin: 0;
   margin-right: 30px;
   padding-bottom: 19px;
@@ -81,7 +81,7 @@
 
   @include for-size(tablet-only) {
     width: 60px;
-    height: 26px;
+    // height: 26px;
     margin-right: 10px;
     padding-bottom: 10px;
   }

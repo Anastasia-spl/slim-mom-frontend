@@ -13,4 +13,8 @@
   @include for-size(desktop-only) {
     top: 355px;
   }
+  @include for-size(tablet-only) {
+    top: 135px;
+    width: 290px;
+  }
 }
