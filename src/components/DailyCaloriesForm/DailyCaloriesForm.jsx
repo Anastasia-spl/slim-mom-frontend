@@ -37,8 +37,14 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function DailyCaloriesForm() {
+  const [active, setActive] = useState(1);
+
   const [modalActive, setModalActive] = useState(false);
   const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
+
+  function handlRadioChange(event) {
+    setActive(event.target.value);
+  }
 
   useEffect(() => {
     const handleKeyDown = event => {
@@ -131,7 +137,11 @@ export default function DailyCaloriesForm() {
               </ErrorMessage>
             </label>
 
-            <div id="bloodGroup" className={styles.label}>
+            <div
+              id="bloodGroup"
+              className={styles.label}
+              onChange={event => handlRadioChange(event)}
+            >
               Группа крови *
               <div
                 role="group"
@@ -140,12 +150,11 @@ export default function DailyCaloriesForm() {
               >
                 <label className={styles.label}>
                   <Field
-                    onChange={handleChange}
                     className={styles.radio}
                     type="radio"
                     name="bloodGroup"
                     value="1"
-                    checked={true}
+                    checked={active == 1}
                   />
                   1
                 </label>
@@ -155,6 +164,7 @@ export default function DailyCaloriesForm() {
                     type="radio"
                     name="bloodGroup"
                     value="2"
+                    checked={active == 2}
                   />
                   2
                 </label>
@@ -164,6 +174,7 @@ export default function DailyCaloriesForm() {
                     type="radio"
                     name="bloodGroup"
                     value="3"
+                    checked={active == 3}
                   />
                   3
                 </label>
@@ -173,6 +184,7 @@ export default function DailyCaloriesForm() {
                     type="radio"
                     name="bloodGroup"
                     value="4"
+                    checked={active == 4}
                   />
                   4
                 </label>
