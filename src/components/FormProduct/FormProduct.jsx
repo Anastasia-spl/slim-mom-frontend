@@ -7,8 +7,9 @@ import {
 } from '../../redux/products/products-operations';
 import style from './FormProduct.module.scss';
 import ListSearchProducts from '../ListSearchProducts';
+import { useEffect } from 'react';
 
-const FormProduct = ({ className, onHandleToggleModal }) => {
+const FormProduct = ({ className, onHandleToggleModal, onDateString }) => {
   const [titleProduct, setTitleProduct] = useState('');
   const [weightProduct, setWeightProduct] = useState('');
   const [caloriesProduct, setCaloriesProduct] = useState(Number());
@@ -17,6 +18,13 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
 
   const isModal = onHandleToggleModal ? true : false;
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
+  const [isDisableInput, setDisableInput] = useState(false);
+
+  const isDate = onDateString(new Date());
+
+  useEffect(() => {
+    currentDate !== isDate ? setDisableInput(true) : setDisableInput(false);
+  }, [currentDate]);
 
   const handleAddProduct = event => {
     event.preventDefault();
@@ -29,6 +37,8 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
     dispatch(addProducts(newProduct));
     setTitleProduct('');
     setWeightProduct('');
+    setIsDisabledBtn(true);
+
     if (isModal) {
       onHandleToggleModal();
     }
@@ -68,8 +78,13 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
         label="Name"
         autoFocus
         required
-        placeholder="Введите название продукта"
+        placeholder={
+          isDisableInput
+            ? `Выберете дату ${isDate}`
+            : 'Введите название продукта'
+        }
         onChange={handleChangeNameProduct}
+        disabled={isDisableInput}
       />
       <input
         className={style.diary__volumProduct}
@@ -78,6 +93,7 @@ const FormProduct = ({ className, onHandleToggleModal }) => {
         placeholder="Граммы"
         required
         onChange={handleChangeVolumProduct}
+        disabled={isDisableInput}
       />
       <button
         className={style.diary__btnAddProduct}

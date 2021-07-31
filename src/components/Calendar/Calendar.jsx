@@ -12,7 +12,7 @@ const Calendar = ({ getDate }) => {
 
   useEffect(() => {
     handleChangeDate(startDate);
-  }, []);
+  }, [startDate]);
 
   const handleChangeDate = date => {
     setStartDate(date);

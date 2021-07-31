@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 const ListProducts = () => {
   const listProducts = useSelector(productsSelectors.getStateProducts);
-  console.log(listProducts);
   return (
     <ul className={style.diary__listProducts}>
       {listProducts.map(product => (

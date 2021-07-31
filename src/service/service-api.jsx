@@ -27,7 +27,6 @@ const apiService = {
   },
 
   getProductsQuery(date) {
-    console.log(date);
     return axios.get(`/products/eaten?date=${date}`);
   },
 
