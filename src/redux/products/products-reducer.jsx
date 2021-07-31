@@ -5,6 +5,7 @@ const initialProductsState = {
   isLoading: false,
   searchList: [],
   filter: '',
+  currentDate: '',
   error: null,
 };
 
