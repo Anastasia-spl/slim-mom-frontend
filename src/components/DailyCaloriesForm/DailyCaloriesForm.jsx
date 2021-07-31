@@ -1,7 +1,7 @@
-import styles from './FormUser.module.scss';
+import styles from './DailyCaloriesForm.module.scss';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React, { useState, useEffect } from 'react';
-import Modal from '../Modal/Modal'; 
+import Modal from '../Modal/Modal';
 import * as Yup from 'yup';
 import products from '../../JsonData/products.json';
 
@@ -36,22 +36,22 @@ const SignupSchema = Yup.object().shape({
     .required('Заполните все поля'),
 });
 
-export default function FormUser() {
-   const [modalActive, setModalActive] = useState(false);
+export default function DailyCaloriesForm() {
+  const [modalActive, setModalActive] = useState(false);
   const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
-  
-   useEffect(() => {
-      const handleKeyDown = event => {
-    if (event.code === 'Escape') {
-      setModalActive(false);
-    }
-  };
+
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (event.code === 'Escape') {
+        setModalActive(false);
+      }
+    };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-  
+
   return (
     <div className={styles.formWrapper}>
       <h1 className={styles.header}>
@@ -67,9 +67,8 @@ export default function FormUser() {
           desiredWeight: '',
           bloodGroup: '',
         }}
-        onSubmit={async (values, { resetForm }) => {
+        onSubmit={async values => {
           await localStorage.setItem('user', JSON.stringify(values));
-          resetForm();
         }}
       >
         {({ values, handleSubmit, isValid, dirty, handleChange }) => (

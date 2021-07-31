@@ -23,20 +23,20 @@
   font-family: 'Gotham', sans-serif;
   font-style: normal;
   font-weight: 300;
-  src: local('Gotham'), url('./fonts/Gotham-Light.ttf') format('truetype'),
-    url('./fonts/Gotham-Light.eot') format('embedded-opentype'),
-    url('./fonts/Gotham-Light.woff2') format('woff2'),
-    url('./fonts/Gotham-Light.woff') format('woff');
+  src: local('Gotham'), url('./fonts/GothamPro-Light.ttf') format('truetype'),
+    url('./fonts/GothamPro-Light.eot') format('embedded-opentype'),
+    url('./fonts/GothamPro-Light.woff2') format('woff2'),
+    url('./fonts/GothamPro-Light.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Gotham', sans-serif;
   font-style: normal;
   font-weight: 700;
-  src: local('Gotham'), url('./fonts/Gotham-Bold.ttf') format('truetype'),
-    url('./fonts/Gotham-Bold.eot') format('embedded-opentype'),
-    url('./fonts/Gotham-Bold.woff2') format('woff2'),
-    url('./fonts/Gotham-Bold.woff') format('woff');
+  src: local('Gotham'), url('./fonts/GothamPro-Bold.ttf') format('truetype'),
+    url('./fonts/GothamPro-Bold.eot') format('embedded-opentype'),
+    url('./fonts/GothamPro-Bold.woff2') format('woff2'),
+    url('./fonts/GothamPro-Bold.woff') format('woff');
 }
 
 /*==================== VARIABLES =======================*/

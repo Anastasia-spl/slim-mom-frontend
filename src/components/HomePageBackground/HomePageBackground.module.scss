@@ -1,37 +1,78 @@
 @import '../../assets/baseStyles.scss';
 
-.back {
+.background {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  @media (min-width: 420px) {
-    min-height: 100vh;
-    background-image: url('../../assets/pictures/Strawberry-Big-PNG@2x.png'),
-      url('../../assets/pictures/hero-leaves-desktop.png'),
-      url('../../assets/pictures/shapeGray.svg');
-    background-position: bottom -9px right -29px, bottom 45px right 207px,
-      bottom 0 right 0;
-    background-repeat: no-repeat;
-    background-size: 30.7%, 43.1%, 57.1%, 47%;
-  }
+  max-width: 100%;
+  transition: 250ms cubic-bezier(linear);
   @include for-size(tablet) {
-    min-height: 1024px;
-    background-image: url('../../assets/pictures/Strawberry-Big-PNG.png'),
-      url('../../assets/pictures/banana.png'),
-      url('../../assets/pictures/hero-leaves-tablet.png'),
-      url('../../assets/pictures/shapeGray.svg');
-    background-position: bottom 185px right 47px, bottom -58px right -69px,
-      bottom -30px right 222px, bottom -185px right -35px;
+    min-height: 100vh;
+    background-image: url('../../assets/pictures/shapeGrayAuthTablet.svg');
+    background-position: bottom 0px right 0px;
     background-repeat: no-repeat;
-    background-size: 291px 284px, 580px 510px, 531px 602px, 553px 750px;
+    background-size: 70% auto;
   }
   @include for-size(desktop) {
     min-height: 100vh;
-    background-image: url('../../assets/pictures/Strawberry-Big-PNG@2x.png'),
-      url('../../assets/pictures/banana-desktop.png'),
-      url('../../assets/pictures/hero-leaves-desktop.png'),
-      url('../../assets/pictures/shapeGray.svg');
-    background-position: bottom 74px right -29px, bottom 485px right -276px,
-      bottom 135px right 200px, bottom -88px right 0;
+    background-image: url('../../assets/pictures/shapeGrayAuth.svg');
+    background-position: bottom -7px right -220px;
     background-repeat: no-repeat;
-    background-size: 394px, 773px 552px, 731px, 602px;
+    background-size: 62% auto;
+  }
+}
+
+.strawberry {
+  display: none;
+  transition: 250ms cubic-bezier(linear);
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: 15px;
+    bottom: 100px;
+  }
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    right: 70px;
+    top: 567px;
+  }
+}
+
+.banana {
+  display: none;
+  transition: 250ms cubic-bezier(linear);
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: -237px;
+    bottom: -185px;
+    pointer-events: none;
+  }
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    right: -197px;
+    bottom: 580px;
+    pointer-events: none;
+  }
+}
+
+.leaves {
+  display: none;
+  transition: 250ms cubic-bezier(linear);
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 250px;
+    pointer-events: none;
+  }
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    right: 285px;
+    bottom: 170px;
+    pointer-events: none;
   }
 }
