@@ -13,8 +13,6 @@
   width: 100vw;
   height: 100vh;
   @include for-size(tablet) {
-    position: absolute;
-    bottom: 0;
     width: 100vw;
     height: 350px;
     @media only screen and (-webkit-min-device-pixel-ratio: 2),
