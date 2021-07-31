@@ -4,7 +4,7 @@ const initialProductsState = {
   products: [],
   isLoading: false,
   searchList: [],
-  currentDate: new Date(),
+  currentDate: '',
   error: null,
 };
 
