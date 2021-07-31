@@ -1,15 +1,19 @@
-import apiService from '../../service';
-import axios from 'axios';
-import actions from './notAllowed-actions';
+// import axios from 'axios';
+// import reducer from './notAllowed-reducer';
 
-const getProducts = () => dispatch => {
-  dispatch(actions.getProductRequest());
+// const { actions } = reducer;
 
-  axios
-    .get(apiService)
-    .then(({ data }) => dispatch(actions.getProductSuccess(data)))
-    .catch(error => dispatch(actions.getProductError(error.message)));
-};
+// const getProducts = bloodGroup => async dispatch => {
+//   dispatch(actions.fetchRecommendationRequest());
+//   try {
+//     const { data } = await axios.get(
+//       `/products/recommendation?bloodGroup=${bloodGroup}`,
+//     );
+//     dispatch(actions.fetchRecommendationSuccess(data.productsNotAllowed));
+//   } catch (error) {
+//     dispatch(actions.fetchRecommendationError(error.message));
+//   }
+// };
 
-// eslint-disable-next-line
-export default { getProducts };
+// // eslint-disable-next-line
+// export default { getProducts };
