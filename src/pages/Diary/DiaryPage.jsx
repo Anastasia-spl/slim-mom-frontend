@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import style from './Diary.module.scss';
-import Date from '../../components/Date';
+import DatePicker from '../../components/DatePicker';
 import FormProduct from '../../components/FormProduct';
 import ListProducts from '../../components/ListProducts';
 import ModalAddProducts from '../../components/ModalAddProducts';
@@ -31,12 +31,10 @@ const Diary = () => {
   };
 
   useEffect(() => {
-    const isDate = getDateString(isCurrentDate);
-    dispatch(productsReducer.actions.currentDateSuccess(isDate));
-  }, []);
-
-  useEffect(() => {
-    dispatch(dowloadProducts(isCurrentDate));
+    const isDate = getDateString(new Date());
+    isCurrentDate === ''
+      ? dispatch(productsReducer.actions.currentDateSuccess(isDate))
+      : dispatch(dowloadProducts(isCurrentDate));
   }, [isCurrentDate]);
 
   const handleToggleModal = () => {
@@ -44,18 +42,8 @@ const Diary = () => {
   };
 
   return (
-//     <Container>
-//       <Header />
-//       <div className={style.diary}>
-//         <Date onDate={getDateString} />
-//         <FormProduct className={classNameMobile} />
-//         {isLoader ? (
-//           <Loader />
-//         ) : isListProducts.length > 0 ? (
-//           <ListProducts />
-//         ) : null}
     <div className={style.diary}>
-      <Date />
+      <DatePicker onDate={getDateString} />
       <FormProduct className={classNameMobile} />
       {isLoader ? (
         <Loader />

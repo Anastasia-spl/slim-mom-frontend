@@ -1,11 +1,11 @@
 import Calendar from '../Calendar';
-import style from './Date.module.scss';
+import style from './DatePicker.module.scss';
 
-const Date = ({ onDate }) => {
+const DatePicker = ({ onDate }) => {
   return (
     <div className={style.diary__date}>
       <label className={style.diary__lableDate}>
-        <Calendar onDate={onDate} />
+        <Calendar getDate={onDate} />
         <div className={style.boxIcon}>
           <svg
             className={style.diary__iconDate}
@@ -27,4 +27,4 @@ const Date = ({ onDate }) => {
   );
 };
 
-export default Date;
+export default DatePicker;

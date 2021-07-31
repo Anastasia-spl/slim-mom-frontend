@@ -6,13 +6,17 @@ import { productsReducer } from '../../redux/products';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-const Calendar = ({ onDate }) => {
+const Calendar = ({ getDate }) => {
   const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    handleChangeDate(startDate);
+  }, []);
+
   const handleChangeDate = date => {
     setStartDate(date);
-    const dateString = onDate(startDate);
+    const dateString = getDate(startDate);
     dispatch(productsReducer.actions.currentDateSuccess(dateString));
   };
 
