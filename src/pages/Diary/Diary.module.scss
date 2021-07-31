@@ -63,18 +63,6 @@
       #ffffff 42.19%
     );
   }
-
-  // @media screen and (min-width: 480px) {
-  //   width: 480px;
-  // }
-
-  // @media screen and (min-width: 768px) {
-  //   width: 750px;
-  // }
-
-  // @media screen and (min-width: 1280px) {
-  //   width: 1182px;
-  // }
 }
 .flexContainer {
   @include for-size(desktop) {

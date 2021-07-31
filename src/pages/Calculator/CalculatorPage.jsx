@@ -9,7 +9,7 @@ const CalculatorPage = () => {
     <DiaryContainer style={{ padding: 0 }}>
       <div className={style.flexContainer}>
         <div>
-          <Header goBack={false} />
+          {/* <Header goBack={false} /> */}
 
           <DailyCaloriesForm />
         </div>
