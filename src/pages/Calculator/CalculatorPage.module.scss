@@ -1,0 +1,8 @@
+@import '../../assets/baseStyles.scss';
+
+.flexContainer {
+  @include for-size(desktop) {
+    display: flex;
+    flex-direction: row;
+  }
+}
