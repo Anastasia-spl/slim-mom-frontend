@@ -8,7 +8,7 @@ const apiService = {
   },
 
   getnotAllowedProducts(bloodGroup) {
-    return axios.get(`/products/recomendation?bloodGroup=${bloodGroup}'`);
+    return axios.get(`/products/recommendation?bloodGroup=${bloodGroup}`);
   },
 
   logInUser(credentials) {
