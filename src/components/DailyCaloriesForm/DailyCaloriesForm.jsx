@@ -1,8 +1,11 @@
 import styles from './DailyCaloriesForm.module.scss';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React, { useState, useEffect } from 'react';
+import { getProducts } from '../../redux/products/products-operations';
+import { useDispatch } from 'react-redux';
 import Modal from '../Modal/Modal';
 import * as Yup from 'yup';
+import { result } from '../Modal/Formula';
 import products from '../../JsonData/products.json';
 
 const SignupSchema = Yup.object().shape({
@@ -40,6 +43,9 @@ const SignupSchema = Yup.object().shape({
 export default function DailyCaloriesForm() {
   const [modalActive, setModalActive] = useState(false);
   const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
+  const [calories, setCalories] = useState('');
+  const dispath = useDispatch();
+  const fetchProducts = bloodGroup => dispath(getProducts(bloodGroup));
 
   useEffect(() => {
     const handleKeyDown = event => {
@@ -69,6 +75,8 @@ export default function DailyCaloriesForm() {
           bloodGroup: '',
         }}
         onSubmit={values => {
+          setCalories(result(values));
+          fetchProducts(values.bloodGroup);
           localStorage.setItem('user', JSON.stringify(values));
         }}
       >
@@ -192,7 +200,13 @@ export default function DailyCaloriesForm() {
           </Form>
         )}
       </Formik>
-      {modalActive && <Modal active={modalActive} setActive={setModalActive} />}
+      {modalActive && (
+        <Modal
+          active={modalActive}
+          setActive={setModalActive}
+          calories={calories}
+        />
+      )}
       <form className={styles.formUser}></form>
     </div>
   );
