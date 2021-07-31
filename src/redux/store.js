@@ -14,7 +14,6 @@ import logger from 'redux-logger';
 
 /* ПРИМЕР ИМПОРТА РЕДЬЮСЕРОВ*/
 
-
 import { notAllowedProductsReducer } from './notAllowedProducts';
 import { productsReducer } from './products';
 import { authSlice } from './auth';

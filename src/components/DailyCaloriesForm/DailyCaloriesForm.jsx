@@ -67,8 +67,8 @@ export default function DailyCaloriesForm() {
           desiredWeight: '',
           bloodGroup: '',
         }}
-        onSubmit={async values => {
-          await localStorage.setItem('user', JSON.stringify(values));
+        onSubmit={values => {
+          localStorage.setItem('user', JSON.stringify(values));
         }}
       >
         {({ values, handleSubmit, isValid, dirty, handleChange }) => (
