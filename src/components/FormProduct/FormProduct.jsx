@@ -47,7 +47,7 @@ const FormProduct = ({ className, onHandleToggleModal, onDateString }) => {
   const handleChangeNameProduct = event => {
     event.preventDefault();
     let value = event.target.value;
-    if (value !== '') {
+    if (value.length > 2) {
       dispatch(searchProducts(value));
     }
     if (value === '') {
