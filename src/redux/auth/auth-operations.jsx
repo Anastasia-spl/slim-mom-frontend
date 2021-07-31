@@ -22,7 +22,7 @@ const register = credentials => async dispatch => {
     dispatch(authSlice.actions.registerSuccess(data));
   } catch (error) {
     console.dir(error);
-    toast.error(error.response.data);
+    toast.error(error);
     dispatch(authSlice.actions.registerError(error.message));
   }
 };
@@ -36,7 +36,7 @@ const logIn = credentials => async dispatch => {
     dispatch(authSlice.actions.loginSuccess(data));
   } catch (error) {
     console.dir(error);
-    toast.error(error.response.data);
+    toast.error(error);
     dispatch(authSlice.actions.loginError(error.message));
   }
 };
@@ -50,7 +50,7 @@ const logOut = () => async dispatch => {
     token.unset();
     dispatch(authSlice.actions.logoutSuccess());
   } catch (error) {
-    toast.error(error.response.data);
+    toast.error(error);
     dispatch(authSlice.actions.logoutError(error.message));
   }
 };
@@ -73,7 +73,7 @@ const currentUser = () => async (dispatch, getState) => {
 
     dispatch(authSlice.actions.getCurrentUserSuccess(data));
   } catch (error) {
-    toast.error(error.response.data);
+    toast.error(error);
     dispatch(authSlice.actions.getCurrentUserError(error.message));
   }
 };
