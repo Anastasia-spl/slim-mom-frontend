@@ -14,6 +14,8 @@ const result = parsData
       10 * (parsData.weight - parsData.desiredWeight))
   : (formula = 'Введите свои данные');
 
+localStorage.setItem('formula', JSON.stringify(formula));
+
 // console.log(result);
 
 export default formula;
