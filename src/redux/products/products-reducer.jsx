@@ -72,6 +72,18 @@ const { actions, reducer } = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
+
+    currentDateSuccess: (state, { payload }) => {
+      state.currentDate = payload;
+      state.isLoading = false;
+    },
+    currentDateRequest: (state, { payload }) => {
+      state.isLoading = true;
+    },
+    currentDateError: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    },
   },
 });
 

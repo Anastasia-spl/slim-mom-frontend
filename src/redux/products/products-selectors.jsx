@@ -3,6 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 const getStateProducts = state => state.products.products;
 const getSearchList = state => state.products.searchList;
 const getLoader = state => state.products.isLoading;
+const getCurrentDate = state => state.products.currentDate;
 const getNotAllowedProducts = state => state.products.notAllowedProducts;
 const isLoading = state => state.products.isLoading;
 
@@ -22,4 +23,5 @@ export default {
   getLoader,
   getNotAllowedProducts,
   isLoading,
+  getCurrentDate,
 };
