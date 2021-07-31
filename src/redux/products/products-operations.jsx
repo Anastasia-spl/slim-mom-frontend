@@ -1,4 +1,5 @@
 import serviceAPI from '../../service';
+import { toast } from 'react-toastify';
 import { productsReducer } from '.';
 
 const {
@@ -39,7 +40,7 @@ const deleteProducts = id => async dispatch => {
   }
 };
 
-const dowloadProducts = (isCurrentDate)  => async dispatch => {
+const dowloadProducts = isCurrentDate => async dispatch => {
   dispatch(downloadProductsRequest());
   try {
     const { data } = await serviceAPI.getProductsQuery(isCurrentDate);
@@ -53,12 +54,13 @@ const dowloadProducts = (isCurrentDate)  => async dispatch => {
 const searchProducts = value => async dispatch => {
   dispatch(searchProductsRequest());
   try {
-    // const { data } = await serviceAPI.searchProductQuery(value);
-    const data = await serviceAPI.searchProductQuery(value);
+    const {
+      data: { productsList },
+    } = await serviceAPI.searchProductQuery(value);
     if (
-      data.length < 10
-        ? dispatch(searchProductsSuccess(data))
-        : console.log('Введите точнее запрос')
+      productsList.length < 10
+        ? dispatch(searchProductsSuccess(productsList))
+        : toast.warning('Введите запрос точнее')
     );
   } catch (error) {
     dispatch(searchProductsError(error.message));
