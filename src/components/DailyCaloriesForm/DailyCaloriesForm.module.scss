@@ -4,9 +4,12 @@
   width: 100%;
   padding: 110px 15px;
   position: relative;
-  z-index: 220;
+  z-index: 2;
+  overflow: hidden;
+
   @include for-size(tablet) {
-    padding: 180px 67px 60px 87px;
+    padding: 122px 67px 60px 87px;
+    margin-top: 78px;
   }
   @include for-size(desktop) {
     padding: 292px 0 60px 115px;
