@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions, getCurrentDate, modalAddProduct } from '../../redux/products';
 import {
@@ -8,17 +8,21 @@ import {
 import style from './FormProduct.module.scss';
 import ListSearchProducts from '../ListSearchProducts';
 import { useEffect } from 'react';
+import debounce from 'lodash.debounce';
 
 const FormProduct = ({ className, handleToggleModal, onDateString }) => {
   const [titleProduct, setTitleProduct] = useState('');
   const [weightProduct, setWeightProduct] = useState('');
   const [caloriesProduct, setCaloriesProduct] = useState(Number());
+  const [page, setPage] = useState(1);
+  const [limit] = useState(7);
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
   const [isDisableInput, setDisableInput] = useState(false);
   const [clientWidth, setclientWidth] = useState(
     document.documentElement.clientWidth,
   );
   const currentDate = useSelector(getCurrentDate);
+  const isDate = onDateString(new Date());
   const isModalAddProduct = useSelector(modalAddProduct);
   const dispatch = useDispatch();
 
@@ -32,8 +36,6 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const isDate = onDateString(new Date());
 
   useEffect(() => {
     currentDate !== isDate ? setDisableInput(true) : setDisableInput(false);
@@ -57,13 +59,22 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
     }
   };
 
+  function isFunctionDebonce(value, page, limit) {
+    dispatch(searchProducts(value, page, limit));
+  }
+
+  const debounceLoadData = useCallback(debounce(isFunctionDebonce, 1000), []);
+
   const handleChangeNameProduct = event => {
     event.preventDefault();
-    let value = event.target.value;
-    if (value.length > 3) {
-      dispatch(searchProducts(value));
+    setTitleProduct(event.target.value);
+    let query = event.target.value;
+
+    if (query.length > 0) {
+      debounceLoadData(query, page, limit);
     }
-    if (value === '') {
+
+    if (query === '') {
       dispatch(actions.searchProductsSuccess([]));
     }
 
@@ -79,7 +90,15 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
     setTitleProduct(isProduct.title.ru);
     setIsDisabledBtn(false);
     setCaloriesProduct(isProduct.calories);
+    setPage(1);
     dispatch(actions.searchProductsSuccess([]));
+  };
+
+  const handleLoadMore = () => {
+    setPage(page => page + 1);
+    const isPage = page + 1;
+    dispatch(actions.searchProductsSuccess([]));
+    dispatch(searchProducts(titleProduct, isPage, limit));
   };
 
   return (
@@ -115,7 +134,10 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
       >
         {clientWidth < 768 ? 'Добавить' : '+'}
       </button>
-      <ListSearchProducts onHandleSelectItem={handelSelectItem} />
+      <ListSearchProducts
+        onHandleSelectItem={handelSelectItem}
+        onHandleLoadMore={handleLoadMore}
+      />
     </form>
   );
 };
