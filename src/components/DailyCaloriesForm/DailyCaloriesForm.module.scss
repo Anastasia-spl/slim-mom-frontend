@@ -2,7 +2,7 @@
 
 .formWrapper {
   width: 100%;
-
+  padding: 15px;
   @include for-size(tablet) {
     padding: 100px 67px 60px 67px;
   }
