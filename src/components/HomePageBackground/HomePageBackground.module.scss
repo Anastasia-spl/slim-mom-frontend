@@ -52,8 +52,8 @@
   @include for-size(desktop) {
     display: block;
     position: absolute;
-    right: -197px;
-    bottom: 580px;
+    right: 310px;
+    bottom: -90px;
     pointer-events: none;
   }
 }
@@ -64,10 +64,21 @@
   @include for-size(tablet) {
     display: block;
     position: absolute;
-    right: 0;
-    bottom: 250px;
+    right: 310px;
+    bottom: -90px;
     pointer-events: none;
   }
+
+  @media screen and (min-width: 758px) {
+    right: 389px;
+    bottom: -170px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    right: 319px;
+    bottom: -40px;
+  }
+
   @include for-size(desktop) {
     display: block;
     position: absolute;
