@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 axios.defaults.baseURL = `https://slim-mom-5group.herokuapp.com`;
 
 const apiService = {
@@ -27,15 +26,17 @@ const apiService = {
   },
 
   getProductsQuery(date) {
-    return axios.get(`/products/eaten?date=${date}&page=1&limit=10`);
+    return axios.get(`/products/eaten?date=${date}`);
   },
 
   deletProductQuery(id) {
     return axios.delete(`/products/${id}`);
   },
 
-  searchProductQuery(value) {
-    return axios.get(`products/search?query=${value}`);
+  searchProductQuery(value, page, limit) {
+    return axios.get(
+      `products/search?query=${value}&page=${page}&limit=${limit}`,
+    );
   },
 };
 

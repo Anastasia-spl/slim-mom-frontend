@@ -1,6 +1,8 @@
 import serviceAPI from '../../service';
+// import { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { actions } from '.';
+// import { debounce } from 'debounce';
 
 const {
   addProductsSuccess,
@@ -51,12 +53,12 @@ const dowloadProducts = isCurrentDate => async dispatch => {
   }
 };
 
-const searchProducts = value => async dispatch => {
+const searchProducts = (value, page, limit) => async dispatch => {
   dispatch(searchProductsRequest());
   try {
     const {
       data: { productsList },
-    } = await serviceAPI.searchProductQuery(value);
+    } = await serviceAPI.searchProductQuery(value, page, limit);
     dispatch(searchProductsSuccess(productsList));
   } catch (error) {
     dispatch(searchProductsError(error.message));
