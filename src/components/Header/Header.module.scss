@@ -29,9 +29,11 @@
 }
 
 .HeaderWrapper {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
+  padding-bottom: 100px;
+  z-index: 100;
 }
 
 .arrowBtn {

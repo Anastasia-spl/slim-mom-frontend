@@ -3,6 +3,8 @@
 .formWrapper {
   width: 100%;
   padding: 110px 15px;
+  position: relative;
+  z-index: 220;
   @include for-size(tablet) {
     padding: 180px 67px 60px 87px;
   }
