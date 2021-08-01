@@ -1,6 +1,8 @@
 @import '../../assets/baseStyles.scss';
 
 .itemSearchProducts {
+  display: flex;
+  justify-content: space-between;
   padding: 13px 0px 13px 5px;
   border-bottom: 1px solid #9b9faa;
   border-radius: 6px;
@@ -12,4 +14,8 @@
   &:focus {
     transform: scale(1.01);
   }
+}
+
+.valueSearch {
+  margin: 0;
 }

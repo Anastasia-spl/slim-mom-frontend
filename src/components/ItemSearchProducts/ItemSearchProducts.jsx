@@ -6,7 +6,8 @@ const ItemSearchProducts = ({ isProduct, handleSelectItem }) => {
       className={style.itemSearchProducts}
       onClick={() => handleSelectItem(isProduct)}
     >
-      {isProduct.title.ru}
+      <p className={style.valueSearch}>{isProduct.title.ru}</p>
+      <p className={style.valueSearch}>{isProduct.calories} ккал</p>
     </li>
   );
 };

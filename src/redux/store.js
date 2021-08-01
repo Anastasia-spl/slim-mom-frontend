@@ -12,9 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 
-import { notAllowedProductsReducer } from './notAllowedProducts';
 import { reducer } from './products';
-
 import { authSlice } from './auth';
 
 const middleware = getDefaultMiddleware =>
@@ -35,7 +33,6 @@ const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authSlice.reducer),
     products: reducer,
-    // notAllowedProducts: notAllowedProductsReducer.reducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',

@@ -56,6 +56,7 @@ const dowloadProducts = isCurrentDate => async dispatch => {
 const searchProducts = (value, page, limit) => async dispatch => {
   dispatch(searchProductsRequest());
   try {
+    console.log(value);
     const {
       data: { productsList },
     } = await serviceAPI.searchProductQuery(value, page, limit);

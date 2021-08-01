@@ -63,15 +63,15 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
     dispatch(searchProducts(value, page, limit));
   }
 
-  const debounceLoadData = useCallback(debounce(isFunctionDebonce, 1000), []);
+  const debounceLoadData = useCallback(debounce(isFunctionDebonce, 2000), []);
 
   const handleChangeNameProduct = event => {
     event.preventDefault();
     setTitleProduct(event.target.value);
     let query = event.target.value;
 
-    if (query.length > 0) {
-      debounceLoadData(query, page, limit);
+    if (titleProduct.trim() !== '') {
+      debounceLoadData(titleProduct, page, limit);
     }
 
     if (query === '') {
