@@ -28,6 +28,10 @@ export default function NavAuth() {
     dispatch(actions.modalAddProductSuccess());
   };
 
+  const handleCloseBurger = () => {
+    setMenuActive(false);
+  };
+
   return (
     <div className={styles.NavAuthWrapper}>
       <div className={styles.linksWrapper}>
@@ -44,7 +48,7 @@ export default function NavAuth() {
         ))}
       </div>
 
-      <BurgerMenu isActive={menuActive} />
+      <BurgerMenu isActive={menuActive} onCloseBurger={handleCloseBurger} />
 
       <BurgerBtn active={menuActive} setActive={setMenuActive} />
 
