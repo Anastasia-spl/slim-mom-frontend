@@ -27,7 +27,7 @@ const apiService = {
   },
 
   getProductsQuery(date) {
-    return axios.get(`/products/eaten?date=${date}`);
+    return axios.get(`/products/eaten?date=${date}&page=1&limit=10`);
   },
 
   deletProductQuery(id) {
