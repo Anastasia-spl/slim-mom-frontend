@@ -26,20 +26,20 @@ const Diary = () => {
   const isCurrentDate = useSelector(getCurrentDate);
   const isModalAddProduct = useSelector(modalAddProduct);
   const dispatch = useDispatch();
+  const isDate = getDateString(new Date());
 
-  const getDateString = date => {
+  function getDateString(date) {
     const day = pad(date.getDate());
     const month = pad(date.getMonth() + 1);
     const datestring = day + '.' + month + '.' + date.getFullYear();
     return datestring;
-  };
+  }
 
-  const pad = value => {
+  function pad(value) {
     return String(value).padStart(2, '0');
-  };
+  }
 
   useEffect(() => {
-    const isDate = getDateString(new Date());
     isCurrentDate === ''
       ? dispatch(actions.currentDateSuccess(isDate))
       : dispatch(dowloadProducts(isCurrentDate));
@@ -59,10 +59,12 @@ const Diary = () => {
       <div className={style.flexContainer}>
         <div className={style.diary}>
           <DatePicker onDate={getDateString} />
-          <FormProduct
-            className={classNameMobile}
-            onDateString={getDateString}
-          />
+          {isCurrentDate === isDate ? (
+            <FormProduct
+              className={classNameMobile}
+              onDateString={getDateString}
+            />
+          ) : null}
           {isLoader ? (
             <Loader />
           ) : isListProducts.length > 0 ? (

@@ -26,7 +26,7 @@ const Calendar = ({ getDate }) => {
       selected={startDate}
       dateFormat="dd.MM.yyyy"
       onChange={date => handleChangeDate(date)}
-      // minDate={new Date()}
+      maxDate={new Date()}
     ></DatePicker>
   );
 };
