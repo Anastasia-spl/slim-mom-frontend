@@ -21,9 +21,9 @@ const register = credentials => async dispatch => {
     token.set(data.user.token);
     dispatch(authSlice.actions.registerSuccess(data));
   } catch (error) {
-    console.dir(error);
-    toast.error(error);
-    dispatch(authSlice.actions.registerError(error.message));
+    const err = error?.response?.data?.message || error?.response?.data?.status;
+    toast.error(err);
+    dispatch(authSlice.actions.registerError(err));
   }
 };
 
@@ -35,9 +35,9 @@ const logIn = credentials => async dispatch => {
     token.set(data.user.token);
     dispatch(authSlice.actions.loginSuccess(data));
   } catch (error) {
-    console.dir(error);
-    toast.error(error);
-    dispatch(authSlice.actions.loginError(error.message));
+    const err = error?.response?.data?.message || error?.response?.data?.status;
+    toast.error(err);
+    dispatch(authSlice.actions.loginError(err));
   }
 };
 
@@ -50,8 +50,9 @@ const logOut = () => async dispatch => {
     token.unset();
     dispatch(authSlice.actions.logoutSuccess());
   } catch (error) {
-    toast.error(error);
-    dispatch(authSlice.actions.logoutError(error.message));
+    const err = error?.response?.data?.message || error?.response?.data?.status;
+    toast.error(err);
+    dispatch(authSlice.actions.logoutError(err));
   }
 };
 
@@ -73,8 +74,9 @@ const currentUser = () => async (dispatch, getState) => {
 
     dispatch(authSlice.actions.getCurrentUserSuccess(data));
   } catch (error) {
-    toast.error(error);
-    dispatch(authSlice.actions.getCurrentUserError(error.message));
+    const err = error?.response?.data?.message || error?.response?.data?.status;
+    toast.error(err);
+    dispatch(authSlice.actions.getCurrentUserError(err));
   }
 };
 
