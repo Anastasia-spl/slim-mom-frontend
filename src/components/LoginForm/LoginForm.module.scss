@@ -84,7 +84,7 @@
   @include flexbox();
   flex-direction: column;
   @include for-size(tablet) {
-    @include flexbox(start, start);
+    @include flexbox(flex-start, flex-start);
     flex-direction: row;
     margin-top: 60px;
   }
@@ -92,7 +92,7 @@
 
 .btn__eye {
   position: absolute;
-  bottom: 25%;
+  bottom: 4px;
   right: 0;
   @include flexbox();
   width: 20px;

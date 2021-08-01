@@ -20,20 +20,20 @@ const routes = [
     exact: true,
     path: '/',
     component: HomePage,
-    isProtected: false,
+    isProtected: null,
   },
   {
     path: '/diary',
     component: Diary,
     label: 'Дневник',
-    isProtected: false,
+    isProtected: true,
     isNav: true,
   },
   {
     path: '/calculator',
     component: CalculatorPage,
     label: 'Калькулятор',
-    isProtected: false,
+    isProtected: true,
     isNav: true,
   },
   {
@@ -54,7 +54,7 @@ const routes = [
   },
   {
     component: Page404,
-    isProtected: false,
+    isProtected: null,
   },
 ];
 export default routes;
