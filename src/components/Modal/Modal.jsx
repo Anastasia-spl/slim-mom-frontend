@@ -33,6 +33,8 @@ export default function Modal({ active, setActive, calories }) {
         }
         onClick={() => setActive(false)}
       >
+        <div className={styles.modalClose2}></div>
+        <div className={styles.modalRectangle}></div>
         <div className={styles.modal} onClick={e => e.stopPropagation()}>
           <div
             className={styles.modalClose}
@@ -52,7 +54,9 @@ export default function Modal({ active, setActive, calories }) {
               не рекомендуется употреблять
             </h3>
             {isLoading ? (
-              <Loader />
+              <div className={styles.modalLoader}>
+                <Loader />
+              </div>
             ) : (
               <ol className={styles.modalBlockList}>
                 {products.map(product => (
