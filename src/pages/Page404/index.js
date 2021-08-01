@@ -1,1 +1,1 @@
-export { default } from './Page404.jsx';
+export { default } from './Page404';

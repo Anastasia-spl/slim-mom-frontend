@@ -13,7 +13,7 @@ const Diary = lazy(() =>
 const CalculatorPage = lazy(() =>
   import('./pages/Calculator' /*webpackChunkName: "calculator-page" */),
 );
-const Page404 = lazy(() => import('./pages/Page404'));
+const Page404 = lazy(() => import('./pages/Page404' /*webpackChunkName: "404-page" */));
 
 const routes = [
   {
