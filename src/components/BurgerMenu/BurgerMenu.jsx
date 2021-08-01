@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './BurgerMenu.module.scss';
 import routes from '../../routes';
 
-const BurgerMenu = ({ isActive }) => {
+const BurgerMenu = ({ isActive, onCloseBurger }) => {
   const navLinks = useMemo(() => routes.filter(route => route.isNav), []);
 
   return (
@@ -24,6 +24,7 @@ const BurgerMenu = ({ isActive }) => {
           exact
           className={styles.link}
           activeClassName={styles.activeLink}
+          onClick={() => onCloseBurger()}
         >
           {link.label}
         </NavLink>
