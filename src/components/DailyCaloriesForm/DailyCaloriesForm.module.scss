@@ -2,9 +2,9 @@
 
 .formWrapper {
   width: 100%;
-  padding: 15px;
+  padding: 110px 15px;
   @include for-size(tablet) {
-    padding: 100px 67px 60px 67px;
+    padding: 180px 67px 60px 87px;
   }
   @include for-size(desktop) {
     padding: 292px 0 60px 115px;
