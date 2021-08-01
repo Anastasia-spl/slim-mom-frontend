@@ -4,12 +4,13 @@ import { getNotAllowedProducts, isLoading } from '../../redux/products';
 // import { formula } from './Formula';
 import Loader from '../Loader';
 import styles from './Modal.module.scss';
+// import { isLoading } from '../../redux/products';
 // import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 const shortid = require('shortid');
 
 export default function Modal({ active, setActive, calories }) {
-  const isLoading = useSelector(isLoading);
+  const isOnLoading = useSelector(isLoading);
   const dispath = useDispatch();
 
   // useEffect(() => {
@@ -53,7 +54,7 @@ export default function Modal({ active, setActive, calories }) {
               Продукты, которые вам <br />
               не рекомендуется употреблять
             </h3>
-            {isLoading ? (
+            {isOnLoading ? (
               <div className={styles.modalLoader}>
                 <Loader />
               </div>
