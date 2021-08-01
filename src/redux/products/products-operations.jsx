@@ -57,11 +57,7 @@ const searchProducts = value => async dispatch => {
     const {
       data: { productsList },
     } = await serviceAPI.searchProductQuery(value);
-    if (
-      productsList.length < 10
-        ? dispatch(searchProductsSuccess(productsList))
-        : toast.warning('Введите запрос точнее')
-    );
+    dispatch(searchProductsSuccess(productsList));
   } catch (error) {
     dispatch(searchProductsError(error.message));
   }
