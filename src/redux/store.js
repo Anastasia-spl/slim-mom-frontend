@@ -15,7 +15,7 @@ import logger from 'redux-logger';
 /* ПРИМЕР ИМПОРТА РЕДЬЮСЕРОВ*/
 
 import { notAllowedProductsReducer } from './notAllowedProducts';
-import { productsReducer } from './products';
+import { reducer } from './products';
 import { authSlice } from './auth';
 
 const middleWare = [
@@ -45,7 +45,7 @@ const authPersistConfig = {
 const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authSlice.reducer),
-    products: productsReducer.reducer,
+    products: reducer,
     // notAllowedProducts: notAllowedProductsReducer.reducer,
   },
   middleWare,

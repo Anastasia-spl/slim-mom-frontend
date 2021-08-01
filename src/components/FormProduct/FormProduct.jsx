@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { productsReducer, productsSelectors } from '../../redux/products';
+import { actions, getCurrentDate, modalAddProduct } from '../../redux/products';
 import {
   addProducts,
   searchProducts,
@@ -9,16 +9,29 @@ import style from './FormProduct.module.scss';
 import ListSearchProducts from '../ListSearchProducts';
 import { useEffect } from 'react';
 
-const FormProduct = ({ className, onHandleToggleModal, onDateString }) => {
+const FormProduct = ({ className, handleToggleModal, onDateString }) => {
   const [titleProduct, setTitleProduct] = useState('');
   const [weightProduct, setWeightProduct] = useState('');
   const [caloriesProduct, setCaloriesProduct] = useState(Number());
-  const currentDate = useSelector(productsSelectors.getCurrentDate);
-  const dispatch = useDispatch();
-
-  const isModal = onHandleToggleModal ? true : false;
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
   const [isDisableInput, setDisableInput] = useState(false);
+  const [clientWidth, setclientWidth] = useState(
+    document.documentElement.clientWidth,
+  );
+  const currentDate = useSelector(getCurrentDate);
+  const isModalAddProduct = useSelector(modalAddProduct);
+  const dispatch = useDispatch();
+
+  const handleResize = () => {
+    const width = document.documentElement.clientWidth;
+    setclientWidth(width);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const isDate = onDateString(new Date());
 
@@ -39,19 +52,19 @@ const FormProduct = ({ className, onHandleToggleModal, onDateString }) => {
     setWeightProduct('');
     setIsDisabledBtn(true);
 
-    if (isModal) {
-      onHandleToggleModal();
+    if (isModalAddProduct) {
+      handleToggleModal();
     }
   };
 
   const handleChangeNameProduct = event => {
     event.preventDefault();
     let value = event.target.value;
-    if (value.length > 2) {
+    if (value.length > 3) {
       dispatch(searchProducts(value));
     }
     if (value === '') {
-      dispatch(productsReducer.actions.searchProductsSuccess([]));
+      dispatch(actions.searchProductsSuccess([]));
     }
 
     setTitleProduct(event.target.value);
@@ -66,7 +79,7 @@ const FormProduct = ({ className, onHandleToggleModal, onDateString }) => {
     setTitleProduct(isProduct.title.ru);
     setIsDisabledBtn(false);
     setCaloriesProduct(isProduct.calories);
-    dispatch(productsReducer.actions.searchProductsSuccess([]));
+    dispatch(actions.searchProductsSuccess([]));
   };
 
   return (
@@ -100,7 +113,7 @@ const FormProduct = ({ className, onHandleToggleModal, onDateString }) => {
         type="submit"
         disabled={isDisabledBtn}
       >
-        {document.documentElement.clientWidth < 768 ? 'Добавить' : '+'}
+        {clientWidth < 768 ? 'Добавить' : '+'}
       </button>
       <ListSearchProducts onHandleSelectItem={handelSelectItem} />
     </form>

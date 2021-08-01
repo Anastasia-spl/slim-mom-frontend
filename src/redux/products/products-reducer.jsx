@@ -6,6 +6,7 @@ const initialProductsState = {
   searchList: [],
   filter: '',
   currentDate: '',
+  modalAddProduct: false,
   error: null,
   notAllowedProducts: [],
 };
@@ -27,7 +28,9 @@ const { actions, reducer } = createSlice({
       state.isLoading = false;
     },
     deleteProductSuccess: (state, { payload }) => {
-      state.products = state.products.filter(product => product.id !== payload);
+      state.products = state.products.filter(
+        product => product._id !== payload,
+      );
       state.isLoading = false;
     },
     deleteProductRequest: state => {
@@ -84,7 +87,19 @@ const { actions, reducer } = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
+
+    modalAddProductSuccess: state => {
+      state.modalAddProduct = !state.modalAddProduct;
+      state.isLoading = false;
+    },
+    modalAddProductRequest: (state, { payload }) => {
+      state.isLoading = true;
+    },
+    modalAddProductError: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    },
   },
 });
 
-export default { actions, reducer };
+export { actions, reducer };
