@@ -27,32 +27,33 @@ export default function App() {
       <Header />
       <Suspense fallback={<Loader />}>
         <Switch>
-          {routes.map(({ path, isProtected, exact, component: Component }) =>
-            isProtected === null ? (
-              <Route
-                exact={exact}
-                key={[path]}
-                path={path}
-                isProtected={isProtected}
-                component={Component}
-              />
-            ) : isProtected ? (
-              <PrivateRoute
-                exact={exact}
-                key={path}
-                path={path}
-                isProtected={isProtected}
-                component={Component}
-              />
-            ) : (
-              <PublicRoute
-                exact={exact}
-                key={[path]}
-                path={path}
-                isProtected={isProtected}
-                component={Component}
-              />
-            ),
+          {routes.map(
+            ({ path, isProtected, redirectTo, exact, component: Component }) =>
+              isProtected === null ? (
+                <Route
+                  exact={exact}
+                  key={[path]}
+                  path={path}
+                  component={Component}
+                  redirectTo={redirectTo}
+                />
+              ) : isProtected ? (
+                <PrivateRoute
+                  exact={exact}
+                  key={path}
+                  path={path}
+                  component={Component}
+                  redirectTo={redirectTo}
+                />
+              ) : (
+                <PublicRoute
+                  exact={exact}
+                  key={[path]}
+                  path={path}
+                  component={Component}
+                  redirectTo={redirectTo}
+                />
+              ),
           )}
         </Switch>
       </Suspense>

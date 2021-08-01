@@ -20,7 +20,8 @@ const routes = [
     exact: true,
     path: '/',
     component: HomePage,
-    isProtected: null,
+    isProtected: false,
+    redirectTo: localStorage.getItem('user') !== null ? '/diary' : '/calculator',
   },
   {
     path: '/diary',
@@ -28,6 +29,7 @@ const routes = [
     label: 'Дневник',
     isProtected: true,
     isNav: true,
+    redirectTo: '/login',
   },
   {
     path: '/calculator',
@@ -35,6 +37,7 @@ const routes = [
     label: 'Калькулятор',
     isProtected: true,
     isNav: true,
+    redirectTo: '/login',
   },
   {
     exact: false,
@@ -43,6 +46,7 @@ const routes = [
     component: LoginPage,
     isProtected: false,
     isLogBar: true,
+    redirectTo: '/diary',
   },
   {
     exact: false,
@@ -51,6 +55,7 @@ const routes = [
     component: RegistrationPage,
     isProtected: false,
     isLogBar: true,
+    redirectTo: '/diary',
   },
   {
     component: Page404,
