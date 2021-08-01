@@ -52,8 +52,8 @@
   @include for-size(desktop) {
     display: block;
     position: absolute;
-    right: 310px;
-    bottom: -90px;
+    right: -10%;
+    bottom: 400px;
     pointer-events: none;
   }
 }
