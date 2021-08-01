@@ -5,12 +5,12 @@ import { getNotAllowedProducts, isLoading } from '../../redux/products';
 import Loader from '../Loader';
 import styles from './Modal.module.scss';
 // import { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 const shortid = require('shortid');
 
 export default function Modal({ active, setActive, calories }) {
   const isLoading = useSelector(isLoading);
-  // const dispath = useDispatch();
+  const dispath = useDispatch();
 
   // useEffect(() => {
   //   const { bloodGroup } = JSON.parse(localStorage.getItem('user'));
