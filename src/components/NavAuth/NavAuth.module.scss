@@ -106,6 +106,7 @@ a {
 
 .closeModal {
   display: none;
+  cursor: pointer;
 
   @include for-size(tablet-only) {
     display: block;

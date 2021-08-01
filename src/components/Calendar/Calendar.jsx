@@ -2,7 +2,7 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import style from './Calendar.module.scss';
-import { productsReducer } from '../../redux/products';
+import { actions } from '../../redux/products';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -17,7 +17,7 @@ const Calendar = ({ getDate }) => {
   const handleChangeDate = date => {
     setStartDate(date);
     const dateString = getDate(startDate);
-    dispatch(productsReducer.actions.currentDateSuccess(dateString));
+    dispatch(actions.currentDateSuccess(dateString));
   };
 
   return (

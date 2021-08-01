@@ -12,7 +12,7 @@ const ModalAddProducts = ({ className, onHandleToggleModal, onDateString }) => {
       <div className={style.modal}>
         <FormProduct
           className={className}
-          onHandleToggleModal={onHandleToggleModal}
+          handleToggleModal={onHandleToggleModal}
           onDateString={onDateString}
         />
       </div>

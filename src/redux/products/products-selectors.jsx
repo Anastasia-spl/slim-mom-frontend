@@ -1,27 +1,17 @@
-import { createSelector } from '@reduxjs/toolkit';
-
 const getStateProducts = state => state.products.products;
 const getSearchList = state => state.products.searchList;
 const getLoader = state => state.products.isLoading;
 const getCurrentDate = state => state.products.currentDate;
 const getNotAllowedProducts = state => state.products.notAllowedProducts;
 const isLoading = state => state.products.isLoading;
+const modalAddProduct = state => state.products.modalAddProduct;
 
-// const getFilterProducts = createSelector(
-//   [getStateProducts, getStateFilterProducts],
-//   (products, inputFilter) => {
-//     const normolizeInputFilter = inputFilter.toLowerCase();
-//     return products.filter(product =>
-//       product.title.toLocaleLowerCase().includes(normolizeInputFilter),
-//     );
-//   },
-// );
-
-export default {
+export {
   getStateProducts,
   getSearchList,
   getLoader,
   getNotAllowedProducts,
   isLoading,
   getCurrentDate,
+  modalAddProduct,
 };

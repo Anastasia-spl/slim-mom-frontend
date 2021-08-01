@@ -6,15 +6,16 @@
   margin: 0;
   padding: 0;
   width: 386px;
+  z-index: 2;
 
   list-style: none;
   background-color: white;
 
   @include for-size(desktop-only) {
-    top: 355px;
+    top: 320px;
   }
   @include for-size(tablet-only) {
-    top: 135px;
+    top: 115px;
     width: 290px;
   }
 }

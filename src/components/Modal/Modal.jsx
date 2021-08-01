@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { productsSelectors } from '../../redux/products';
+import { getNotAllowedProducts, isLoading } from '../../redux/products';
 // import { getProducts } from '../../redux/products/products-operations';
 // import { formula } from './Formula';
 import Loader from '../Loader';
@@ -9,7 +9,7 @@ import styles from './Modal.module.scss';
 const shortid = require('shortid');
 
 export default function Modal({ active, setActive, calories }) {
-  const isLoading = useSelector(productsSelectors.isLoading);
+  const isLoading = useSelector(isLoading);
   // const dispath = useDispatch();
 
   // useEffect(() => {
@@ -19,7 +19,7 @@ export default function Modal({ active, setActive, calories }) {
   //   fetchProducts();
   // }, [dispath]);
 
-  const products = useSelector(productsSelectors.getNotAllowedProducts);
+  const products = useSelector(getNotAllowedProducts);
   const buttonClose = () => {
     const closeModal = () => setActive(false);
     const redirect = (window.location.href = '/register');

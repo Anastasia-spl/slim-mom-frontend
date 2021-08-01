@@ -1,6 +1,6 @@
 import serviceAPI from '../../service';
 import { toast } from 'react-toastify';
-import { productsReducer } from '.';
+import { actions } from '.';
 
 const {
   addProductsSuccess,
@@ -18,7 +18,7 @@ const {
   fetchRecommendationSuccess,
   fetchRecommendationRequest,
   fetchRecommendationError,
-} = productsReducer.actions;
+} = actions;
 
 const addProducts = payload => async dispatch => {
   dispatch(addProductsRequest());
