@@ -6,7 +6,6 @@
   padding: 18px 15px 18px 15px;
   margin: 0 auto;
   justify-content: space-between;
-
   &:after {
     content: '';
     border-bottom: 2px solid $light-gray;
@@ -29,7 +28,18 @@
 }
 
 .HeaderWrapper {
-  position: relative;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 300;
+  background-color: white;
+
+  @include for-size(tablet) {
+    background-color: white;
+  }
+  @include for-size(desktop) {
+    background-color: transparent;
+  }
 }
 
 .arrowBtn {

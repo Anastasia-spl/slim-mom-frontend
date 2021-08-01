@@ -2,11 +2,17 @@
 
 .formWrapper {
   width: 100%;
+  padding: 110px 15px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+
   @include for-size(tablet) {
-    padding: 100px 67px 60px 67px;
+    padding: 122px 67px 60px 87px;
+    margin-top: 78px;
   }
   @include for-size(desktop) {
-    padding: 146px 0 60px 90px;
+    padding: 292px 0 60px 115px;
     width: 60vw;
   }
 }
