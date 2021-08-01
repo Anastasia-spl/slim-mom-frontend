@@ -19,7 +19,7 @@ const PublicRoute = ({ component: Component, redirectTo, ...routeProps }) => {
         ) : !isLoggedOn ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/diary" />
+          <Redirect to={redirectTo} />
         )
       }
     />

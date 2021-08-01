@@ -19,7 +19,7 @@ const PrivateRoute = ({ component: Component, redirectTo, ...routeProps }) => {
         ) : isLoggedOn ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/login" />
+          <Redirect to={redirectTo} />
         )
       }
     />
