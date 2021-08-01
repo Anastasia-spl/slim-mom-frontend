@@ -1,29 +1,15 @@
 import { useSelector } from 'react-redux';
 import { getNotAllowedProducts, isLoading } from '../../redux/products';
-// import { getProducts } from '../../redux/products/products-operations';
-// import { formula } from './Formula';
 import Loader from '../Loader';
 import styles from './Modal.module.scss';
-// import { isLoading } from '../../redux/products';
-// import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 const shortid = require('shortid');
 
 export default function Modal({ active, setActive, calories }) {
   const isOnLoading = useSelector(isLoading);
-  const dispath = useDispatch();
-
-  // useEffect(() => {
-  //   const { bloodGroup } = JSON.parse(localStorage.getItem('user'));
-  //   console.log(bloodGroup);
-  //   const fetchProducts = () => dispath(getProducts(bloodGroup));
-  //   fetchProducts();
-  // }, [dispath]);
-
   const products = useSelector(getNotAllowedProducts);
   const buttonClose = () => {
-    const closeModal = () => setActive(false);
-    const redirect = (window.location.href = '/register');
+    setActive(false);
+    window.location.href = '/register';
   };
 
   return (
