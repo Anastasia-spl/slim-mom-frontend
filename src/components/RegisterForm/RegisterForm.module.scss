@@ -15,18 +15,18 @@
 .form {
   @include flexbox();
   flex-direction: column;
-  margin-top: 40px;
-  margin-bottom: 10px;
+  margin-top: 110px;
+  padding: 10px;
   z-index: 1;
   @include for-size(tablet) {
     display: block;
     width: 400px;
-    margin-top: 190px;
-    margin-left: 90px;
+    margin-top: 260px;
+    margin-left: 80px;
   }
   @include for-size(desktop) {
-    margin-top: 210px;
-    margin-left: 115px;
+    margin-top: 352px;
+    margin-left: 105px;
   }
 }
 
@@ -35,6 +35,10 @@
   width: 240px;
   height: 45px;
   margin-bottom: 40px;
+  @include for-size(mobile-only) {
+    max-width: 240px;
+    width: 100%;
+  }
 }
 
 .label {
@@ -121,15 +125,6 @@
   border-radius: 30px;
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  &:disabled {
-    &:hover {
-      opacity: 0.4;
-      border: 2px solid $accent-color;
-      box-shadow: none;
-    }
-    opacity: 0.4;
-  }
-
   &:hover {
     opacity: 1;
     border: 2px solid transparent;
@@ -152,6 +147,13 @@
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   opacity: 0.8;
+
+  &:disabled {
+    opacity: 0.4;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
 
   &:hover {
     opacity: 1;

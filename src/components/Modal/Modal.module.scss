@@ -1,8 +1,8 @@
 @import '../../assets/baseStyles.scss';
 
-body {
-  position: relative;
-}
+// body {
+//   position: relative;
+// }
 
 .backdrop {
   @include for-size(mobile) {

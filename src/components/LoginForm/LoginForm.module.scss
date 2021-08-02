@@ -15,18 +15,18 @@
 .form {
   @include flexbox();
   flex-direction: column;
-  margin-top: 40px;
-  margin-bottom: 10px;
+  margin-top: 110px;
+  padding: 10px;
   z-index: 1;
   @include for-size(tablet) {
     display: block;
     width: 400px;
-    margin-top: 158px;
-    margin-left: 90px;
+    margin-top: 260px;
+    margin-left: 80px;
   }
   @include for-size(desktop) {
-    margin-top: 210px;
-    margin-left: 115px;
+    margin-top: 352px;
+    margin-left: 105px;
   }
 }
 
