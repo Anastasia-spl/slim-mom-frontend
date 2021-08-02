@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { getProducts } from '../../redux/products/products-operations';
 import { authSelectors } from '../../redux/auth';
 import { createSelector } from 'reselect';
-import Loader from '../../components/Loader';
+
+import LoaderComponent from '../LoaderComponent';
+
 import {
   getNotAllowedProducts,
   getStateProducts,
@@ -118,7 +120,7 @@ const RightInfoPanel = () => {
             {!authSelectors || !JSON.parse(localStorage.getItem('user')) ? (
               'Здесь будет отображаться Ваш рацион'
             ) : isLoader ? (
-              <Loader />
+              <LoaderComponent />
             ) : (
               productsToString(productsListNA)
             )}

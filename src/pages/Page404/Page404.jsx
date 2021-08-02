@@ -6,7 +6,6 @@ const Page404 = () => {
       <h1 className={styles.title}>404</h1>
       <h2 className={styles.subTitle}>Ой, кажется ты потерялся!</h2>
       <p className={styles.text}>Страница, которую ты ищешь, не существует.</p>
-      <button className={styles.title}>Домой</button>
     </div>
   );
 };

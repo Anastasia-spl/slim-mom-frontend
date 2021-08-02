@@ -4,7 +4,7 @@ import styles from './Loader.module.scss';
 const Loader = () => {
   return (
     <div className={styles.wrapper}>
-      <BaseLoader type="Watch" color="#fc842d" height={80} width={80} />
+      <BaseLoader type="Watch" color="#fc842d" height={60} width={60} />
     </div>
   );
 };
