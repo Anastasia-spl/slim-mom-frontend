@@ -32,6 +32,7 @@
     width: 41.8vw;
     background-color: $secondary-bg-color;
     height: 100vh;
+    min-height: 850px;
     background-repeat: no-repeat;
     background-position: top 0 right 0;
     @media only screen and (-webkit-min-device-pixel-ratio: 2),
@@ -57,6 +58,7 @@
   }
   @include for-size(desktop) {
     flex-direction: column;
+    padding-top: 292px;
   }
 }
 
@@ -128,7 +130,8 @@
   }
   @include for-size(desktop) {
     flex-direction: column;
-    margin-top: 137px;
+    // margin-top: 137px;
+    margin-top: 0;
     max-width: 330px;
     margin-bottom: 0px;
   }
