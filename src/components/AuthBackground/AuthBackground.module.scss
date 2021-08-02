@@ -2,15 +2,12 @@
 
 .background {
   position: relative;
-  flex: 0 1 auto;
   overflow: hidden;
   width: 100%;
   max-width: 100%;
   top: 0;
   @include for-size(tablet) {
     min-height: 100vh;
-    height: 1024px;
-    // min-height: calc(100vh - 78px);
     background-image: url('../../assets/pictures/shapeGrayAuthTablet.svg');
     background-position: bottom 0px right 0px;
     background-repeat: no-repeat;
@@ -19,18 +16,14 @@
 
   @include for-size(desktop) {
     min-height: 100vh;
-    height: 1024px;
-
-    // min-height: calc(100vh - 131px);
     background-image: url('../../assets/pictures/shapeGrayAuth.svg');
-    background-position: bottom -30px right -250px;
+    background-position: top 0px right 0px;
     background-repeat: no-repeat;
-    background-size: 62% 100%;
+    background-size: 62% auto;
   }
 }
 
 .strowberry {
-  display: none;
   @include for-size(tablet) {
     display: block;
     position: absolute;
@@ -45,7 +38,6 @@
 }
 
 .banana {
-  display: none;
   @include for-size(tablet) {
     display: block;
     position: absolute;
@@ -60,7 +52,6 @@
 }
 
 .leaves {
-  display: none;
   @include for-size(tablet) {
     display: block;
     position: absolute;

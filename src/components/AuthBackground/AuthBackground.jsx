@@ -39,45 +39,69 @@ export default function AuthBackground({ children }) {
       onMouseMove={handleMouseMove}
       ref={refs}
     >
-      {clientWidth > 1280 ? (
-        <div
-          className={styles.leaves}
-          style={{
-            transform: `translateX(${x * 0.08}px) translateY(${y * 0.08}px)`,
-          }}
-        >
-          <img src={leavesDesctop} alt="Leaves" />
-        </div>
+      {clientWidth <= 767 ? null : clientWidth >= 768 && clientWidth <= 1279 ? (
+        <>
+          <div
+            className={styles.leaves}
+            style={{
+              transform: `translateX(${x * 0.08}px) translateY(${y * 0.08}px)`,
+            }}
+          >
+            <img src={leaves} alt="Leaves" />
+          </div>
+          <div
+            className={styles.banana}
+            style={{
+              transform: `translateX(${x * 0.05}px) rotate(${
+                x * -0.005
+              }deg) translateY(${y * -0.05}px)`,
+            }}
+          >
+            <img src={banana} alt="Banana" />
+          </div>
+          <div
+            className={styles.strowberry}
+            style={{
+              transform: `translateX(${x * 0.05}px) rotate(${
+                x * -0.015
+              }deg) translateY(${y * 0.05}px)`,
+            }}
+          >
+            <img src={strowberry} alt="Strowberry" />
+          </div>
+        </>
       ) : (
-        <div
-          className={styles.leaves}
-          style={{
-            transform: `translateX(${x * 0.08}px) translateY(${y * 0.08}px)`,
-          }}
-        >
-          <img src={leaves} alt="Leaves" />
-        </div>
+        <>
+          <div
+            className={styles.leaves}
+            style={{
+              transform: `translateX(${x * 0.08}px) translateY(${y * 0.08}px)`,
+            }}
+          >
+            <img src={leavesDesctop} alt="Leaves" />
+          </div>
+          <div
+            className={styles.banana}
+            style={{
+              transform: `translateX(${x * 0.05}px) rotate(${
+                x * -0.005
+              }deg) translateY(${y * -0.05}px)`,
+            }}
+          >
+            <img src={banana} alt="Banana" />
+          </div>
+          <div
+            className={styles.strowberry}
+            style={{
+              transform: `translateX(${x * 0.05}px) rotate(${
+                x * -0.015
+              }deg) translateY(${y * 0.05}px)`,
+            }}
+          >
+            <img src={strowberry} alt="Strowberry" />
+          </div>
+        </>
       )}
-      <div
-        className={styles.banana}
-        style={{
-          transform: `translateX(${x * 0.05}px) rotate(${
-            x * -0.005
-          }deg) translateY(${y * -0.05}px)`,
-        }}
-      >
-        <img src={banana} alt="Banana" />
-      </div>
-      <div
-        className={styles.strowberry}
-        style={{
-          transform: `translateX(${x * 0.05}px) rotate(${
-            x * -0.015
-          }deg) translateY(${y * 0.05}px)`,
-        }}
-      >
-        <img src={strowberry} alt="Strowberry" />
-      </div>
 
       {children}
     </div>

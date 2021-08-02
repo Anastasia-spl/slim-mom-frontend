@@ -147,7 +147,7 @@ const RegisterForm = () => {
             </div>
 
             <div className={styles.buttons}>
-            <button
+              <button
                 className={styles.btn__register}
                 type="submit"
                 disabled={!isValid || !dirty}
@@ -155,11 +155,10 @@ const RegisterForm = () => {
               >
                 Регистрация
               </button>
-              
+
               <NavLink className={styles.btn__login} to={`${login.path}`}>
                 {login.label}
               </NavLink>
-              
             </div>
           </form>
         )}
