@@ -19,8 +19,9 @@ const RightInfoPanel = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (authSelectors) {
-      const getBloudLS = JSON.parse(localStorage.getItem('user'))?.bloodGroup;
+    const getUserLS = JSON.parse(localStorage.getItem('user'));
+    if (authSelectors && getUserLS) {
+      const getBloudLS = JSON.parse(localStorage.getItem('user')).bloodGroup;
       dispatch(getProducts(getBloudLS));
       setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
     }
@@ -116,7 +117,7 @@ const RightInfoPanel = () => {
         <div className={styles.productsBlock}>
           <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
           <span className={styles.products}>
-            {!authSelectors ? (
+            {!authSelectors || !JSON.parse(localStorage.getItem('user')) ? (
               'Здесь будет отображаться Ваш рацион'
             ) : isLoader ? (
               <LoaderComponent />
