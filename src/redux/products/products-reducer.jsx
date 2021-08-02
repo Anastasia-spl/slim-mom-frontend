@@ -2,13 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialProductsState = {
   products: [],
-  isLoading: false,
   searchList: [],
-  filter: '',
-  currentDate: '',
-  modalAddProduct: false,
-  error: null,
   notAllowedProducts: [],
+  currentDate: '',
+  totalPages: 1,
+  modalAddProduct: false,
+  isLoading: false,
+  error: null,
+  // filter: '',
 };
 
 const { actions, reducer } = createSlice({
@@ -60,6 +61,17 @@ const { actions, reducer } = createSlice({
       state.isLoading = true;
     },
     searchProductsError: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    },
+    searchTotalPagesSuccess: (state, { payload }) => {
+      state.totalPages = payload;
+      state.isLoading = false;
+    },
+    searchTotalPagesRequest: (state, { payload }) => {
+      state.isLoading = true;
+    },
+    searchTotalPagesError: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
     },

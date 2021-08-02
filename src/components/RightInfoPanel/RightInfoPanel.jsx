@@ -18,7 +18,7 @@ const RightInfoPanel = () => {
 
   useEffect(() => {
     if (authSelectors) {
-      const getBloudLS = JSON.parse(localStorage.getItem('user')).bloodGroup;
+      const getBloudLS = JSON.parse(localStorage.getItem('user'))?.bloodGroup;
       dispatch(getProducts(getBloudLS));
       setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
     }

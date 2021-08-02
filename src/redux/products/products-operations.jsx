@@ -20,6 +20,7 @@ const {
   fetchRecommendationSuccess,
   fetchRecommendationRequest,
   fetchRecommendationError,
+  searchTotalPagesSuccess,
 } = actions;
 
 const addProducts = payload => async dispatch => {
@@ -56,12 +57,11 @@ const dowloadProducts = isCurrentDate => async dispatch => {
 const searchProducts = (value, page, limit) => async dispatch => {
   dispatch(searchProductsRequest());
   try {
-    console.log(value);
-    const {
-      data: { productsList },
-    } = await serviceAPI.searchProductQuery(value, page, limit);
-    dispatch(searchProductsSuccess(productsList));
+    const { data } = await serviceAPI.searchProductQuery(value, page, limit);
+    dispatch(searchProductsSuccess(data.productsList));
+    dispatch(searchTotalPagesSuccess(data.totalPages));
   } catch (error) {
+    // toast;
     dispatch(searchProductsError(error.message));
   }
 };

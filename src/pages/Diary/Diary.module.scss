@@ -2,6 +2,7 @@
 
 .diary__form {
   &Mobile {
+    position: relative;
     display: flex;
     margin-top: 60px;
     align-items: center;
@@ -11,6 +12,7 @@
   }
 
   &Modal {
+    position: relative;
     @include for-size(tablet-only) {
       display: block;
       margin-top: 80px;

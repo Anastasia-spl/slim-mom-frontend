@@ -1,11 +1,16 @@
 import { useSelector } from 'react-redux';
 import style from './ListSearchProducts.module.scss';
-import { getSearchList } from '../../redux/products';
+import { getSearchList, isTotalPages } from '../../redux/products';
 import ItemSearchProducts from '../ItemSearchProducts/ItemSearchProducts';
 import { v4 as uuidv4 } from 'uuid';
 
-const ListSearchProducts = ({ onHandleSelectItem, onHandleLoadMore }) => {
+const ListSearchProducts = ({
+  isPage,
+  onHandleSelectItem,
+  onHandleLoadMore,
+}) => {
   const listSearchProducts = useSelector(getSearchList);
+  const totalPages = useSelector(isTotalPages);
 
   return (
     <ul className={style.listSearchProducts}>
@@ -16,7 +21,7 @@ const ListSearchProducts = ({ onHandleSelectItem, onHandleLoadMore }) => {
           handleSelectItem={onHandleSelectItem}
         />
       ))}
-      {listSearchProducts.length > 0 ? (
+      {listSearchProducts.length > 0 && isPage < totalPages ? (
         <button
           className={style.btnLoadMore}
           key={'btn'}
