@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { authSelectors, authOperations } from '../../redux/auth';
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 import { modalAddProduct, actions } from '../../redux/products';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -19,6 +19,11 @@ export default function NavAuth() {
   const isModalAddProducts = useSelector(modalAddProduct);
 
   const navLinks = useMemo(() => routes.filter(route => route.isNav), []);
+
+  useEffect(() => {
+    const body = document.querySelector('body');
+    body.style.overflow = menuActive ? 'hidden' : 'auto';
+  }, [menuActive]);
 
   const onLogOut = useCallback(() => {
     dispatch(authOperations.logOut());
