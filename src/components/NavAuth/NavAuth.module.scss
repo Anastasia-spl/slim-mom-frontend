@@ -99,9 +99,7 @@ a {
   padding-right: 15px;
   text-transform: capitalize;
   transition: $cubic;
-  &:hover {
-    color: $primary-text-color;
-  }
+  color: $primary-text-color;
 }
 
 .closeModal {

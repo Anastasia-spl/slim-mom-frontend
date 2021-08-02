@@ -11,6 +11,7 @@
   background-color: $secondary-bg-color;
   background-repeat: no-repeat;
   width: 100vw;
+  padding-top: 40px;
   padding-bottom: 84px;
   @include for-size(tablet) {
     width: 100vw;
@@ -34,7 +35,7 @@
     background-color: $secondary-bg-color;
     height: 100vh;
     min-height: 850px;
-    padding-top: 160px;
+    padding-top: 292px;
 
     background-repeat: no-repeat;
     background-position: top 0 right 0;
@@ -61,7 +62,6 @@
   }
   @include for-size(desktop) {
     flex-direction: column;
-    padding-top: 292px;
   }
 }
 
@@ -126,14 +126,9 @@
   @include for-size(tablet) {
     max-width: 250px;
     width: 250px;
-    // margin-top: 90px;
-    margin-right: 30px;
-    margin-left: 20;
-    margin-bottom: 90px;
   }
   @include for-size(desktop) {
     flex-direction: column;
-    // margin-top: 137px;
     margin-top: 0;
     max-width: 330px;
     margin-bottom: 0px;
@@ -159,12 +154,14 @@
   list-style-type: none;
   min-width: 270px;
   padding-left: 0;
-  margin-top: 0;
+  margin: 0;
 }
 .listItem {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 17px;
+  &:not(:last-child) {
+    margin-bottom: 17px;
+  }
   font-weight: 400;
   color: $secondary-text-color;
   @include for-size(tablet) {
@@ -201,11 +198,11 @@
     margin-top: 60px;
     max-width: 330px;
     margin-left: 0;
-    margin-right: 30px;
+    margin-right: 0;
   }
 }
 .productsTitle {
-  margin-top: 23px;
+  margin-top: 0;
   margin-bottom: 20px;
   font-weight: bold;
   font-size: 14px;
@@ -216,7 +213,7 @@
     margin-top: 0;
   }
   @include for-size(desktop) {
-    margin-bottom: 42px;
+    margin-bottom: 40px;
     margin-top: 0;
   }
 }
@@ -235,7 +232,7 @@
     flex-direction: row;
   }
   @include for-size(desktop) {
-    margin-bottom: 42px;
+    // margin-bottom: 42px;
     min-width: 280px;
   }
 }
@@ -244,13 +241,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 90px 15px 24px 15px;
+  padding-bottom: 40px;
   @include for-size(tablet) {
     flex-direction: row;
     padding: 0;
+    margin-right: 30px;
+    align-items: start;
   }
   @include for-size(desktop) {
     padding: 0;
     flex-direction: column;
+    margin-right: 0;
   }
 }
