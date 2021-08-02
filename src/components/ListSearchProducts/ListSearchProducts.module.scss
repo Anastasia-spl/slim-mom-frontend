@@ -2,7 +2,7 @@
 
 .listSearchProducts {
   position: absolute;
-  top: 280px;
+  top: 45px;
   margin: 0;
   padding: 0;
   width: 386px;
@@ -12,10 +12,23 @@
   background-color: white;
 
   @include for-size(desktop-only) {
-    top: 240px;
+    top: 45px;
   }
   @include for-size(tablet-only) {
-    top: 115px;
+    top: 40px;
     width: 290px;
+  }
+}
+
+.btnLoadMore {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(252, 132, 45, 0.2);
+  border-bottom: 1px solid #9b9faa;
+  transition: background-color, 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    background-color: #fc842d;
   }
 }

@@ -70,12 +70,12 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
     setTitleProduct(event.target.value);
     let query = event.target.value;
 
-    if (titleProduct === '') {
+    if (query === '') {
       dispatch(actions.searchProductsSuccess([]));
     }
 
-    if (titleProduct !== '') {
-      debounceLoadData(titleProduct, page, limit);
+    if (query.trim() !== 0 && query.length > 1) {
+      debounceLoadData(query, page, limit);
     }
 
     setTitleProduct(event.target.value);
@@ -135,6 +135,7 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
         {clientWidth < 768 ? 'Добавить' : '+'}
       </button>
       <ListSearchProducts
+        isPage={page}
         onHandleSelectItem={handelSelectItem}
         onHandleLoadMore={handleLoadMore}
       />
