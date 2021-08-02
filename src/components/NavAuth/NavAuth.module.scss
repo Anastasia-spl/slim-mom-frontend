@@ -59,7 +59,7 @@ a {
   }
   @include for-size(desktop) {
     position: absolute;
-    bottom: 0;
+    bottom: 15px;
     left: 40%;
   }
 }
