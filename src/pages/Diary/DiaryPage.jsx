@@ -15,6 +15,7 @@ import {
   modalAddProduct,
 } from '../../redux/products';
 import Loader from '../../components/Loader';
+import LoaderComponent from '../../components/LoaderComponent';
 import DiaryContainer from '../../components/DiaryContainer';
 import RightInfoPanel from '../../components/RightInfoPanel';
 
@@ -66,7 +67,7 @@ const Diary = () => {
             />
           ) : null}
           {isLoader ? (
-            <Loader />
+            <LoaderComponent />
           ) : isListProducts.length > 0 ? (
             <ListProducts />
           ) : null}
