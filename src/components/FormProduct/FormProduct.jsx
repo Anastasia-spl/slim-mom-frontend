@@ -70,12 +70,12 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
     setTitleProduct(event.target.value);
     let query = event.target.value;
 
-    if (titleProduct.trim() !== '') {
-      debounceLoadData(titleProduct, page, limit);
+    if (titleProduct === '') {
+      dispatch(actions.searchProductsSuccess([]));
     }
 
-    if (query === '') {
-      dispatch(actions.searchProductsSuccess([]));
+    if (titleProduct !== '') {
+      debounceLoadData(titleProduct, page, limit);
     }
 
     setTitleProduct(event.target.value);
