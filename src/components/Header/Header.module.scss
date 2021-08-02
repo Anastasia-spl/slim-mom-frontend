@@ -32,10 +32,8 @@
   top: 0;
   width: 100%;
   z-index: 300;
-  background-color: white;
 
   @include for-size(tablet) {
-    background-color: white;
   }
   @include for-size(desktop) {
     background-color: transparent;
