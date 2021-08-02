@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { getProducts } from '../../redux/products/products-operations';
 import { authSelectors } from '../../redux/auth';
 import { createSelector } from 'reselect';
-import Loader from '../../components/Loader';
+
+import LoaderComponent from '../LoaderComponent';
+
 import {
   getNotAllowedProducts,
   getStateProducts,
@@ -18,7 +20,7 @@ const RightInfoPanel = () => {
 
   useEffect(() => {
     if (authSelectors) {
-      const getBloudLS = JSON.parse(localStorage.getItem('user')).bloodGroup;
+      const getBloudLS = JSON.parse(localStorage.getItem('user'))?.bloodGroup;
       dispatch(getProducts(getBloudLS));
       setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
     }
@@ -117,7 +119,7 @@ const RightInfoPanel = () => {
             {!authSelectors ? (
               'Здесь будет отображаться Ваш рацион'
             ) : isLoader ? (
-              <Loader />
+              <LoaderComponent />
             ) : (
               productsToString(productsListNA)
             )}
