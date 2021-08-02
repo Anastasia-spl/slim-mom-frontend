@@ -11,10 +11,11 @@
   background-color: $secondary-bg-color;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 100vh;
+  padding-bottom: 84px;
   @include for-size(tablet) {
     width: 100vw;
     height: 350px;
+    padding-top: 90px;
     @media only screen and (-webkit-min-device-pixel-ratio: 2),
       only screen and (min-device-pixel-ratio: 2) {
       background-image: url('../../assets/pictures/diary-leaves-tablet@2x.png');
@@ -33,6 +34,8 @@
     background-color: $secondary-bg-color;
     height: 100vh;
     min-height: 850px;
+    padding-top: 160px;
+
     background-repeat: no-repeat;
     background-position: top 0 right 0;
     @media only screen and (-webkit-min-device-pixel-ratio: 2),
@@ -123,7 +126,7 @@
   @include for-size(tablet) {
     max-width: 250px;
     width: 250px;
-    margin-top: 90px;
+    // margin-top: 90px;
     margin-right: 30px;
     margin-left: 20;
     margin-bottom: 90px;
@@ -188,7 +191,7 @@
   @include for-size(tablet) {
     max-width: 260px;
     width: 260px;
-    margin-top: 90px;
+    // margin-top: 90px;
     margin-right: auto;
     margin-left: 30px;
     margin-bottom: auto;
