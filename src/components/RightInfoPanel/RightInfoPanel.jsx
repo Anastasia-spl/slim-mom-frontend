@@ -118,7 +118,7 @@ const RightInfoPanel = () => {
           <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
           <span className={styles.products}>
             {!authSelectors || !JSON.parse(localStorage.getItem('user')) ? (
-              'Здесь будет отображаться Ваш рацион'
+              'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
             ) : isLoader ? (
               <LoaderComponent />
             ) : (
