@@ -7,6 +7,8 @@ import Modal from '../Modal/Modal';
 import * as Yup from 'yup';
 import { result } from '../Modal/Formula';
 import products from '../../JsonData/products.json';
+import { useSelector } from 'react-redux';
+import { authSelectors } from '../../redux/auth';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -41,6 +43,8 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function DailyCaloriesForm() {
+  const isAuthenticated = useSelector(authSelectors.getLoggedOn);
+
   const [modalActive, setModalActive] = useState(false);
   const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
   const [calories, setCalories] = useState('');
@@ -193,7 +197,7 @@ export default function DailyCaloriesForm() {
               type="submit"
               disabled={!isValid || !dirty}
               className={styles.btnSubmit}
-              onClick={() => setModalActive(true)}
+              onClick={!isAuthenticated ? () => setModalActive(true) : null}
             >
               Похудеть
             </button>
