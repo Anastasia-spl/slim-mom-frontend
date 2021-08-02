@@ -24,7 +24,7 @@ const BurgerMenu = ({ isActive, onCloseBurger }) => {
           exact
           className={styles.link}
           activeClassName={styles.activeLink}
-          onClick={() => onCloseBurger()}
+          onClick={onCloseBurger}
         >
           {link.label}
         </NavLink>
