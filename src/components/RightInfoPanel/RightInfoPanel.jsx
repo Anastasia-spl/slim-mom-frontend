@@ -122,44 +122,46 @@ const RightInfoPanel = () => {
     }
   };
   return (
-    <div className={styles.panelContainer}>
-      <div className={styles.panelContainerInner}>
-        <div className={styles.contentBlock}>
-          <div className={styles.informationListBlock}>
-            <h5 className={styles.informationListTitle}>Сводка за {date}</h5>
-            <ul className={styles.list}>
-              {displayRemaining(remaining)}
-              <li key="qk-2" className={styles.listItem}>
-                <span>Употреблено</span>
-                <span className={styles.listItemValue}>{eating} ккал</span>
-              </li>
-              <li key="qk-3" className={styles.listItem}>
-                <span>Дневная норма</span>
-                <span className={styles.listItemValue}>{dailyRate} ккал</span>
-              </li>
-              <li key="qk-4" className={styles.listItem}>
-                <span>n% от нормы</span>
-                <span className={styles.listItemValue}>
-                  {isNaN(percentOfRate) || percentOfRate === Infinity
-                    ? 0
-                    : percentOfRate}
-                  %
-                </span>
-              </li>
-            </ul>
+    <div className={styles.mainContainerForRightBar}>
+      <div className={styles.panelContainer}>
+        <div className={styles.panelContainerInner}>
+          <div className={styles.contentBlock}>
+            <div className={styles.informationListBlock}>
+              <h5 className={styles.informationListTitle}>Сводка за {date}</h5>
+              <ul className={styles.list}>
+                {displayRemaining(remaining)}
+                <li key="qk-2" className={styles.listItem}>
+                  <span>Употреблено</span>
+                  <span className={styles.listItemValue}>{eating} ккал</span>
+                </li>
+                <li key="qk-3" className={styles.listItem}>
+                  <span>Дневная норма</span>
+                  <span className={styles.listItemValue}>{dailyRate} ккал</span>
+                </li>
+                <li key="qk-4" className={styles.listItem}>
+                  <span>n% от нормы</span>
+                  <span className={styles.listItemValue}>
+                    {isNaN(percentOfRate) || percentOfRate === Infinity
+                      ? 0
+                      : percentOfRate}
+                    %
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className={styles.productsBlock}>
-          <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
-          <span className={styles.products}>
-            {!authSelectors || !JSON.parse(localStorage.getItem('user')) ? (
-              'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
-            ) : isLoader ? (
-              <LoaderComponent />
-            ) : (
-              naProducts
-            )}
-          </span>
+          <div className={styles.productsBlock}>
+            <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
+            <span className={styles.products}>
+              {!authSelectors || !JSON.parse(localStorage.getItem('user')) ? (
+                'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
+              ) : isLoader ? (
+                <LoaderComponent />
+              ) : (
+                naProducts
+              )}
+            </span>
+          </div>
         </div>
       </div>
     </div>
