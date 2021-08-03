@@ -64,7 +64,12 @@ export default function DailyCaloriesForm() {
 
   return (
     <div>
-      <div className={styles.formWrapper}>
+      <div
+        className={styles.formWrapper}
+        style={
+          isAuthenticated ? { paddingTop: '160px' } : { paddingTop: '110px' }
+        }
+      >
         <h1 className={styles.header}>
           Просчитай свою суточную норму калорий прямо сейчас
         </h1>
@@ -209,7 +214,7 @@ export default function DailyCaloriesForm() {
             </Form>
           )}
         </Formik>
-        <form className={styles.formUser}></form>
+        {/* <form className={styles.formUser}></form> */}
       </div>
       {modalActive && (
         <Modal
