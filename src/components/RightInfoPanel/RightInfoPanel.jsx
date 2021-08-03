@@ -17,15 +17,15 @@ const RightInfoPanel = () => {
   const [naProducts, setNaProducts] = useState('');
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
   const userInfo = JSON.parse(localStorage.getItem('user'));
+  const dailyCalorieIntake = JSON.parse(
+    localStorage.getItem('dailyCalorieIntake'),
+  );
 
   useEffect(() => {
     if (isAuthenticated && userInfo) {
       const getProductsLS = userInfo.productsNotAllowed;
       setNaProducts(productsToString(getProductsLS));
     }
-    const dailyCalorieIntake = JSON.parse(
-      localStorage.getItem('dailyCalorieIntake'),
-    );
     if (!dailyCalorieIntake) {
       const { height, age, weight, desiredWeight } = userInfo;
       const dailyCalories = countDailyCalorieIntake({
