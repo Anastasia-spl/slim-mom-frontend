@@ -16,7 +16,7 @@ export default function Modal({ active, setActive, calories }) {
     <>
       <div
         className={
-          active ? `${styles.backdrop} ${styles.active}` : styles.backdrop
+          active ? `${styles.modalBackdrop} ${styles.active}` : styles.backdrop
         }
         onClick={() => setActive(false)}
       >
