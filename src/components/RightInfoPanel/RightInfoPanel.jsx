@@ -115,12 +115,6 @@ const RightInfoPanel = () => {
   };
   return (
     <div className={styles.panelContainer}>
-      {/* <div className={styles.userWrapper}>
-        // <p className={styles.userName}>{name}</p>
-        <button onClick={onLogOut} className={styles.logout}>
-          // Выйти //{' '}
-        </button>
-      </div> */}
       <div className={styles.panelContainerInner}>
         <div className={styles.contentBlock}>
           <div className={styles.informationListBlock}>
