@@ -85,10 +85,34 @@ const RightInfoPanel = () => {
   const eating = !authSelectors ? '000' : sumCalories(allProductsListCalories); //Употреблено
   const dailyRate = !authSelectors ? '000' : dailyCal; //Дневная норма
   const remaining = !authSelectors ? '000' : dailyRate - eating; //Осталось
+
   const percentOfRate = !authSelectors
     ? '000'
     : Math.trunc((eating / dailyRate) * 100); //n% от нормы
 
+  const displayRemaining = remaining => {
+    if (remaining !== '000' && remaining < 0) {
+      return (
+        <li key="qk-1" className={styles.listItem}>
+          <span>Осталось</span>
+          <span className={styles.listItemValue}>
+            0 ккал
+            <br />
+            <span style={{ color: 'red' }} className={styles.listItemValueRed}>
+              ❗️ Превышено: {remaining * -1} ккал
+            </span>
+          </span>
+        </li>
+      );
+    } else {
+      return (
+        <li key="qk-1" className={styles.listItem}>
+          <span>Осталось</span>
+          <span className={styles.listItemValue}>{remaining} ккал</span>
+        </li>
+      );
+    }
+  };
   return (
     <div className={styles.panelContainer}>
       {/* <div className={styles.userWrapper}>
@@ -102,22 +126,22 @@ const RightInfoPanel = () => {
           <div className={styles.informationListBlock}>
             <h5 className={styles.informationListTitle}>Сводка за {date}</h5>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                <span>Осталось</span>
-                <span className={styles.listItemValue}>{remaining} ккал</span>
-              </li>
-              <li className={styles.listItem}>
+              {displayRemaining(remaining)}
+              <li key="qk-2" className={styles.listItem}>
                 <span>Употреблено</span>
                 <span className={styles.listItemValue}>{eating} ккал</span>
               </li>
-              <li className={styles.listItem}>
+              <li key="qk-3" className={styles.listItem}>
                 <span>Дневная норма</span>
                 <span className={styles.listItemValue}>{dailyRate} ккал</span>
               </li>
-              <li className={styles.listItem}>
+              <li key="qk-4" className={styles.listItem}>
                 <span>n% от нормы</span>
                 <span className={styles.listItemValue}>
-                  {percentOfRate}% ккал
+                  {isNaN(percentOfRate) || percentOfRate === Infinity
+                    ? 0
+                    : percentOfRate}
+                  %
                 </span>
               </li>
             </ul>
