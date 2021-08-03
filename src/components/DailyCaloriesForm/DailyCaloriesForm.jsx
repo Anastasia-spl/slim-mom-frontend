@@ -63,47 +63,48 @@ export default function DailyCaloriesForm() {
   }, []);
 
   return (
-    <div className={styles.formWrapper}>
-      <h1 className={styles.header}>
-        Просчитай свою суточную норму калорий прямо сейчас
-      </h1>
-      <Formik
-        validationSchema={SignupSchema}
-        className={styles.formWrapper}
-        initialValues={{
-          height: '',
-          age: '',
-          weight: '',
-          desiredWeight: '',
-          bloodGroup: '',
-        }}
-        onSubmit={values => {
-          setCalories(countDailyCalorieIntake(values));
-          fetchProducts(values.bloodGroup);
-          localStorage.setItem(
-            'user',
-            JSON.stringify({ ...values, productsNotAllowed: products }),
-          );
-          isAuthenticated &&
-            sendUserParameters({ ...values, productsNotAllowed: products });
-        }}
-      >
-        {({ values, handleSubmit, isValid, dirty, handleChange }) => (
-          <Form className={styles.form} onSubmit={handleSubmit}>
-            <label>
-              <Field
-                value={values.height}
-                onChange={handleChange}
-                id="height"
-                name="height"
-                placeholder="Рост *"
-                type="text"
-                className={styles.input}
-              />
-              <ErrorMessage name="height">
-                {msg => <p className={styles.notification}>{msg}</p>}
-              </ErrorMessage>
-            </label>
+    <div>
+      <div className={styles.formWrapper}>
+        <h1 className={styles.header}>
+          Просчитай свою суточную норму калорий прямо сейчас
+        </h1>
+        <Formik
+          validationSchema={SignupSchema}
+          className={styles.formWrapper}
+          initialValues={{
+            height: '',
+            age: '',
+            weight: '',
+            desiredWeight: '',
+            bloodGroup: '',
+          }}
+          onSubmit={values => {
+            setCalories(countDailyCalorieIntake(values));
+            fetchProducts(values.bloodGroup);
+            localStorage.setItem(
+              'user',
+              JSON.stringify({ ...values, productsNotAllowed: products }),
+            );
+            isAuthenticated &&
+              sendUserParameters({ ...values, productsNotAllowed: products });
+          }}
+        >
+          {({ values, handleSubmit, isValid, dirty, handleChange }) => (
+            <Form className={styles.form} onSubmit={handleSubmit}>
+              <label>
+                <Field
+                  value={values.height}
+                  onChange={handleChange}
+                  id="height"
+                  name="height"
+                  placeholder="Рост *"
+                  type="text"
+                  className={styles.input}
+                />
+                <ErrorMessage name="height">
+                  {msg => <p className={styles.notification}>{msg}</p>}
+                </ErrorMessage>
+              </label>
 
               <label className={styles.age}>
                 <Field

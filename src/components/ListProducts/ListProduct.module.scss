@@ -5,7 +5,8 @@
   margin: 0;
   margin-top: 60px;
   padding: 0;
-  max-height: 270px;
+  max-height: 280px;
+  max-width: 600px;
   overflow: auto;
 
   @include for-size(desktop-only) {

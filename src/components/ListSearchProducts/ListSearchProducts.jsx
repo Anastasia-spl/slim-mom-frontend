@@ -28,7 +28,7 @@ const ListSearchProducts = ({
           type="button"
           onClick={() => onHandleLoadMore()}
         >
-          Показать больше ->
+          {'Показать больше ->'}
         </button>
       ) : null}
     </ul>

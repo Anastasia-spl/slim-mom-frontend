@@ -19,7 +19,6 @@
 
 .diary__itemNameProduct {
   width: 242px;
-  // height: 36px;
   margin: 0;
   margin-right: 30px;
   padding-bottom: 19px;
@@ -35,7 +34,6 @@
 
   @include for-size(tablet-only) {
     width: 138px;
-    // height: 26px;
     margin-right: 9px;
     padding-bottom: 10px;
   }
@@ -58,7 +56,6 @@
 
   @include for-size(tablet-only) {
     width: 50px;
-    // height: 26px;
     margin-right: 10px;
     padding-bottom: 10px;
   }
@@ -66,7 +63,6 @@
 
 .diary__itemCcalProduct {
   width: 106px;
-  // height: 36px;
   margin: 0;
   margin-right: 30px;
   padding-bottom: 19px;
@@ -74,14 +70,13 @@
   border-bottom: 1px solid #e0e0e0;
   outline: none;
 
-  color: primary-text-color;
+  color: $primary-text-color;
   text-align: right;
 
   @include font(400, 14px, 17px, $primary-font, $primary-letter-spacing);
 
   @include for-size(tablet-only) {
     width: 60px;
-    // height: 26px;
     margin-right: 10px;
     padding-bottom: 10px;
   }
@@ -98,5 +93,5 @@
 .iconDelProduct:hover path {
   fill: #fc842d;
 
-  transition: fill $cubic;
+  transition: color $cubic;
 }
