@@ -17,13 +17,18 @@ import styles from './RightInfoPanel.module.scss';
 
 const RightInfoPanel = () => {
   const [dailyCal, setDailyCal] = useState(0);
-  const dispatch = useDispatch();
+  const [naProducts, setNaProducts] = useState('');
+  //const dispatch = useDispatch();
 
   useEffect(() => {
     const getUserLS = JSON.parse(localStorage.getItem('user'));
     if (authSelectors && getUserLS) {
-      const getBloudLS = JSON.parse(localStorage.getItem('user')).bloodGroup;
-      dispatch(getProducts(getBloudLS));
+      //const getBloudLS = JSON.parse(localStorage.getItem('user')).bloodGroup;
+      const getProductsLS = JSON.parse(
+        localStorage.getItem('user'),
+      ).productsNotAllowed;
+      //dispatch(getProducts(getBloudLS));
+      setNaProducts(productsToString(getProductsLS));
       setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
     }
   }, []);
@@ -63,6 +68,9 @@ const RightInfoPanel = () => {
   };
   function productsToString(productsArray) {
     let textString = '';
+    if (productsArray === undefined) {
+      return;
+    }
     productsArray.forEach((product, idx) => {
       if (idx === 0) {
         textString += `${product}`;
@@ -123,7 +131,7 @@ const RightInfoPanel = () => {
             ) : isLoader ? (
               <LoaderComponent />
             ) : (
-              productsToString(productsListNA)
+              naProducts
             )}
           </span>
         </div>
