@@ -49,6 +49,20 @@ export default function DailyCaloriesForm() {
   const dispath = useDispatch();
   const fetchProducts = bloodGroup => dispath(getProducts(bloodGroup));
   const products = useSelector(getNotAllowedProducts);
+  const [clientWidth, setclientWidth] = useState(
+    document.documentElement.clientWidth,
+  );
+
+  const handleResize = () => {
+    const width = document.documentElement.clientWidth;
+    setclientWidth(width);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = event => {
@@ -67,7 +81,9 @@ export default function DailyCaloriesForm() {
       <div
         className={styles.formWrapper}
         style={
-          isAuthenticated ? { paddingTop: '160px' } : { paddingTop: '110px' }
+          isAuthenticated && clientWidth < 768
+            ? { paddingTop: '160px' }
+            : { paddingTop: '110px' }
         }
       >
         <h1 className={styles.header}>
