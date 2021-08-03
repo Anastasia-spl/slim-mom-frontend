@@ -8,7 +8,7 @@ import Modal from '../Modal/Modal';
 import { countDailyCalorieIntake } from '../Modal/Formula';
 import { authSelectors } from '../../redux/auth';
 import { getNotAllowedProducts } from '../../redux/products';
-import { sendUserParameters } from '../../service/send-user-info-api';
+import { sendUserParameters } from '../../service/user-parameters-api';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()

@@ -41,6 +41,9 @@ const apiService = {
   setUserParameters(data) {
     return axios.post('users/info/', data);
   },
+  getUserParameters() {
+    return axios.get('users/info/');
+  },
 };
 
 export default apiService;

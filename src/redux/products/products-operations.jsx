@@ -76,10 +76,24 @@ const getProducts = bloodGroup => async dispatch => {
   }
 };
 
+const updateUserInfo = () => async dispatch => {
+  dispatch(fetchRecommendationRequest());
+  try {
+    const {
+      data: { userInfo },
+    } = await serviceAPI.getUserParameters();
+    dispatch(fetchRecommendationSuccess(userInfo.productsNotAllowed));
+    return userInfo;
+  } catch (error) {
+    dispatch(fetchRecommendationError(error.message));
+  }
+};
+
 export {
   addProducts,
   deleteProducts,
   dowloadProducts,
   searchProducts,
   getProducts,
+  updateUserInfo,
 };
