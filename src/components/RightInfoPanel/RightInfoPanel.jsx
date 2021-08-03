@@ -1,14 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getProducts } from '../../redux/products/products-operations';
 import { authSelectors } from '../../redux/auth';
 import { createSelector } from 'reselect';
-
 import LoaderComponent from '../LoaderComponent';
-
 import {
-  getNotAllowedProducts,
   getStateProducts,
   getLoader,
   getCurrentDate,
@@ -18,29 +14,25 @@ import styles from './RightInfoPanel.module.scss';
 const RightInfoPanel = () => {
   const [dailyCal, setDailyCal] = useState(0);
   const [naProducts, setNaProducts] = useState('');
-  //const dispatch = useDispatch();
+  const isAuthenticated = useSelector(authSelectors.getLoggedOn);
 
   useEffect(() => {
-    const getUserLS = JSON.parse(localStorage.getItem('user'));
-    if (authSelectors && getUserLS) {
-      //const getBloudLS = JSON.parse(localStorage.getItem('user')).bloodGroup;
-      const getProductsLS = JSON.parse(
-        localStorage.getItem('user'),
-      ).productsNotAllowed;
-      //dispatch(getProducts(getBloudLS));
+    const userInfo = JSON.parse(localStorage.getItem('user'));
+    if (isAuthenticated && userInfo) {
+      const getProductsLS = userInfo.productsNotAllowed;
       setNaProducts(productsToString(getProductsLS));
       setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
     }
   }, []);
 
-  const productsListNAmemoSelector = createSelector(
-    [getNotAllowedProducts],
-    prod => {
-      return prod.map(i => {
-        return i;
-      });
-    },
-  );
+  // const productsListNAmemoSelector = createSelector(
+  //   [getNotAllowedProducts],
+  //   prod => {
+  //     return prod.map(i => {
+  //       return i;
+  //     });
+  //   },
+  // );
 
   const allEatenCaloriesMemoSelector = createSelector(
     [getStateProducts],
@@ -51,7 +43,7 @@ const RightInfoPanel = () => {
     },
   );
 
-  const productsListNA = useSelector(productsListNAmemoSelector);
+  // const productsListNA = useSelector(productsListNAmemoSelector);
   const allProductsListCalories = useSelector(allEatenCaloriesMemoSelector);
   const getDate = useSelector(getCurrentDate);
   const isLoader = useSelector(getLoader);
