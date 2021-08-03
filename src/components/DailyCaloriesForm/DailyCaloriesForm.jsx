@@ -8,6 +8,7 @@ import Modal from '../Modal/Modal';
 import { countDailyCalorieIntake } from '../Modal/Formula';
 import { authSelectors } from '../../redux/auth';
 import { getNotAllowedProducts } from '../../redux/products';
+import { sendUserParameters } from '../../service/send-user-info-api';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -83,6 +84,8 @@ export default function DailyCaloriesForm() {
             'user',
             JSON.stringify({ ...values, productsNotAllowed: products }),
           );
+          isAuthenticated &&
+            sendUserParameters({ ...values, productsNotAllowed: products });
         }}
       >
         {({ values, handleSubmit, isValid, dirty, handleChange }) => (
