@@ -85,7 +85,9 @@ export default function DailyCaloriesForm() {
         }
       >
         <h1 className={styles.header}>
-          Просчитай свою суточную норму калорий прямо сейчас
+          {!isAuthenticated
+            ? 'Просчитай свою суточную норму калорий прямо сейчас'
+            : 'Узнай свою суточную норму калорий'}
         </h1>
         <Formik
           validationSchema={SignupSchema}
