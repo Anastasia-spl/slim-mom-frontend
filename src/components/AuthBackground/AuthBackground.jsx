@@ -17,6 +17,7 @@ export default function AuthBackground({ children }) {
   };
 
   useEffect(() => {
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
@@ -39,7 +40,7 @@ export default function AuthBackground({ children }) {
       onMouseMove={handleMouseMove}
       ref={refs}
     >
-      {clientWidth <= 767 ? null : clientWidth >= 768 && clientWidth <= 1279 ? (
+      {clientWidth <= 767 ? null : clientWidth <= 1279 ? (
         <>
           <div
             className={styles.leaves}
