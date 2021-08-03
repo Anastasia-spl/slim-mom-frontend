@@ -1,11 +1,45 @@
+@import '../../assets/baseStyles.scss';
+
 .notFoundWrapper {
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 150px;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+
+  @include for-size(desktop) {
+    margin-top: 290px;
+  }
 }
 
-.title {
-  font-size: 30px;
+.errorWrapper {
+  font-family: monospace;
+  font-size: 85px;
+  font-weight: 900;
+  color: $decorative-color;
+}
+
+.strawberry {
+  position: relative;
+  top: 17px;
+  left: 8px;
 }
 
 .subTitle {
-  font-size: 24px;
+  font-size: 20px;
+  color: $accent-color;
+
+  @include for-size(tablet) {
+    font-size: 24px;
+  }
+}
+
+.text {
+  font-size: 16px;
+  color: $secondary-text-color;
+
+  @include for-size(tablet) {
+    font-size: 20px;
+  }
 }
