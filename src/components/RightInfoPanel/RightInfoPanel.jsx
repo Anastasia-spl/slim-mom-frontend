@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { authSelectors } from '../../redux/auth';
 import { createSelector } from 'reselect';
 import LoaderComponent from '../LoaderComponent';
+import { countDailyCalorieIntake } from '../Modal/Formula';
 import {
   getStateProducts,
   getLoader,
@@ -15,14 +16,27 @@ const RightInfoPanel = () => {
   const [dailyCal, setDailyCal] = useState(0);
   const [naProducts, setNaProducts] = useState('');
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
+  const userInfo = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem('user'));
     if (isAuthenticated && userInfo) {
       const getProductsLS = userInfo.productsNotAllowed;
       setNaProducts(productsToString(getProductsLS));
-      setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
     }
+    const dailyCalorieIntake = JSON.parse(
+      localStorage.getItem('dailyCalorieIntake'),
+    );
+    if (!dailyCalorieIntake) {
+      const { height, age, weight, desiredWeight } = userInfo;
+      const dailyCalories = countDailyCalorieIntake({
+        height,
+        age,
+        weight,
+        desiredWeight,
+      });
+      localStorage.setItem('dailyCalorieIntake', JSON.stringify(dailyCalories));
+    }
+    setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
   }, []);
 
   // const productsListNAmemoSelector = createSelector(
@@ -74,9 +88,9 @@ const RightInfoPanel = () => {
     return textString;
   }
 
-  const eating = !authSelectors ? '000' : sumCalories(allProductsListCalories); //Употреблено
-  const dailyRate = !authSelectors ? '000' : dailyCal; //Дневная норма
-  const remaining = !authSelectors ? '000' : dailyRate - eating; //Осталось
+  const eating = !userInfo ? '000' : sumCalories(allProductsListCalories); //Употреблено
+  const dailyRate = !userInfo ? '000' : dailyCal; //Дневная норма
+  const remaining = !userInfo ? '000' : dailyRate - eating; //Осталось
 
   const percentOfRate = !authSelectors
     ? '000'
