@@ -38,6 +38,12 @@ const apiService = {
       `products/search?query=${value}&page=${page}&limit=${limit}`,
     );
   },
+  setUserParameters(data) {
+    return axios.post('users/info/', data);
+  },
+  getUserParameters() {
+    return axios.get('users/info/');
+  },
 };
 
 export default apiService;

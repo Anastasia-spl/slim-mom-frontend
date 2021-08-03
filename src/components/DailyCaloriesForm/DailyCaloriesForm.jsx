@@ -1,14 +1,14 @@
 import styles from './DailyCaloriesForm.module.scss';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React, { useState, useEffect } from 'react';
-import { getProducts } from '../../redux/products/products-operations';
-import { useDispatch } from 'react-redux';
-import Modal from '../Modal/Modal';
 import * as Yup from 'yup';
-import { result } from '../Modal/Formula';
-import products from '../../JsonData/products.json';
-import { useSelector } from 'react-redux';
+import { getProducts } from '../../redux/products/products-operations';
+import { useDispatch, useSelector } from 'react-redux';
+import Modal from '../Modal/Modal';
+import { countDailyCalorieIntake } from '../Modal/Formula';
 import { authSelectors } from '../../redux/auth';
+import { getNotAllowedProducts } from '../../redux/products';
+import { sendUserParameters } from '../../service/user-parameters-api';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -44,12 +44,11 @@ const SignupSchema = Yup.object().shape({
 
 export default function DailyCaloriesForm() {
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
-
   const [modalActive, setModalActive] = useState(false);
-  const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
   const [calories, setCalories] = useState('');
   const dispath = useDispatch();
   const fetchProducts = bloodGroup => dispath(getProducts(bloodGroup));
+  const products = useSelector(getNotAllowedProducts);
 
   useEffect(() => {
     const handleKeyDown = event => {
@@ -64,43 +63,47 @@ export default function DailyCaloriesForm() {
   }, []);
 
   return (
-    <div>
-      <div className={styles.formWrapper}>
-        <h1 className={styles.header}>
-          Просчитай свою суточную норму калорий прямо сейчас
-        </h1>
-        <Formik
-          validationSchema={SignupSchema}
-          className={styles.formWrapper}
-          initialValues={{
-            height: '',
-            age: '',
-            weight: '',
-            desiredWeight: '',
-            bloodGroup: '',
-          }}
-          onSubmit={values => {
-            setCalories(result(values));
-            fetchProducts(values.bloodGroup);
-            localStorage.setItem('user', JSON.stringify(values));
-          }}
-        >
-          {({ values, handleSubmit, isValid, dirty, handleChange }) => (
-            <Form className={styles.form} onSubmit={handleSubmit}>
-              <label>
-                <Field
-                  value={values.height}
-                  onChange={handleChange}
-                  id="height"
-                  name="height"
-                  placeholder="Рост *"
-                  type="text"
-                  className={styles.input}
-                />
-                <ErrorMessage name="height">
-                  {msg => <p className={styles.notification}>{msg}</p>}
-                </ErrorMessage>
-              </label>
+    <div className={styles.formWrapper}>
+      <h1 className={styles.header}>
+        Просчитай свою суточную норму калорий прямо сейчас
+      </h1>
+      <Formik
+        validationSchema={SignupSchema}
+        className={styles.formWrapper}
+        initialValues={{
+          height: '',
+          age: '',
+          weight: '',
+          desiredWeight: '',
+          bloodGroup: '',
+        }}
+        onSubmit={values => {
+          setCalories(countDailyCalorieIntake(values));
+          fetchProducts(values.bloodGroup);
+          localStorage.setItem(
+            'user',
+            JSON.stringify({ ...values, productsNotAllowed: products }),
+          );
+          isAuthenticated &&
+            sendUserParameters({ ...values, productsNotAllowed: products });
+        }}
+      >
+        {({ values, handleSubmit, isValid, dirty, handleChange }) => (
+          <Form className={styles.form} onSubmit={handleSubmit}>
+            <label>
+              <Field
+                value={values.height}
+                onChange={handleChange}
+                id="height"
+                name="height"
+                placeholder="Рост *"
+                type="text"
+                className={styles.input}
+              />
+              <ErrorMessage name="height">
+                {msg => <p className={styles.notification}>{msg}</p>}
+              </ErrorMessage>
+            </label>
 
               <label className={styles.age}>
                 <Field

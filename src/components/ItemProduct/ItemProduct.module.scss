@@ -94,3 +94,9 @@
   outline: none;
   cursor: pointer;
 }
+
+.iconDelProduct:hover path {
+  fill: #fc842d;
+
+  transition: fill $cubic;
+}

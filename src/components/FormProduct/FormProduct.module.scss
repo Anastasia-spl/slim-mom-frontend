@@ -92,3 +92,21 @@
     border-radius: 30px;
   }
 }
+
+.btnClearInput {
+  position: absolute;
+  top: 10px;
+  left: 240px;
+  border: none;
+  outline: none;
+  background-color: white;
+  color: aqua;
+
+  cursor: pointer;
+}
+
+.iconClearInput:hover path {
+  fill: #fc842d;
+
+  transition: fill $cubic;
+}
