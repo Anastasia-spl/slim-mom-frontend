@@ -105,109 +105,111 @@ export default function DailyCaloriesForm() {
               </ErrorMessage>
             </label>
 
-            <label className={styles.age}>
-              <Field
-                value={values.age}
-                onChange={handleChange}
-                id="age"
-                name="age"
-                className={styles.input}
-                placeholder="Возраст *"
-              />
-              <ErrorMessage name="age">
-                {msg => <p className={styles.notification}>{msg}</p>}
-              </ErrorMessage>
-            </label>
+              <label className={styles.age}>
+                <Field
+                  value={values.age}
+                  onChange={handleChange}
+                  id="age"
+                  name="age"
+                  className={styles.input}
+                  placeholder="Возраст *"
+                />
+                <ErrorMessage name="age">
+                  {msg => <p className={styles.notification}>{msg}</p>}
+                </ErrorMessage>
+              </label>
 
-            <label className={styles.weight}>
-              <Field
-                value={values.weight}
-                onChange={handleChange}
-                id="weight"
-                name="weight"
-                className={styles.input}
-                placeholder="Текущий вес *"
-              />
-              <ErrorMessage name="weight">
-                {msg => <p className={styles.notification}>{msg}</p>}
-              </ErrorMessage>
-            </label>
+              <label className={styles.weight}>
+                <Field
+                  value={values.weight}
+                  onChange={handleChange}
+                  id="weight"
+                  name="weight"
+                  className={styles.input}
+                  placeholder="Текущий вес *"
+                />
+                <ErrorMessage name="weight">
+                  {msg => <p className={styles.notification}>{msg}</p>}
+                </ErrorMessage>
+              </label>
 
-            <label>
-              <Field
-                value={values.desiredWeight}
-                onChange={handleChange}
-                id="desiredWeight"
-                name="desiredWeight"
-                type="text"
-                className={styles.input}
-                placeholder="Желаемый вес *"
-              />
-              <ErrorMessage name="desiredWeight">
-                {msg => <p className={styles.notification}>{msg}</p>}
-              </ErrorMessage>
-            </label>
+              <label>
+                <Field
+                  value={values.desiredWeight}
+                  onChange={handleChange}
+                  id="desiredWeight"
+                  name="desiredWeight"
+                  type="text"
+                  className={styles.input}
+                  placeholder="Желаемый вес *"
+                />
+                <ErrorMessage name="desiredWeight">
+                  {msg => <p className={styles.notification}>{msg}</p>}
+                </ErrorMessage>
+              </label>
 
-            <div id="bloodGroup" className={styles.label}>
-              Группа крови *
-              <div
-                role="group"
-                aria-labelledby="bloodGroup"
-                className={styles.radiogroup}
-              >
-                <label className={styles.label}>
-                  <Field
-                    onChange={handleChange}
-                    className={styles.radio}
-                    type="radio"
-                    name="bloodGroup"
-                    value="1"
-                  />
-                  1
-                </label>
-                <label className={styles.label}>
-                  <Field
-                    onChange={handleChange}
-                    className={styles.radio}
-                    type="radio"
-                    name="bloodGroup"
-                    value="2"
-                  />
-                  2
-                </label>
-                <label className={styles.label}>
-                  <Field
-                    onChange={handleChange}
-                    className={styles.radio}
-                    type="radio"
-                    name="bloodGroup"
-                    value="3"
-                  />
-                  3
-                </label>
-                <label className={styles.label}>
-                  <Field
-                    onChange={handleChange}
-                    className={styles.radio}
-                    type="radio"
-                    name="bloodGroup"
-                    value="4"
-                  />
-                  4
-                </label>
+              <div id="bloodGroup" className={styles.label}>
+                Группа крови *
+                <div
+                  role="group"
+                  aria-labelledby="bloodGroup"
+                  className={styles.radiogroup}
+                >
+                  <label className={styles.label}>
+                    <Field
+                      onChange={handleChange}
+                      className={styles.radio}
+                      type="radio"
+                      name="bloodGroup"
+                      value="1"
+                    />
+                    1
+                  </label>
+                  <label className={styles.label}>
+                    <Field
+                      onChange={handleChange}
+                      className={styles.radio}
+                      type="radio"
+                      name="bloodGroup"
+                      value="2"
+                    />
+                    2
+                  </label>
+                  <label className={styles.label}>
+                    <Field
+                      onChange={handleChange}
+                      className={styles.radio}
+                      type="radio"
+                      name="bloodGroup"
+                      value="3"
+                    />
+                    3
+                  </label>
+                  <label className={styles.label}>
+                    <Field
+                      onChange={handleChange}
+                      className={styles.radio}
+                      type="radio"
+                      name="bloodGroup"
+                      value="4"
+                    />
+                    4
+                  </label>
+                </div>
               </div>
-            </div>
-            <button
-              type="submit"
-              disabled={!isValid || !dirty}
-              className={styles.btnSubmit}
-              onClick={!isAuthenticated ? () => setModalActive(true) : null}
-            >
-              Похудеть
-            </button>
-          </Form>
-        )}
-      </Formik>
+              <button
+                type="submit"
+                disabled={!isValid || !dirty}
+                className={styles.btnSubmit}
+                onClick={!isAuthenticated ? () => setModalActive(true) : null}
+              >
+                Похудеть
+              </button>
+            </Form>
+          )}
+        </Formik>
+        <form className={styles.formUser}></form>
+      </div>
       {modalActive && (
         <Modal
           active={modalActive}
@@ -215,7 +217,6 @@ export default function DailyCaloriesForm() {
           calories={calories}
         />
       )}
-      <form className={styles.formUser}></form>
     </div>
   );
 }
