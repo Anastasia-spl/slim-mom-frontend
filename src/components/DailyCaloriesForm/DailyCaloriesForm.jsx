@@ -81,9 +81,7 @@ export default function DailyCaloriesForm() {
       <div
         className={styles.formWrapper}
         style={
-          isAuthenticated && clientWidth < 768
-            ? { paddingTop: '160px' }
-            : { paddingTop: '110px' }
+          isAuthenticated && clientWidth < 768 ? { paddingTop: '160px' } : null
         }
       >
         <h1 className={styles.header}>
