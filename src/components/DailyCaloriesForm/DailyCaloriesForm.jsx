@@ -101,6 +101,10 @@ export default function DailyCaloriesForm() {
           }}
           onSubmit={values => {
             setCalories(countDailyCalorieIntake(values));
+            localStorage.setItem(
+              'dailyCalorieIntake',
+              JSON.stringify(countDailyCalorieIntake(values)),
+            );
             fetchProducts(values.bloodGroup);
             localStorage.setItem(
               'user',
