@@ -1,14 +1,16 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actions, getCurrentDate, modalAddProduct } from '../../redux/products';
-import {
-  addProducts,
-  searchProducts,
-} from '../../redux/products/products-operations';
+import debounce from 'lodash.debounce';
 import style from './FormProduct.module.scss';
 import ListSearchProducts from '../ListSearchProducts';
-import { useEffect } from 'react';
-import debounce from 'lodash.debounce';
+import { ReactComponent as IconClearInput } from '../../pictures/close.svg';
+import {
+  actions,
+  getCurrentDate,
+  modalAddProduct,
+  addProducts,
+  searchProducts,
+} from '../../redux/products';
 
 const FormProduct = ({ className, handleToggleModal, onDateString }) => {
   const [titleProduct, setTitleProduct] = useState('');
@@ -70,11 +72,11 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
     setTitleProduct(event.target.value);
     let query = event.target.value;
 
-    if (query === '') {
+    if (query === '' && query.length < 1) {
       dispatch(actions.searchProductsSuccess([]));
     }
 
-    if (query.trim() !== 0 && query.length > 1) {
+    if (query.length > 1) {
       debounceLoadData(query, page, limit);
     }
 
@@ -99,6 +101,11 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
     const isPage = page + 1;
     dispatch(actions.searchProductsSuccess([]));
     dispatch(searchProducts(titleProduct, isPage, limit));
+  };
+
+  const handleClearInput = () => {
+    setTitleProduct('');
+    dispatch(actions.searchProductsSuccess([]));
   };
 
   return (
@@ -139,6 +146,11 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
         onHandleSelectItem={handelSelectItem}
         onHandleLoadMore={handleLoadMore}
       />
+      {titleProduct.length >= 1 ? (
+        <button className={style.btnClearInput} onClick={handleClearInput}>
+          <IconClearInput className={style.iconClearInput} />
+        </button>
+      ) : null}
     </form>
   );
 };
