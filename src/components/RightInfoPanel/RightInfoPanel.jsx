@@ -88,9 +88,11 @@ const RightInfoPanel = () => {
     return textString;
   }
 
-  const eating = !userInfo ? '000' : sumCalories(allProductsListCalories); //Употреблено
-  const dailyRate = !userInfo ? '000' : dailyCal; //Дневная норма
-  const remaining = !userInfo ? '000' : dailyRate - eating; //Осталось
+  const eating = !userInfo
+    ? '000'
+    : Math.round(sumCalories(allProductsListCalories)); //Употреблено
+  const dailyRate = !userInfo ? '000' : Math.round(dailyCal); //Дневная норма
+  const remaining = !userInfo ? '000' : Math.round(dailyRate) - eating; //Осталось
 
   const percentOfRate = !authSelectors
     ? '000'
