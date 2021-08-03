@@ -1,14 +1,13 @@
 import styles from './DailyCaloriesForm.module.scss';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React, { useState, useEffect } from 'react';
-import { getProducts } from '../../redux/products/products-operations';
-import { useDispatch } from 'react-redux';
-import Modal from '../Modal/Modal';
 import * as Yup from 'yup';
-import { result } from '../Modal/Formula';
-import products from '../../JsonData/products.json';
-import { useSelector } from 'react-redux';
+import { getProducts } from '../../redux/products/products-operations';
+import { useDispatch, useSelector } from 'react-redux';
+import Modal from '../Modal/Modal';
+import { countDailyCalorieIntake } from '../Modal/Formula';
 import { authSelectors } from '../../redux/auth';
+import { getNotAllowedProducts } from '../../redux/products';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -44,12 +43,11 @@ const SignupSchema = Yup.object().shape({
 
 export default function DailyCaloriesForm() {
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
-
   const [modalActive, setModalActive] = useState(false);
-  const toggleModal = () => setModalActive(prevModalActive => !prevModalActive);
   const [calories, setCalories] = useState('');
   const dispath = useDispatch();
   const fetchProducts = bloodGroup => dispath(getProducts(bloodGroup));
+  const products = useSelector(getNotAllowedProducts);
 
   useEffect(() => {
     const handleKeyDown = event => {
@@ -79,9 +77,12 @@ export default function DailyCaloriesForm() {
           bloodGroup: '',
         }}
         onSubmit={values => {
-          setCalories(result(values));
+          setCalories(countDailyCalorieIntake(values));
           fetchProducts(values.bloodGroup);
-          localStorage.setItem('user', JSON.stringify(values));
+          localStorage.setItem(
+            'user',
+            JSON.stringify({ ...values, productsNotAllowed: products }),
+          );
         }}
       >
         {({ values, handleSubmit, isValid, dirty, handleChange }) => (
