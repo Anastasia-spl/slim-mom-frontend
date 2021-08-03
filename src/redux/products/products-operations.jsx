@@ -21,6 +21,9 @@ const {
   fetchRecommendationRequest,
   fetchRecommendationError,
   searchTotalPagesSuccess,
+  updateUserInfoRequest,
+  updateUserInfoSuccess,
+  updateUserInfoError,
 } = actions;
 
 const addProducts = payload => async dispatch => {
@@ -77,15 +80,15 @@ const getProducts = bloodGroup => async dispatch => {
 };
 
 const updateUserInfo = () => async dispatch => {
-  dispatch(fetchRecommendationRequest());
+  dispatch(updateUserInfoRequest());
   try {
     const {
       data: { userInfo },
     } = await serviceAPI.getUserParameters();
-    dispatch(fetchRecommendationSuccess(userInfo.productsNotAllowed));
-    return userInfo;
+    localStorage.setItem('user', JSON.stringify(userInfo));
+    dispatch(updateUserInfoSuccess(userInfo));
   } catch (error) {
-    dispatch(fetchRecommendationError(error.message));
+    dispatch(updateUserInfoError(error.message));
   }
 };
 

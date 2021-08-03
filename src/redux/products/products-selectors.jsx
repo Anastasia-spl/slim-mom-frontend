@@ -6,6 +6,7 @@ const isTotalPages = state => state.products.totalPages;
 const getNotAllowedProducts = state => state.products.notAllowedProducts;
 const isLoading = state => state.products.isLoading;
 const modalAddProduct = state => state.products.modalAddProduct;
+const userParameters = state => state.products.userParameters;
 
 export {
   getStateProducts,
@@ -16,4 +17,5 @@ export {
   getCurrentDate,
   modalAddProduct,
   isTotalPages,
+  userParameters,
 };

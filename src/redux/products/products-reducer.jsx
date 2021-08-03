@@ -9,7 +9,7 @@ const initialProductsState = {
   modalAddProduct: false,
   isLoading: false,
   error: null,
-  // filter: '',
+  userParameters: {},
 };
 
 const { actions, reducer } = createSlice({
@@ -108,6 +108,17 @@ const { actions, reducer } = createSlice({
       state.isLoading = true;
     },
     modalAddProductError: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    },
+    updateUserInfoRequest: state => {
+      state.isLoading = true;
+    },
+    updateUserInfoSuccess: (state, { payload }) => {
+      state.userParameters = payload;
+      state.isLoading = false;
+    },
+    updateUserInfoError: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
     },
