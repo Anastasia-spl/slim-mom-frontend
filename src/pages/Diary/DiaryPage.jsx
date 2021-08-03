@@ -1,10 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
-import style from './Diary.module.scss';
-import DatePicker from '../../components/DatePicker';
-import FormProduct from '../../components/FormProduct';
-import ListProducts from '../../components/ListProducts';
-import ModalAddProducts from '../../components/ModalAddProducts';
-import ButtonAdd from '../../components/ButtonAdd';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   actions,
@@ -14,10 +9,15 @@ import {
   getCurrentDate,
   modalAddProduct,
 } from '../../redux/products';
-import Loader from '../../components/Loader';
-import LoaderComponent from '../../components/LoaderComponent';
+import style from './Diary.module.scss';
+import ButtonAdd from '../../components/ButtonAdd';
+import DatePicker from '../../components/DatePicker';
+import FormProduct from '../../components/FormProduct';
+import ListProducts from '../../components/ListProducts';
 import DiaryContainer from '../../components/DiaryContainer';
 import RightInfoPanel from '../../components/RightInfoPanel';
+import LoaderComponent from '../../components/LoaderComponent';
+import ModalAddProducts from '../../components/ModalAddProducts';
 
 const Diary = () => {
   const classNameModal = style.diary__formModal;
