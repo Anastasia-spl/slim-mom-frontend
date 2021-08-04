@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { authSelectors } from '../../redux/auth';
 import { createSelector } from 'reselect';
 import { updateUserInfo } from '../../redux/products/products-operations';
+// import { getNotAllowedProducts } from '../../redux/products/products-selectors';
 import LoaderComponent from '../LoaderComponent';
 import { countDailyCalorieIntake } from '../Modal/Formula';
 import {
@@ -11,6 +12,7 @@ import {
   getLoader,
   getCurrentDate,
 } from '../../redux/products';
+// import { actions } from '../../redux/products/products-reducer';
 import styles from './RightInfoPanel.module.scss';
 
 const RightInfoPanel = () => {
@@ -25,12 +27,13 @@ const RightInfoPanel = () => {
     localStorage.getItem('dailyCalorieIntake'),
   );
 
+  const notAllowedProducts =
+    userInfo && userInfo.productsNotAllowed.length !== 0
+      ? productsToString(userInfo.productsNotAllowed)
+      : 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!';
+
   useEffect(() => {
-    if (userInfo && userInfo.productsNotAllowed.length !== 0) {
-      const getProductsLS = userInfo.productsNotAllowed;
-      setNaProducts(productsToString(getProductsLS));
-    }
-    if (!dailyCalorieIntake && userInfo.weight !== null) {
+    if (userInfo && !dailyCalorieIntake && userInfo.weight !== null) {
       const { height, age, weight, desiredWeight } = userInfo;
       const dailyCalories = countDailyCalorieIntake({
         height,
@@ -41,6 +44,7 @@ const RightInfoPanel = () => {
       localStorage.setItem('dailyCalorieIntake', JSON.stringify(dailyCalories));
     }
     setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
+    setNaProducts(notAllowedProducts);
   }, []);
 
   useEffect(() => {
@@ -48,6 +52,8 @@ const RightInfoPanel = () => {
       getUserInfo();
     }
   });
+
+  // setNaProducts(productsToString(notAllowedProducts));
 
   // const productsListNAmemoSelector = createSelector(
   //   [getNotAllowedProducts],
@@ -163,13 +169,7 @@ const RightInfoPanel = () => {
         <div className={styles.productsBlock}>
           <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
           <span className={styles.products}>
-            {!authSelectors || !JSON.parse(localStorage.getItem('user')) ? (
-              'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
-            ) : isLoader ? (
-              <LoaderComponent />
-            ) : (
-              naProducts
-            )}
+            {isLoader ? <LoaderComponent /> : naProducts}
           </span>
         </div>
       </div>
