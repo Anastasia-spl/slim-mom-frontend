@@ -107,7 +107,7 @@ const RightInfoPanel = () => {
             0 ккал
             <br />
             <span style={{ color: 'red' }} className={styles.listItemValueRed}>
-              ❗️ Превышено: {remaining * -1} ккал
+              ! Превышено: {remaining * -1} ккал
             </span>
           </span>
         </li>
