@@ -69,7 +69,6 @@ const searchProducts = (value, page, limit) => async dispatch => {
     dispatch(searchProductsSuccess(data.productsList));
     dispatch(searchTotalPagesSuccess(data.totalPages));
   } catch (error) {
-    toast.warning('Продукт не найден');
     dispatch(notificationAddNewProductSuccess());
     dispatch(searchProductsError(error.message));
   }

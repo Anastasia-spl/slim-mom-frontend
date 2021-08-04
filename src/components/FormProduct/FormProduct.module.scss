@@ -52,44 +52,16 @@
 }
 
 .diary__btnAddProduct {
+  @include orangeBtn();
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  border: none;
-  outline: none;
-
-  color: white;
   @include font(700, 20px, 17px, $primary-font, $primary-letter-spacing);
-
-  background: #fc842d;
-  /* orange */
-
-  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
-  cursor: pointer;
-
-  &:disabled {
-    &:hover {
-      opacity: 0.4;
-    }
-    opacity: 0.4;
-  }
-
-  &:hover,
-  &:focus {
-    box-shadow: 0px 0px 10px 4px rgba(252, 132, 45, 0.75);
-    -webkit-box-shadow: 0px 0px 10px 4px rgba(252, 132, 45, 0.75);
-    -moz-box-shadow: 0px 0px 10px 4px rgba(252, 132, 45, 0.75);
-  }
-
-  transition: box-shadow, 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   @include for-size(tablet-only) {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 176px;
-    height: 44px;
-    border-radius: 30px;
+    @include orangeBtn();
   }
 }
 
@@ -102,6 +74,11 @@
   background-color: white;
 
   cursor: pointer;
+
+  @include for-size(tablet-only) {
+    top: 2px;
+    left: 270px;
+  }
 }
 
 .iconClearInput:hover path {
