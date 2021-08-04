@@ -2,12 +2,11 @@ import { useDispatch } from 'react-redux';
 import { actions } from '../../redux/products';
 import style from './Notification.module.scss';
 
-const Notification = ({ onHandleCloseBotification, onCleareForm }) => {
+const Notification = ({ onHandleCloseBotification }) => {
   const dispatch = useDispatch();
   const handleOpenModal = () => {
     dispatch(actions.modalAddNewProductSuccess());
     dispatch(actions.notificationAddNewProductSuccess());
-    onCleareForm('');
   };
 
   return (
