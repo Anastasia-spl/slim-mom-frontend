@@ -23,16 +23,21 @@ import ModalAddProducts from '../../components/ModalAddProducts';
 
 const Diary = () => {
   const [isNameNewProduct, setNameNewProduct] = useState(false);
-  const classNameModal = style.diary__formModal;
-  const classNameMobile = style.diary__formMobile;
-  const isListProducts = useSelector(getStateProducts);
-  const isLoader = useSelector(getLoader);
-  const isCurrentDate = useSelector(getCurrentDate);
-  const isModalAddProduct = useSelector(modalAddProduct);
   const isModalAddNewProduct = useSelector(modalAddNewProduct);
-  const dispatch = useDispatch();
+  const isModalAddProduct = useSelector(modalAddProduct);
+  const isListProducts = useSelector(getStateProducts);
+  const isCurrentDate = useSelector(getCurrentDate);
+  const isLoader = useSelector(getLoader);
+  const classNameMobile = style.diary__formMobile;
+  const classNameModal = style.diary__formModal;
   const isDate = getDateString(new Date());
-  console.log(isModalAddNewProduct);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    isCurrentDate === ''
+      ? dispatch(actions.currentDateSuccess(isDate))
+      : dispatch(dowloadProducts(isCurrentDate));
+  }, [isCurrentDate]);
 
   function getDateString(date) {
     const day = pad(date.getDate());
@@ -40,16 +45,9 @@ const Diary = () => {
     const datestring = day + '.' + month + '.' + date.getFullYear();
     return datestring;
   }
-
   function pad(value) {
     return String(value).padStart(2, '0');
   }
-
-  useEffect(() => {
-    isCurrentDate === ''
-      ? dispatch(actions.currentDateSuccess(isDate))
-      : dispatch(dowloadProducts(isCurrentDate));
-  }, [isCurrentDate]);
 
   const handleToggleModal = () => {
     dispatch(actions.modalAddProductSuccess());

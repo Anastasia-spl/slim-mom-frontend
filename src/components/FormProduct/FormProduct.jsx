@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash.debounce';
 import style from './FormProduct.module.scss';
 import ListSearchProducts from '../ListSearchProducts';
-import { notification } from '../../redux/products';
 import Notification from '../Notification';
 import { ReactComponent as IconClearInput } from '../../pictures/close.svg';
 import {
+  notification,
   actions,
   getCurrentDate,
   modalAddProduct,
@@ -21,20 +21,20 @@ const FormProduct = ({
   onDateString,
   onGetNameNewProduct,
 }) => {
-  const [titleProduct, setTitleProduct] = useState('');
-  const [weightProduct, setWeightProduct] = useState('');
   const [caloriesProduct, setCaloriesProduct] = useState(Number());
-  const [page, setPage] = useState(1);
-  const [limit] = useState(7);
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
   const [isDisableInput, setDisableInput] = useState(false);
+  const [weightProduct, setWeightProduct] = useState('');
+  const [titleProduct, setTitleProduct] = useState('');
+  const [page, setPage] = useState(1);
+  const [limit] = useState(7);
   const isNotification = useSelector(notification);
   const [clientWidth, setclientWidth] = useState(
     document.documentElement.clientWidth,
   );
+  const isModalAddProduct = useSelector(modalAddProduct);
   const currentDate = useSelector(getCurrentDate);
   const isDate = onDateString(new Date());
-  const isModalAddProduct = useSelector(modalAddProduct);
   const dispatch = useDispatch();
 
   const handleResize = () => {
@@ -44,7 +44,6 @@ const FormProduct = ({
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
