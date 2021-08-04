@@ -65,7 +65,6 @@ const searchProducts = (value, page, limit) => async dispatch => {
   dispatch(searchProductsRequest());
   try {
     const { data } = await serviceAPI.searchProductQuery(value, page, limit);
-    console.log(data);
     dispatch(searchProductsSuccess(data.productsList));
     dispatch(searchTotalPagesSuccess(data.totalPages));
   } catch (error) {
