@@ -14,18 +14,19 @@ import {
 import styles from './RightInfoPanel.module.scss';
 
 const RightInfoPanel = () => {
-  const dispatch = useDispatch();
   const [dailyCal, setDailyCal] = useState(0);
   const [naProducts, setNaProducts] = useState('');
-  const isAuthenticated = useSelector(authSelectors.getLoggedOn);
+
+  const dispatch = useDispatch();
   const getUserInfo = () => dispatch(updateUserInfo());
+
   const userInfo = JSON.parse(localStorage.getItem('user'));
   const dailyCalorieIntake = JSON.parse(
     localStorage.getItem('dailyCalorieIntake'),
   );
 
   useEffect(() => {
-    if (isAuthenticated && userInfo) {
+    if (userInfo) {
       const getProductsLS = userInfo.productsNotAllowed;
       setNaProducts(productsToString(getProductsLS));
     }
@@ -43,7 +44,7 @@ const RightInfoPanel = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated && !userInfo) {
+    if (!userInfo) {
       getUserInfo();
     }
   });
