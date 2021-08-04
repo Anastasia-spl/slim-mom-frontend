@@ -3,17 +3,13 @@
 
 .diary__nameProduct {
   width: 242px;
-  // height: 36px;
   margin-right: 30px;
   padding-bottom: 19px;
   border: none;
   border-bottom: 1px solid #e0e0e0;
-
   outline: none;
-
   color: $secondary-text-color;
   vertical-align: top;
-
   @include font(700, 14px, 17px, $primary-font, $primary-letter-spacing);
 
   &:focus {
@@ -27,11 +23,10 @@
 
 .diary__volumProduct {
   width: 106px;
-  // height: 36px;
   margin-right: 75px;
   padding-bottom: 19px;
   border: none;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid $light-gray;
   outline: none;
 
   color: $secondary-text-color;
@@ -52,16 +47,15 @@
 }
 
 .diary__btnAddProduct {
-  @include orangeBtn();
+  @include orangeBtn;
   width: 50px;
   height: 50px;
-  @include font(700, 20px, 17px, $primary-font, $primary-letter-spacing);
+  @include font(300, 30px, 17px, $secondary-font, $primary-letter-spacing);
 
   @include for-size(tablet-only) {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    @include orangeBtn();
   }
 }
 
