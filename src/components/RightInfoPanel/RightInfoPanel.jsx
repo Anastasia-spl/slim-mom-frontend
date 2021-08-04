@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { authSelectors } from '../../redux/auth';
 import { createSelector } from 'reselect';
+import { updateUserInfo } from '../../redux/products/products-operations';
 import LoaderComponent from '../LoaderComponent';
 import { countDailyCalorieIntake } from '../Modal/Formula';
 import {
@@ -13,9 +14,11 @@ import {
 import styles from './RightInfoPanel.module.scss';
 
 const RightInfoPanel = () => {
+  const dispatch = useDispatch();
   const [dailyCal, setDailyCal] = useState(0);
   const [naProducts, setNaProducts] = useState('');
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
+  const getUserInfo = () => dispatch(updateUserInfo());
   const userInfo = JSON.parse(localStorage.getItem('user'));
   const dailyCalorieIntake = JSON.parse(
     localStorage.getItem('dailyCalorieIntake'),
@@ -38,6 +41,12 @@ const RightInfoPanel = () => {
     }
     setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated && !userInfo) {
+      getUserInfo();
+    }
+  });
 
   // const productsListNAmemoSelector = createSelector(
   //   [getNotAllowedProducts],

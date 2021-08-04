@@ -3,10 +3,8 @@ import { Suspense, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import routes from '../routes';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
-import { authSelectors } from '../redux/auth';
-import { updateUserInfo } from '../redux/products/products-operations';
 
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -18,20 +16,11 @@ export default function App() {
   const onRefresh = () => {
     dispatch(authOperations.currentUser());
   };
-  const getUserInfo = () => dispatch(updateUserInfo());
-  const isAuthenticated = useSelector(authSelectors.getLoggedOn);
-  const userInfo = localStorage.getItem('user');
 
   useEffect(() => {
     onRefresh();
     // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    if (isAuthenticated && !userInfo) {
-      getUserInfo();
-    }
-  })
 
   return (
     <>
