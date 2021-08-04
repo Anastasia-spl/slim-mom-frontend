@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   actions,
@@ -8,6 +8,7 @@ import {
   getLoader,
   getCurrentDate,
   modalAddProduct,
+  modalAddNewProduct,
 } from '../../redux/products';
 import style from './Diary.module.scss';
 import ButtonAdd from '../../components/ButtonAdd';
@@ -16,18 +17,22 @@ import FormProduct from '../../components/FormProduct';
 import ListProducts from '../../components/ListProducts';
 import DiaryContainer from '../../components/DiaryContainer';
 import RightInfoPanel from '../../components/RightInfoPanel';
+import ModalNewProduct from '../../components/ModalNewProduct';
 import LoaderComponent from '../../components/LoaderComponent';
 import ModalAddProducts from '../../components/ModalAddProducts';
 
 const Diary = () => {
+  const [isNameNewProduct, setNameNewProduct] = useState(false);
   const classNameModal = style.diary__formModal;
   const classNameMobile = style.diary__formMobile;
   const isListProducts = useSelector(getStateProducts);
   const isLoader = useSelector(getLoader);
   const isCurrentDate = useSelector(getCurrentDate);
   const isModalAddProduct = useSelector(modalAddProduct);
+  const isModalAddNewProduct = useSelector(modalAddNewProduct);
   const dispatch = useDispatch();
   const isDate = getDateString(new Date());
+  console.log(isModalAddNewProduct);
 
   function getDateString(date) {
     const day = pad(date.getDate());
@@ -55,6 +60,8 @@ const Diary = () => {
     }
   };
 
+  const getNameNewProduct = name => setNameNewProduct(name);
+
   return (
     <DiaryContainer style={{ padding: 0 }}>
       <div className={style.flexContainer}>
@@ -64,6 +71,7 @@ const Diary = () => {
             <FormProduct
               className={classNameMobile}
               onDateString={getDateString}
+              onGetNameNewProduct={getNameNewProduct}
             />
           ) : null}
           {isLoader ? (
@@ -81,6 +89,9 @@ const Diary = () => {
           ) : null}
         </div>
         <RightInfoPanel />
+        {isModalAddNewProduct && (
+          <ModalNewProduct isNameNewProduct={isNameNewProduct} />
+        )}
       </div>
     </DiaryContainer>
   );

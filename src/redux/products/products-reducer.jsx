@@ -4,9 +4,12 @@ const initialProductsState = {
   products: [],
   searchList: [],
   notAllowedProducts: [],
+  newProduct: '',
   currentDate: '',
   totalPages: 1,
+  notification: false,
   modalAddProduct: false,
+  modalAddNewProduct: false,
   isLoading: false,
   error: null,
   userParameters: {},
@@ -25,6 +28,18 @@ const { actions, reducer } = createSlice({
       state.isLoading = true;
     },
     addProductsError: (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+    },
+    addNewProductSuccess: (state, { payload }) => {
+      state.newProduct = payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+    addNewProductRequest: state => {
+      state.isLoading = true;
+    },
+    addNewProductError: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
     },
@@ -99,7 +114,12 @@ const { actions, reducer } = createSlice({
       state.error = payload;
       state.isLoading = false;
     },
-
+    modalAddNewProductSuccess: state => {
+      state.modalAddNewProduct = !state.modalAddNewProduct;
+    },
+    notificationAddNewProductSuccess: state => {
+      state.notification = !state.notification;
+    },
     modalAddProductSuccess: state => {
       state.modalAddProduct = !state.modalAddProduct;
       state.isLoading = false;

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash.debounce';
 import style from './FormProduct.module.scss';
 import ListSearchProducts from '../ListSearchProducts';
+import { notification } from '../../redux/products';
+import Notification from '../Notification';
 import { ReactComponent as IconClearInput } from '../../pictures/close.svg';
 import {
   actions,
@@ -13,7 +15,12 @@ import {
   searchProducts,
 } from '../../redux/products';
 
-const FormProduct = ({ className, handleToggleModal, onDateString }) => {
+const FormProduct = ({
+  className,
+  handleToggleModal,
+  onDateString,
+  onGetNameNewProduct,
+}) => {
   const [titleProduct, setTitleProduct] = useState('');
   const [weightProduct, setWeightProduct] = useState('');
   const [caloriesProduct, setCaloriesProduct] = useState(Number());
@@ -21,6 +28,7 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
   const [limit] = useState(7);
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
   const [isDisableInput, setDisableInput] = useState(false);
+  const isNotification = useSelector(notification);
   const [clientWidth, setclientWidth] = useState(
     document.documentElement.clientWidth,
   );
@@ -81,7 +89,8 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
       debounceLoadData(query, page, limit);
     }
 
-    setTitleProduct(event.target.value);
+    onGetNameNewProduct(query);
+    setTitleProduct(query);
   };
 
   const handleChangeVolumProduct = event => {
@@ -90,7 +99,8 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
   };
 
   const handelSelectItem = isProduct => {
-    setTitleProduct(isProduct.title.ru);
+    const nameProduct = isProduct.title.ru;
+    setTitleProduct(nameProduct ? nameProduct : isProduct.title);
     setIsDisabledBtn(false);
     setCaloriesProduct(isProduct.calories);
     setPage(1);
@@ -107,6 +117,10 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
   const handleClearInput = () => {
     setTitleProduct('');
     dispatch(actions.searchProductsSuccess([]));
+  };
+
+  const handleCloseBotification = () => {
+    dispatch(actions.notificationAddNewProductSuccess());
   };
 
   return (
@@ -152,6 +166,12 @@ const FormProduct = ({ className, handleToggleModal, onDateString }) => {
           <IconClearInput className={style.iconClearInput} />
         </button>
       ) : null}
+      {isNotification && (
+        <Notification
+          onHandleCloseBotification={handleCloseBotification}
+          onCleareForm={setTitleProduct}
+        />
+      )}
     </form>
   );
 };

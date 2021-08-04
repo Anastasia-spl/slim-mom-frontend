@@ -21,6 +21,10 @@ const apiService = {
   logOutUser() {
     return axios.post(`/users/logout`);
   },
+  addNewProduct(payload) {
+    console.log(payload);
+    return axios.post('/products/personal/add', payload);
+  },
   addProductQuery(payload) {
     return axios.post('/products', payload);
   },
