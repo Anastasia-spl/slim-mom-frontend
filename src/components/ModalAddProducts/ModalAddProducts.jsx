@@ -1,7 +1,12 @@
 import FormProduct from '../FormProduct';
 import style from './ModalAddProducts.module.scss';
 
-const ModalAddProducts = ({ className, onHandleToggleModal, onDateString }) => {
+const ModalAddProducts = ({
+  className,
+  onHandleToggleModal,
+  onDateString,
+  onGetNameNewProduct,
+}) => {
   const handleBackdrop = e => {
     if (e.target === e.currentTarget) {
       onHandleToggleModal();
@@ -14,6 +19,7 @@ const ModalAddProducts = ({ className, onHandleToggleModal, onDateString }) => {
           className={className}
           handleToggleModal={onHandleToggleModal}
           onDateString={onDateString}
+          onGetNameNewProduct={onGetNameNewProduct}
         />
       </div>
     </div>
