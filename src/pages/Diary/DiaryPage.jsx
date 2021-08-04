@@ -85,6 +85,7 @@ const Diary = () => {
               className={classNameModal}
               onHandleToggleModal={handleToggleModal}
               onDateString={getDateString}
+              onGetNameNewProduct={getNameNewProduct}
             />
           ) : null}
         </div>
