@@ -106,11 +106,13 @@ export default function DailyCaloriesForm() {
               JSON.stringify(countDailyCalorieIntake(values)),
             );
             fetchProducts(values.bloodGroup);
-            localStorage.setItem(
-              'user',
-              JSON.stringify({ ...values, productsNotAllowed: products }),
-            );
+            products.length !== 0 &&
+              localStorage.setItem(
+                'user',
+                JSON.stringify({ ...values, productsNotAllowed: products }),
+              );
             isAuthenticated &&
+              products.length !== 0 &&
               sendUserParameters({ ...values, productsNotAllowed: products });
           }}
         >
