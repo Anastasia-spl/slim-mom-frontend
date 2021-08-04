@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { getNotAllowedProducts, isLoading } from '../../redux/products';
+import { useHistory } from 'react-router-dom';
 import Loader from '../Loader';
 import styles from './Modal.module.scss';
 const shortid = require('shortid');
@@ -7,9 +8,10 @@ const shortid = require('shortid');
 export default function Modal({ active, setActive, calories }) {
   const isOnLoading = useSelector(isLoading);
   const products = useSelector(getNotAllowedProducts);
+  const history = useHistory();
   const buttonClose = () => {
     setActive(false);
-    window.location.href = '/register';
+    history.push('/register');
   };
 
   return (
