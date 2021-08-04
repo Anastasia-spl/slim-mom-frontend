@@ -20,6 +20,8 @@
   position: absolute;
   top: 240px;
   left: 135px;
+  // transform: translate(-50%, -50%) scale(1);
+
   width: 400px;
   height: 155px;
   padding: 30px 30px 30px 50px;
@@ -29,8 +31,8 @@
   background-color: #fff;
 
   @include for-size(desktop-only) {
-    top: 183px;
-    left: 100px;
+    top: 23%;
+    left: 115px;
   }
 
   @include for-size(tablet-only) {
