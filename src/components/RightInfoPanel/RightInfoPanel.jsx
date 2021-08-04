@@ -26,7 +26,7 @@ const RightInfoPanel = () => {
       const getProductsLS = userInfo.productsNotAllowed;
       setNaProducts(productsToString(getProductsLS));
     }
-    if (!dailyCalorieIntake) {
+    if (!dailyCalorieIntake && userInfo) {
       const { height, age, weight, desiredWeight } = userInfo;
       const dailyCalories = countDailyCalorieIntake({
         height,

@@ -16,7 +16,7 @@ const RegisterForm = () => {
     dispatch(authOperations.register(credentials));
 
   const [cross, setCross] = useState(true);
-  const [dataUser, setDataUser] = useState(true);
+  const [dataUser, setDataUser] = useState(null);
 
   useEffect(() => {
     if (localStorage.getItem('user') !== null) {
@@ -55,9 +55,8 @@ const RegisterForm = () => {
           password: '',
         }}
         validateOnBlur
-        onSubmit={(values, { resetForm }) => {
+        onSubmit={values => {
           onRegister({ ...values, ...dataUser });
-          resetForm();
         }}
         validationSchema={validationSchema}
       >

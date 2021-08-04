@@ -46,12 +46,22 @@ export default function DailyCaloriesForm() {
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
   const [modalActive, setModalActive] = useState(false);
   const [calories, setCalories] = useState('');
+  const [userInfo, setUserInfo] = useState({});
   const dispatсh = useDispatch();
   const fetchProducts = bloodGroup => dispatсh(getProducts(bloodGroup));
   const products = useSelector(getNotAllowedProducts);
   const [clientWidth, setClientWidth] = useState(
     document.documentElement.clientWidth,
   );
+
+  products.length !== 0 &&
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ ...userInfo, productsNotAllowed: products }),
+    );
+  isAuthenticated &&
+    products.length !== 0 &&
+    sendUserParameters({ ...userInfo, productsNotAllowed: products });
 
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
@@ -106,14 +116,7 @@ export default function DailyCaloriesForm() {
               JSON.stringify(countDailyCalorieIntake(values)),
             );
             fetchProducts(values.bloodGroup);
-            products.length !== 0 &&
-              localStorage.setItem(
-                'user',
-                JSON.stringify({ ...values, productsNotAllowed: products }),
-              );
-            isAuthenticated &&
-              products.length !== 0 &&
-              sendUserParameters({ ...values, productsNotAllowed: products });
+            setUserInfo(values);
           }}
         >
           {({ values, handleSubmit, isValid, dirty, handleChange }) => (
