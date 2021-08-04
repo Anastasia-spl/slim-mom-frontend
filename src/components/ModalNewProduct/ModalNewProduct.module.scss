@@ -33,15 +33,13 @@
 
   @include for-size(desktop-only) {
     top: 183px;
-    left: 100px;
+    left: 230px;
   }
 
   @include for-size(tablet-only) {
     top: 120px;
     left: 185px;
     width: 300px;
-    // height: 175px;
-    // padding: 30px 10px 30px 10px;
   }
 }
 
