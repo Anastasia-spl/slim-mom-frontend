@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 // import { createTheme, makeStyles } from '@material-ui/core/styles';
 import style from './ModalNewProduct.module.scss';
-import { addNewProduct } from '../../redux/products';
+import { addNewProduct, searchProducts } from '../../redux/products';
 import { actions } from '../../redux/products';
 import { ReactComponent as CloseModal } from '../../pictures/close.svg';
 import { useEffect } from 'react';
@@ -26,6 +26,8 @@ const ModalNewProduct = ({ onHandleToggleModal, isNameNewProduct }) => {
       calories: caloriesProduct,
     };
     dispatch(addNewProduct(newProduc));
+    setTimeout(() => dispatch(searchProducts(nameProduct, 1, 7)), 1000);
+
     dispatch(actions.modalAddNewProductSuccess());
   };
 

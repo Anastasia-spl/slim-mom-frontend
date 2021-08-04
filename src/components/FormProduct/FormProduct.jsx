@@ -167,10 +167,7 @@ const FormProduct = ({
         </button>
       ) : null}
       {isNotification && (
-        <Notification
-          onHandleCloseBotification={handleCloseBotification}
-          onCleareForm={setTitleProduct}
-        />
+        <Notification onHandleCloseBotification={handleCloseBotification} />
       )}
     </form>
   );
