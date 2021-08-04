@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { authSelectors } from '../../redux/auth';
 import { createSelector } from 'reselect';
 import { updateUserInfo } from '../../redux/products/products-operations';
-// import { getNotAllowedProducts } from '../../redux/products/products-selectors';
+import { userParameters } from '../../redux/products/products-selectors';
 import LoaderComponent from '../LoaderComponent';
 import { countDailyCalorieIntake } from '../Modal/Formula';
 import {
@@ -18,51 +18,34 @@ import styles from './RightInfoPanel.module.scss';
 const RightInfoPanel = () => {
   const [dailyCal, setDailyCal] = useState(0);
   const [naProducts, setNaProducts] = useState('');
-
+  const [userInfoState, setUserInfoState] = useState();
   const dispatch = useDispatch();
   const getUserInfo = () => dispatch(updateUserInfo());
-
+  const userParametersInfo = useSelector(userParameters);
   const userInfo = JSON.parse(localStorage.getItem('user'));
-  const dailyCalorieIntake = JSON.parse(
-    localStorage.getItem('dailyCalorieIntake'),
-  );
 
   const notAllowedProducts =
     userInfo && userInfo.productsNotAllowed.length !== 0
       ? productsToString(userInfo.productsNotAllowed)
       : 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!';
 
+  const dailyCalories =
+    userInfo && userInfo.weight && countDailyCalorieIntake(userInfo);
+
   useEffect(() => {
-    if (userInfo && !dailyCalorieIntake && userInfo.weight !== null) {
-      const { height, age, weight, desiredWeight } = userInfo;
-      const dailyCalories = countDailyCalorieIntake({
-        height,
-        age,
-        weight,
-        desiredWeight,
-      });
-      localStorage.setItem('dailyCalorieIntake', JSON.stringify(dailyCalories));
-    }
-    setDailyCal(JSON.parse(localStorage.getItem('dailyCalorieIntake')));
+    setUserInfoState({ userInfo });
+    // const dailyCalories = countDailyCalorieIntake(userInfoState);
     setNaProducts(notAllowedProducts);
+    setDailyCal(dailyCalories);
+    localStorage.setItem('dailyCalorieIntake', JSON.stringify(dailyCalories));
   }, []);
 
   useEffect(() => {
     if (!userInfo) {
       getUserInfo();
+      setUserInfoState({ userParametersInfo });
     }
   });
-
-  // setNaProducts(productsToString(notAllowedProducts));
-
-  // const productsListNAmemoSelector = createSelector(
-  //   [getNotAllowedProducts],
-  //   prod => {
-  //     return prod.map(i => {
-  //       return i;
-  //     });
-  //   },
-  // );
 
   const allEatenCaloriesMemoSelector = createSelector(
     [getStateProducts],
@@ -73,7 +56,6 @@ const RightInfoPanel = () => {
     },
   );
 
-  // const productsListNA = useSelector(productsListNAmemoSelector);
   const allProductsListCalories = useSelector(allEatenCaloriesMemoSelector);
   const getDate = useSelector(getCurrentDate);
   const isLoader = useSelector(getLoader);
