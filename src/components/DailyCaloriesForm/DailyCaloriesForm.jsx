@@ -46,16 +46,16 @@ export default function DailyCaloriesForm() {
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
   const [modalActive, setModalActive] = useState(false);
   const [calories, setCalories] = useState('');
-  const dispath = useDispatch();
-  const fetchProducts = bloodGroup => dispath(getProducts(bloodGroup));
+  const dispatсh = useDispatch();
+  const fetchProducts = bloodGroup => dispatсh(getProducts(bloodGroup));
   const products = useSelector(getNotAllowedProducts);
-  const [clientWidth, setclientWidth] = useState(
+  const [clientWidth, setClientWidth] = useState(
     document.documentElement.clientWidth,
   );
 
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
-    setclientWidth(width);
+    setClientWidth(width);
   };
 
   useEffect(() => {
