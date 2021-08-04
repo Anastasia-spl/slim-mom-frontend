@@ -26,11 +26,11 @@ const RightInfoPanel = () => {
   );
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && userInfo.productsNotAllowed.length !== 0) {
       const getProductsLS = userInfo.productsNotAllowed;
       setNaProducts(productsToString(getProductsLS));
     }
-    if (!dailyCalorieIntake && userInfo) {
+    if (!dailyCalorieIntake && userInfo.weight !== null) {
       const { height, age, weight, desiredWeight } = userInfo;
       const dailyCalories = countDailyCalorieIntake({
         height,

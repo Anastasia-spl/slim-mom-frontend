@@ -51,7 +51,7 @@ const { actions, reducer } = createSlice({
       state.isLoggedOn = false;
     },
     logoutError: (state, { payload }) => {
-      state.error = payload.message;
+      state.error = payload?.message;
       state.isLoading = false;
     },
     getCurrentUserRequest: (state, { payload }) => {
