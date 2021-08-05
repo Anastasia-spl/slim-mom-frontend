@@ -22,6 +22,7 @@
 }
 
 .diary {
+  min-height: 30%;
   @include for-size(desktop) {
     padding-top: 292px;
     padding-left: 115px;
@@ -46,6 +47,7 @@
   }
 }
 .flexContainer {
+  height: 100vh;
   @include for-size(mobile) {
     padding-top: 160px;
   }

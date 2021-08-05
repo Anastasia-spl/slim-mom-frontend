@@ -13,8 +13,7 @@
   width: 100vw;
   padding-top: 40px;
   padding-bottom: 84px;
-  position: fixed;
-  bottom: 0;
+  height: 100%;
   @include for-size(tablet) {
     width: 100vw;
     min-height: 350px;
@@ -31,7 +30,6 @@
     }
   }
   @include for-size(desktop) {
-    position: static;
     flex-direction: column;
     position: relative;
     width: 41.8vw;
