@@ -63,7 +63,7 @@ const RightInfoPanel = () => {
 
   const allProductsListCalories = useSelector(allEatenCaloriesMemoSelector);
   const getDate = useSelector(getCurrentDate);
-  const isLoader = useSelector(getLoader);
+  // const isLoader = useSelector(getLoader);
   const date = getDate; // Дата для отображаемого списка
 
   const sumCalories = arrayCalories => {
@@ -155,9 +155,7 @@ const RightInfoPanel = () => {
         </div>
         <div className={styles.productsBlock}>
           <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
-          <span className={styles.products}>
-            {isLoader ? <LoaderComponent /> : naProducts}
-          </span>
+          <span className={styles.products}>{naProducts}</span>
         </div>
       </div>
     </div>
