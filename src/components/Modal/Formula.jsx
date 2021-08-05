@@ -4,7 +4,10 @@ export const countDailyCalorieIntake = ({
   weight,
   desiredWeight,
 }) => {
-  const formula =
+  const result =
     10 * weight + 6.25 * height - 5 * age - 161 - 10 * (weight - desiredWeight);
+
+  const formula = Math.floor(result * 100) / 100;
+
   return formula;
 };

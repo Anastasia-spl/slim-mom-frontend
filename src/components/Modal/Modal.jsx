@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getNotAllowedProducts, isLoading } from '../../redux/products';
 import { useHistory } from 'react-router-dom';
-import Loader from '../Loader';
+import LoaderComponent from '../LoaderComponent';
 import styles from './Modal.module.scss';
 const shortid = require('shortid');
 
@@ -44,7 +44,7 @@ export default function Modal({ active, setActive, calories }) {
             </h3>
             {isOnLoading ? (
               <div className={styles.modalLoader}>
-                <Loader />
+                <LoaderComponent />
               </div>
             ) : (
               <ol className={styles.modalBlockList}>

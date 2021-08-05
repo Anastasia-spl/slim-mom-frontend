@@ -260,6 +260,9 @@
 }
 
 .modalLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   @include for-size(desktop) {
     margin-right: 70px;
   }
