@@ -55,7 +55,7 @@
   @include orangeBtn();
   width: 50px;
   height: 50px;
-  @include font(700, 20px, 17px, $primary-font, $primary-letter-spacing);
+  @include font(300, 30px, 17px, $secondary-font, $primary-letter-spacing);
 
   @include for-size(tablet-only) {
     position: relative;
