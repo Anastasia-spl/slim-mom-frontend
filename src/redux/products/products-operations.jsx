@@ -3,6 +3,7 @@ import serviceAPI from '../../service';
 import { toast } from 'react-toastify';
 import { actions } from '.';
 // import { debounce } from 'debounce';
+import { countDailyCalorieIntake } from '../../components/Modal/Formula';
 
 const {
   notificationAddNewProductSuccess,
@@ -90,6 +91,11 @@ const updateUserInfo = () => async dispatch => {
       data: { userInfo },
     } = await serviceAPI.getUserParameters();
     localStorage.setItem('user', JSON.stringify(userInfo));
+    userInfo.weight &&
+      localStorage.setItem(
+        'dailyCalorieIntake',
+        JSON.stringify(countDailyCalorieIntake(userInfo)),
+      );
     dispatch(updateUserInfoSuccess(userInfo));
   } catch (error) {
     dispatch(updateUserInfoError(error.message));

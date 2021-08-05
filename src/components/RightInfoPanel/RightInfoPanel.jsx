@@ -4,7 +4,10 @@ import { useEffect, useState } from 'react';
 import { authSelectors } from '../../redux/auth';
 import { createSelector } from 'reselect';
 import { updateUserInfo } from '../../redux/products/products-operations';
-import { userParameters } from '../../redux/products/products-selectors';
+import {
+  userParameters,
+  getNotAllowedProducts,
+} from '../../redux/products/products-selectors';
 import LoaderComponent from '../LoaderComponent';
 import { countDailyCalorieIntake } from '../Modal/Formula';
 import {
@@ -16,28 +19,30 @@ import {
 import styles from './RightInfoPanel.module.scss';
 
 const RightInfoPanel = () => {
+  const userParametersInfo = useSelector(userParameters);
+
   const [dailyCal, setDailyCal] = useState(0);
   const [naProducts, setNaProducts] = useState('');
-  const [userInfoState, setUserInfoState] = useState();
+  const [userInfoState, setUserInfoState] = useState(userParametersInfo);
   const dispatch = useDispatch();
   const getUserInfo = () => dispatch(updateUserInfo());
-  const userParametersInfo = useSelector(userParameters);
+  const notAllowedProductsSelector = useSelector(getNotAllowedProducts);
   const userInfo = JSON.parse(localStorage.getItem('user'));
+  const dailyCalories = localStorage.getItem('dailyCalorieIntake');
 
   const notAllowedProducts =
     userInfo && userInfo.productsNotAllowed.length !== 0
       ? productsToString(userInfo.productsNotAllowed)
       : 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!';
 
-  const dailyCalories =
-    userInfo && userInfo.weight && countDailyCalorieIntake(userInfo);
-
   useEffect(() => {
-    setUserInfoState({ userInfo });
-    // const dailyCalories = countDailyCalorieIntake(userInfoState);
+    getUserInfo();
+    setUserInfoState(userInfo);
     setNaProducts(notAllowedProducts);
+    // const dailyCalories =
+    //   userInfo && userInfo.weight && countDailyCalorieIntake(userInfo);
+
     setDailyCal(dailyCalories);
-    localStorage.setItem('dailyCalorieIntake', JSON.stringify(dailyCalories));
   }, []);
 
   useEffect(() => {

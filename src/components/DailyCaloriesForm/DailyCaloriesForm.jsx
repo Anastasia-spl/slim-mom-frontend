@@ -9,6 +9,7 @@ import { countDailyCalorieIntake } from '../Modal/Formula';
 import { authSelectors } from '../../redux/auth';
 import { getNotAllowedProducts } from '../../redux/products';
 import { sendUserParameters } from '../../service/user-parameters-api';
+import { useHistory } from 'react-router-dom';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -43,6 +44,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function DailyCaloriesForm() {
+  // const history = useHistory();
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
   const [modalActive, setModalActive] = useState(false);
   const [calories, setCalories] = useState('');
@@ -86,6 +88,15 @@ export default function DailyCaloriesForm() {
     };
   }, []);
 
+  // let timer;
+  // const refreshPage = () => {
+  //   timer = setTimeout(function () {
+  //     history.push('/diary');
+  //     history.push('/calculator');
+  //     timer = clearTimeout(timer);
+  //   }, 2500);
+  // };
+
   return (
     <div>
       <div
@@ -116,7 +127,11 @@ export default function DailyCaloriesForm() {
               JSON.stringify(countDailyCalorieIntake(values)),
             );
             fetchProducts(values.bloodGroup);
-            setUserInfo(values);
+            setUserInfo({ ...values });
+            sendUserParameters({ ...values });
+            // history.push('/diary');
+            // history.push('/calculator');
+            // refreshPage();
           }}
         >
           {({ values, handleSubmit, isValid, dirty, handleChange }) => (
