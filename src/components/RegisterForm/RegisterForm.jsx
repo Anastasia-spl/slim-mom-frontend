@@ -161,6 +161,8 @@ const RegisterForm = () => {
                 {login.label}
               </NavLink>
             </div>
+
+            <GoogleAuthBtn />
           </form>
         )}
       </Formik>
