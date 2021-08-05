@@ -10,6 +10,7 @@ import { authSelectors } from '../../redux/auth';
 import { getNotAllowedProducts } from '../../redux/products';
 import { sendUserParameters } from '../../service/user-parameters-api';
 import { useHistory } from 'react-router-dom';
+import { updateUserInfo } from '../../redux/products/products-operations';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -51,6 +52,7 @@ export default function DailyCaloriesForm() {
   const [userInfo, setUserInfo] = useState({});
   const dispatсh = useDispatch();
   const fetchProducts = bloodGroup => dispatсh(getProducts(bloodGroup));
+  const getUserInfo = () => dispatсh(updateUserInfo());
   const products = useSelector(getNotAllowedProducts);
   const [clientWidth, setClientWidth] = useState(
     document.documentElement.clientWidth,
@@ -63,7 +65,8 @@ export default function DailyCaloriesForm() {
     );
   isAuthenticated &&
     products.length !== 0 &&
-    sendUserParameters({ ...userInfo, productsNotAllowed: products });
+    sendUserParameters({ ...userInfo, productsNotAllowed: products }) &&
+    getUserInfo();
 
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
