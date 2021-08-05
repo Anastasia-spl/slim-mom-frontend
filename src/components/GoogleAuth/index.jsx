@@ -1,1 +1,1 @@
-import GoogleAuthBtn from './GoogleAuthBtn';
+export { default } from './GoogleAuthBtn';
