@@ -8,7 +8,9 @@ const GoogleAuthBtn = () => {
   const responseSuccessGoogle = response => {
     axios({
       method: 'POST',
-      url: 'http://https://slim-mom-5group.herokuapp.com/users/authgoogle',
+        url: 'https://slim-mom-5group.herokuapp.com/users/authgoogle',
+    //   url: 'http://localhost:3030/users/authgoogle',
+
       data: { tokenId: response.tokenId },
     }).then(response => {
       console.log('Google login sucess ===> response', response);

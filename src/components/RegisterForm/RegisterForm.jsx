@@ -9,7 +9,7 @@ import routes from '../../routes';
 import eye from '../../assets/pictures/eye.svg';
 import eyeCrossed from '../../assets/pictures/eye-crossed.svg';
 
-import GoogleAuthBtn from '../GoogleAuthBtn';
+import GoogleAuthBtn from '../GoogleAuth';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -74,6 +74,9 @@ const RegisterForm = () => {
         }) => (
           <form className={styles.form} onSubmit={handleSubmit}>
             <h2 className={styles.title}>Регистрация</h2>
+
+            <GoogleAuthBtn />
+
             <div className={styles.input__form}>
               <label className={styles.label}>
                 Логин*
