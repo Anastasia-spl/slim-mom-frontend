@@ -9,6 +9,8 @@ import routes from '../../routes';
 import eye from '../../assets/pictures/eye.svg';
 import eyeCrossed from '../../assets/pictures/eye-crossed.svg';
 
+import GoogleAuthBtn from '../GoogleAuthBtn';
+
 const RegisterForm = () => {
   const dispatch = useDispatch();
 
