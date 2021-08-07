@@ -16,6 +16,7 @@ export {
   deleteProducts,
   dowloadProducts,
   searchProducts,
-  getProducts,
+  getProductsRecommendation,
   addNewProduct,
+  getUserInfo,
 } from './products-operations';

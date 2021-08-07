@@ -1,16 +1,15 @@
-import styles from './DailyCaloriesForm.module.scss';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React, { useState, useEffect } from 'react';
-import * as Yup from 'yup';
-import { getProducts } from '../../redux/products/products-operations';
 import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { getProductsRecommendation } from '../../redux/products/products-operations';
 import Modal from '../Modal/Modal';
 import { countDailyCalorieIntake } from '../Modal/Formula';
 import { authSelectors } from '../../redux/auth';
-import { getNotAllowedProducts } from '../../redux/products';
+import { getNotAllowedProducts } from '../../redux/products/products-selectors';
 import { sendUserParameters } from '../../service/user-parameters-api';
-import { useHistory } from 'react-router-dom';
-import { updateUserInfo } from '../../redux/products/products-operations';
+import { actions } from '../../redux/products/products-reducer';
+import styles from './DailyCaloriesForm.module.scss';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -45,28 +44,26 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function DailyCaloriesForm() {
-  // const history = useHistory();
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
+  const notAllowedProducts = useSelector(getNotAllowedProducts);
+
   const [modalActive, setModalActive] = useState(false);
   const [calories, setCalories] = useState('');
   const [userInfo, setUserInfo] = useState({});
-  const dispatсh = useDispatch();
-  const fetchProducts = bloodGroup => dispatсh(getProducts(bloodGroup));
-  const getUserInfo = () => dispatсh(updateUserInfo());
-  const products = useSelector(getNotAllowedProducts);
   const [clientWidth, setClientWidth] = useState(
     document.documentElement.clientWidth,
   );
-
-  products.length !== 0 &&
-    localStorage.setItem(
-      'user',
-      JSON.stringify({ ...userInfo, productsNotAllowed: products }),
+  const dispatсh = useDispatch();
+  const fetchProducts = bloodGroup =>
+    dispatсh(getProductsRecommendation(bloodGroup));
+  const updateDailyCaloriesIntake = parameters =>
+    dispatсh(
+      actions.updateDailyCaloriesIntake(countDailyCalorieIntake(parameters)),
     );
+
   isAuthenticated &&
-    products.length !== 0 &&
-    sendUserParameters({ ...userInfo, productsNotAllowed: products }) &&
-    getUserInfo();
+    notAllowedProducts.length !== 0 &&
+    sendUserParameters({ ...userInfo, productsNotAllowed: notAllowedProducts });
 
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
@@ -75,7 +72,6 @@ export default function DailyCaloriesForm() {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -90,15 +86,6 @@ export default function DailyCaloriesForm() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
-  // let timer;
-  // const refreshPage = () => {
-  //   timer = setTimeout(function () {
-  //     history.push('/diary');
-  //     history.push('/calculator');
-  //     timer = clearTimeout(timer);
-  //   }, 2500);
-  // };
 
   return (
     <div>
@@ -125,16 +112,10 @@ export default function DailyCaloriesForm() {
           }}
           onSubmit={values => {
             setCalories(countDailyCalorieIntake(values));
-            localStorage.setItem(
-              'dailyCalorieIntake',
-              JSON.stringify(countDailyCalorieIntake(values)),
-            );
             fetchProducts(values.bloodGroup);
             setUserInfo({ ...values });
             sendUserParameters({ ...values });
-            // history.push('/diary');
-            // history.push('/calculator');
-            // refreshPage();
+            updateDailyCaloriesIntake(values);
           }}
         >
           {({ values, handleSubmit, isValid, dirty, handleChange }) => (

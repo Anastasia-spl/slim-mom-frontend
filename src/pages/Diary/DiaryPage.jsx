@@ -20,10 +20,6 @@ import RightInfoPanel from '../../components/RightInfoPanel';
 import ModalNewProduct from '../../components/ModalNewProduct';
 import LoaderComponent from '../../components/LoaderComponent';
 import ModalAddProducts from '../../components/ModalAddProducts';
-import {
-  userParameters,
-  getNotAllowedProducts,
-} from '../../redux/products/products-selectors';
 
 const Diary = () => {
   const [isNameNewProduct, setNameNewProduct] = useState(false);
@@ -36,7 +32,6 @@ const Diary = () => {
   const classNameModal = style.diary__formModal;
   const isDate = getDateString(new Date());
   const dispatch = useDispatch();
-  const userParametersInfo = useSelector(userParameters);
 
   useEffect(() => {
     isCurrentDate === ''
