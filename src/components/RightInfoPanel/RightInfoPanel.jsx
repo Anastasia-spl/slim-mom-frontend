@@ -37,7 +37,7 @@ const RightInfoPanel = () => {
       : notAllowedProducts.join(', ');
 
   const recommendationToShow =
-    userParameters.productsNotAllowed === 0
+    userParameters.productsNotAllowed.length === 0
       ? 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
       : notAllowedProductsString;
 
