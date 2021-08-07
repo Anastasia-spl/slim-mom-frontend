@@ -33,13 +33,12 @@ const RightInfoPanel = () => {
 
   const notAllowedProductsString =
     notAllowedProducts.length === 0
-      ? userParameters.productsNotAllowed
+      ? 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
       : notAllowedProducts.join(', ');
 
-  const recommendationToShow =
-    userParameters.productsNotAllowed.length === 0
-      ? 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
-      : notAllowedProductsString;
+  // if (notAllowedProducts.length !== 0) {
+  //   notAllowedProductsString = notAllowedProducts.join(', ');
+  // }
 
   const sumCalories = arrayCalories => {
     if (arrayCalories.length > 0) {
@@ -112,7 +111,7 @@ const RightInfoPanel = () => {
         </div>
         <div className={styles.productsBlock}>
           <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
-          <span className={styles.products}>{recommendationToShow}</span>
+          <span className={styles.products}>{notAllowedProductsString}</span>
         </div>
       </div>
     </div>

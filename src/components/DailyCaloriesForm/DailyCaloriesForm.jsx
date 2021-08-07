@@ -59,6 +59,8 @@ export default function DailyCaloriesForm() {
     notAllowedProducts.length !== 0 &&
     sendUserParameters({ ...userInfo, productsNotAllowed: notAllowedProducts });
 
+  console.log(notAllowedProducts.length);
+
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
     setClientWidth(width);
