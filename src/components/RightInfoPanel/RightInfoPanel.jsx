@@ -22,16 +22,6 @@ const RightInfoPanel = () => {
   const userParameters = useSelector(getUserParameters);
   const isLoading = useSelector(getLoader);
 
-  const notAllowedProductsString =
-    notAllowedProducts.length === 0
-      ? userParameters.productsNotAllowed
-      : notAllowedProducts.join(', ');
-
-  const recommendationToShow =
-    notAllowedProductsString.length === 0
-      ? 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
-      : notAllowedProductsString;
-
   const dispatch = useDispatch();
   const takeUserInfo = () => dispatch(getUserInfo());
 
@@ -39,8 +29,17 @@ const RightInfoPanel = () => {
 
   useEffect(() => {
     takeUserInfo();
-    console.log(notAllowedProductsString);
   }, []);
+
+  const notAllowedProductsString =
+    notAllowedProducts.length === 0
+      ? userParameters.productsNotAllowed
+      : notAllowedProducts.join(', ');
+
+  const recommendationToShow =
+    userParameters.productsNotAllowed === 0
+      ? 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
+      : notAllowedProductsString;
 
   const sumCalories = arrayCalories => {
     if (arrayCalories.length > 0) {
