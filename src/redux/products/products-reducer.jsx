@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { countDailyCalorieIntake } from '../../components/Modal/Formula';
 
 const initialProductsState = {
   products: [],
@@ -13,6 +14,7 @@ const initialProductsState = {
   isLoading: false,
   error: null,
   userParameters: {},
+  dailyCaloriesIntake: '000',
 };
 
 const { actions, reducer } = createSlice({
@@ -137,10 +139,16 @@ const { actions, reducer } = createSlice({
     updateUserInfoSuccess: (state, { payload }) => {
       state.userParameters = payload;
       state.isLoading = false;
+      state.dailyCaloriesIntake = !!payload.weight
+        ? countDailyCalorieIntake(payload)
+        : '000';
     },
     updateUserInfoError: (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
+    },
+    updateDailyCaloriesIntake: (state, { payload }) => {
+      state.dailyCaloriesIntake = payload;
     },
   },
 });

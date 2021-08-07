@@ -11,6 +11,7 @@ const notification = state => state.products.notification;
 const modalAddProduct = state => state.products.modalAddProduct;
 const modalAddNewProduct = state => state.products.modalAddNewProduct;
 const getUserParameters = state => state.products.userParameters;
+const getDailyCaloriesIntake = state => state.products.dailyCaloriesIntake;
 
 const getCaloriesListPerDay = createSelector([getStateProducts], products => {
   return products.map(product => product.calories);
@@ -29,4 +30,5 @@ export {
   modalAddNewProduct,
   notification,
   getCaloriesListPerDay,
+  getDailyCaloriesIntake,
 };

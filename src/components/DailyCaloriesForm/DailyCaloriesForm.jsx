@@ -8,6 +8,7 @@ import { countDailyCalorieIntake } from '../Modal/Formula';
 import { authSelectors } from '../../redux/auth';
 import { getNotAllowedProducts } from '../../redux/products/products-selectors';
 import { sendUserParameters } from '../../service/user-parameters-api';
+import { actions } from '../../redux/products/products-reducer';
 import styles from './DailyCaloriesForm.module.scss';
 
 const SignupSchema = Yup.object().shape({
@@ -44,6 +45,8 @@ const SignupSchema = Yup.object().shape({
 
 export default function DailyCaloriesForm() {
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
+  const notAllowedProducts = useSelector(getNotAllowedProducts);
+
   const [modalActive, setModalActive] = useState(false);
   const [calories, setCalories] = useState('');
   const [userInfo, setUserInfo] = useState({});
@@ -53,13 +56,14 @@ export default function DailyCaloriesForm() {
   const dispatсh = useDispatch();
   const fetchProducts = bloodGroup =>
     dispatсh(getProductsRecommendation(bloodGroup));
-  const notAllowedProducts = useSelector(getNotAllowedProducts);
+  const updateDailyCaloriesIntake = parameters =>
+    dispatсh(
+      actions.updateDailyCaloriesIntake(countDailyCalorieIntake(parameters)),
+    );
 
   isAuthenticated &&
     notAllowedProducts.length !== 0 &&
     sendUserParameters({ ...userInfo, productsNotAllowed: notAllowedProducts });
-
-  console.log(notAllowedProducts.length);
 
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
@@ -108,13 +112,10 @@ export default function DailyCaloriesForm() {
           }}
           onSubmit={values => {
             setCalories(countDailyCalorieIntake(values));
-            // localStorage.setItem(
-            //   'dailyCalorieIntake',
-            //   JSON.stringify(countDailyCalorieIntake(values)),
-            // );
             fetchProducts(values.bloodGroup);
             setUserInfo({ ...values });
             sendUserParameters({ ...values });
+            updateDailyCaloriesIntake(values);
           }}
         >
           {({ values, handleSubmit, isValid, dirty, handleChange }) => (

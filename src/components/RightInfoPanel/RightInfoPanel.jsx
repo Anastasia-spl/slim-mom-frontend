@@ -9,6 +9,7 @@ import {
   getCurrentDate,
   getCaloriesListPerDay,
   getLoader,
+  getDailyCaloriesIntake,
 } from '../../redux/products/products-selectors';
 // import LoaderComponent from '../LoaderComponent';
 // import { countDailyCalorieIntake } from '../Modal/Formula';
@@ -17,15 +18,14 @@ import styles from './RightInfoPanel.module.scss';
 
 const RightInfoPanel = () => {
   const date = useSelector(getCurrentDate);
+  const dailyCaloriesIntake = useSelector(getDailyCaloriesIntake);
   const caloriesListPerDay = useSelector(getCaloriesListPerDay);
   const notAllowedProducts = useSelector(getNotAllowedProducts);
-  const userParameters = useSelector(getUserParameters);
+  // const userParameters = useSelector(getUserParameters);
   const isLoading = useSelector(getLoader);
 
   const dispatch = useDispatch();
   const takeUserInfo = () => dispatch(getUserInfo());
-
-  const [dailyCal, setDailyCal] = useState(0);
 
   useEffect(() => {
     takeUserInfo();
@@ -35,10 +35,6 @@ const RightInfoPanel = () => {
     notAllowedProducts.length === 0
       ? 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
       : notAllowedProducts.join(', ');
-
-  // if (notAllowedProducts.length !== 0) {
-  //   notAllowedProductsString = notAllowedProducts.join(', ');
-  // }
 
   const sumCalories = arrayCalories => {
     if (arrayCalories.length > 0) {
@@ -50,9 +46,11 @@ const RightInfoPanel = () => {
     }
   };
 
+  console.log(dailyCaloriesIntake);
+
   const eating = Math.round(sumCalories(caloriesListPerDay)); //Употреблено
-  const dailyRate = !userParameters ? '000' : Math.round(dailyCal); //Дневная норма
-  const remaining = !userParameters ? '000' : Math.round(dailyRate) - eating; //Осталось
+  const dailyRate = Math.round(dailyCaloriesIntake); //Дневная норма
+  const remaining = Math.round(dailyRate) - eating; //Осталось
 
   const percentOfRate = !authSelectors
     ? '000'
