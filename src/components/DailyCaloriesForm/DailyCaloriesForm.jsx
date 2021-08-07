@@ -1,16 +1,14 @@
-import styles from './DailyCaloriesForm.module.scss';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React, { useState, useEffect } from 'react';
-import * as Yup from 'yup';
-import { getProducts } from '../../redux/products/products-operations';
 import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { getProductsRecommendation } from '../../redux/products/products-operations';
 import Modal from '../Modal/Modal';
 import { countDailyCalorieIntake } from '../Modal/Formula';
 import { authSelectors } from '../../redux/auth';
-import { getNotAllowedProducts } from '../../redux/products';
+import { getNotAllowedProducts } from '../../redux/products/products-selectors';
 import { sendUserParameters } from '../../service/user-parameters-api';
-import { useHistory } from 'react-router-dom';
-import { updateUserInfo } from '../../redux/products/products-operations';
+import styles from './DailyCaloriesForm.module.scss';
 
 const SignupSchema = Yup.object().shape({
   height: Yup.number()
@@ -45,28 +43,21 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function DailyCaloriesForm() {
-  // const history = useHistory();
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
   const [modalActive, setModalActive] = useState(false);
   const [calories, setCalories] = useState('');
   const [userInfo, setUserInfo] = useState({});
-  const dispatсh = useDispatch();
-  const fetchProducts = bloodGroup => dispatсh(getProducts(bloodGroup));
-  const getUserInfo = () => dispatсh(updateUserInfo());
-  const products = useSelector(getNotAllowedProducts);
   const [clientWidth, setClientWidth] = useState(
     document.documentElement.clientWidth,
   );
+  const dispatсh = useDispatch();
+  const fetchProducts = bloodGroup =>
+    dispatсh(getProductsRecommendation(bloodGroup));
+  const products = useSelector(getNotAllowedProducts);
 
-  products.length !== 0 &&
-    localStorage.setItem(
-      'user',
-      JSON.stringify({ ...userInfo, productsNotAllowed: products }),
-    );
   isAuthenticated &&
     products.length !== 0 &&
-    sendUserParameters({ ...userInfo, productsNotAllowed: products }) &&
-    getUserInfo();
+    sendUserParameters({ ...userInfo, productsNotAllowed: products });
 
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
@@ -75,7 +66,6 @@ export default function DailyCaloriesForm() {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -90,15 +80,6 @@ export default function DailyCaloriesForm() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
-  // let timer;
-  // const refreshPage = () => {
-  //   timer = setTimeout(function () {
-  //     history.push('/diary');
-  //     history.push('/calculator');
-  //     timer = clearTimeout(timer);
-  //   }, 2500);
-  // };
 
   return (
     <div>
@@ -132,9 +113,6 @@ export default function DailyCaloriesForm() {
             fetchProducts(values.bloodGroup);
             setUserInfo({ ...values });
             sendUserParameters({ ...values });
-            // history.push('/diary');
-            // history.push('/calculator');
-            // refreshPage();
           }}
         >
           {({ values, handleSubmit, isValid, dirty, handleChange }) => (

@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+
 const getStateProducts = state => state.products.products;
 const getSearchList = state => state.products.searchList;
 const getLoader = state => state.products.isLoading;
@@ -8,7 +10,11 @@ const isLoading = state => state.products.isLoading;
 const notification = state => state.products.notification;
 const modalAddProduct = state => state.products.modalAddProduct;
 const modalAddNewProduct = state => state.products.modalAddNewProduct;
-const userParameters = state => state.products.userParameters;
+const getUserParameters = state => state.products.userParameters;
+
+const getCaloriesListPerDay = createSelector([getStateProducts], products => {
+  return products.map(product => product.calories);
+});
 
 export {
   getStateProducts,
@@ -19,7 +25,8 @@ export {
   getCurrentDate,
   modalAddProduct,
   isTotalPages,
-  userParameters,
+  getUserParameters,
   modalAddNewProduct,
   notification,
+  getCaloriesListPerDay,
 };

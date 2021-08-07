@@ -74,7 +74,7 @@ const searchProducts = (value, page, limit) => async dispatch => {
   }
 };
 
-const getProducts = bloodGroup => async dispatch => {
+const getProductsRecommendation = bloodGroup => async dispatch => {
   dispatch(fetchRecommendationRequest());
   try {
     const { data } = await serviceAPI.getnotAllowedProducts(bloodGroup);
@@ -84,18 +84,20 @@ const getProducts = bloodGroup => async dispatch => {
   }
 };
 
-const updateUserInfo = () => async dispatch => {
+const getUserInfo = () => async dispatch => {
   dispatch(updateUserInfoRequest());
   try {
     const {
       data: { userInfo },
     } = await serviceAPI.getUserParameters();
-    localStorage.setItem('user', JSON.stringify(userInfo));
-    userInfo.weight &&
-      localStorage.setItem(
-        'dailyCalorieIntake',
-        JSON.stringify(countDailyCalorieIntake(userInfo)),
-      );
+    userInfo.productsNotAllowed &&
+      dispatch(actions.fetchRecommendationSuccess(userInfo.productsNotAllowed));
+    // localStorage.setItem('user', JSON.stringify(userInfo));
+    // userInfo.weight &&
+    //   localStorage.setItem(
+    //     'dailyCalorieIntake',
+    //     JSON.stringify(countDailyCalorieIntake(userInfo)),
+    //   );
     dispatch(updateUserInfoSuccess(userInfo));
   } catch (error) {
     dispatch(updateUserInfoError(error.message));
@@ -118,7 +120,7 @@ export {
   deleteProducts,
   dowloadProducts,
   searchProducts,
-  getProducts,
-  updateUserInfo,
+  getProductsRecommendation,
+  getUserInfo,
   addNewProduct,
 };
