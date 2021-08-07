@@ -8,6 +8,7 @@ import {
   getNotAllowedProducts,
   getCurrentDate,
   getCaloriesListPerDay,
+  getLoader,
 } from '../../redux/products/products-selectors';
 // import LoaderComponent from '../LoaderComponent';
 // import { countDailyCalorieIntake } from '../Modal/Formula';
@@ -19,29 +20,27 @@ const RightInfoPanel = () => {
   const caloriesListPerDay = useSelector(getCaloriesListPerDay);
   const notAllowedProducts = useSelector(getNotAllowedProducts);
   const userParameters = useSelector(getUserParameters);
+  const isLoading = useSelector(getLoader);
 
   const notAllowedProductsString =
     notAllowedProducts.length === 0
       ? userParameters.productsNotAllowed
       : notAllowedProducts.join(', ');
 
-  // const isLoader = useSelector(getLoader);
+  const recommendationToShow =
+    notAllowedProductsString.length === 0
+      ? 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
+      : notAllowedProductsString;
 
   const dispatch = useDispatch();
   const takeUserInfo = () => dispatch(getUserInfo());
 
   const [dailyCal, setDailyCal] = useState(0);
 
-  // const notAllowedProducts =
-  //   userInfo && userInfo.productsNotAllowed.length !== 0
-  //     ? productsToString(userInfo.productsNotAllowed)
-  //     : 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!';
-
   useEffect(() => {
     takeUserInfo();
+    console.log(notAllowedProductsString);
   }, []);
-
-  useEffect(() => {});
 
   const sumCalories = arrayCalories => {
     if (arrayCalories.length > 0) {
@@ -53,9 +52,7 @@ const RightInfoPanel = () => {
     }
   };
 
-  const eating = !userParameters
-    ? '000'
-    : Math.round(sumCalories(caloriesListPerDay)); //Употреблено
+  const eating = Math.round(sumCalories(caloriesListPerDay)); //Употреблено
   const dailyRate = !userParameters ? '000' : Math.round(dailyCal); //Дневная норма
   const remaining = !userParameters ? '000' : Math.round(dailyRate) - eating; //Осталось
 
@@ -87,7 +84,6 @@ const RightInfoPanel = () => {
     }
   };
   return (
-    // <div className={styles.mainContainerForRightBar}>
     <div className={styles.panelContainer}>
       <div className={styles.panelContainerInner}>
         <div className={styles.contentBlock}>
@@ -117,11 +113,10 @@ const RightInfoPanel = () => {
         </div>
         <div className={styles.productsBlock}>
           <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
-          <span className={styles.products}>{notAllowedProductsString}</span>
+          <span className={styles.products}>{recommendationToShow}</span>
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 export default RightInfoPanel;

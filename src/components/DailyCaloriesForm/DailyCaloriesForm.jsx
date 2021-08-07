@@ -53,11 +53,11 @@ export default function DailyCaloriesForm() {
   const dispatсh = useDispatch();
   const fetchProducts = bloodGroup =>
     dispatсh(getProductsRecommendation(bloodGroup));
-  const products = useSelector(getNotAllowedProducts);
+  const notAllowedProducts = useSelector(getNotAllowedProducts);
 
   isAuthenticated &&
-    products.length !== 0 &&
-    sendUserParameters({ ...userInfo, productsNotAllowed: products });
+    notAllowedProducts.length !== 0 &&
+    sendUserParameters({ ...userInfo, productsNotAllowed: notAllowedProducts });
 
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
@@ -106,10 +106,10 @@ export default function DailyCaloriesForm() {
           }}
           onSubmit={values => {
             setCalories(countDailyCalorieIntake(values));
-            localStorage.setItem(
-              'dailyCalorieIntake',
-              JSON.stringify(countDailyCalorieIntake(values)),
-            );
+            // localStorage.setItem(
+            //   'dailyCalorieIntake',
+            //   JSON.stringify(countDailyCalorieIntake(values)),
+            // );
             fetchProducts(values.bloodGroup);
             setUserInfo({ ...values });
             sendUserParameters({ ...values });
