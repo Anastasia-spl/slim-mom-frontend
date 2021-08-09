@@ -16,7 +16,6 @@ const { actions, reducer } = createSlice({
       state.isLoading = true;
     },
     registerSuccess: (state, { payload }) => {
-      console.log(payload);
       state.user = payload.user;
       state.token = payload.user.token;
       state.isLoading = false;

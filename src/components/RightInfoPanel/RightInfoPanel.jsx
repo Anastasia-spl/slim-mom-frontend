@@ -11,7 +11,7 @@ import {
   getLoader,
   getDailyCaloriesIntake,
 } from '../../redux/products/products-selectors';
-// import LoaderComponent from '../LoaderComponent';
+import Loader from '../Loader';
 // import { countDailyCalorieIntake } from '../Modal/Formula';
 // import { actions } from '../../redux/products/products-reducer';
 import styles from './RightInfoPanel.module.scss';
@@ -21,7 +21,6 @@ const RightInfoPanel = () => {
   const dailyCaloriesIntake = useSelector(getDailyCaloriesIntake);
   const caloriesListPerDay = useSelector(getCaloriesListPerDay);
   const notAllowedProducts = useSelector(getNotAllowedProducts);
-  // const userParameters = useSelector(getUserParameters);
   const isLoading = useSelector(getLoader);
 
   const dispatch = useDispatch();
@@ -34,7 +33,8 @@ const RightInfoPanel = () => {
   const notAllowedProductsString =
     notAllowedProducts.length === 0
       ? 'Здесь будет отображаться Ваш рацион. Для этого заполните форму в калькуляторе!'
-      : notAllowedProducts.join(', ');
+      : notAllowedProducts[0][0].toUpperCase() +
+        notAllowedProducts.join(', ').slice(1);
 
   const sumCalories = arrayCalories => {
     if (arrayCalories.length > 0) {
@@ -45,8 +45,6 @@ const RightInfoPanel = () => {
       return '000';
     }
   };
-
-  console.log(dailyCaloriesIntake);
 
   const eating = Math.round(sumCalories(caloriesListPerDay)); //Употреблено
   const dailyRate = Math.round(dailyCaloriesIntake); //Дневная норма
@@ -81,37 +79,41 @@ const RightInfoPanel = () => {
   };
   return (
     <div className={styles.panelContainer}>
-      <div className={styles.panelContainerInner}>
-        <div className={styles.contentBlock}>
-          <div className={styles.informationListBlock}>
-            <h5 className={styles.informationListTitle}>Сводка за {date}</h5>
-            <ul className={styles.list}>
-              {displayRemaining(remaining)}
-              <li key="qk-2" className={styles.listItem}>
-                <span>Употреблено</span>
-                <span className={styles.listItemValue}>{eating} ккал</span>
-              </li>
-              <li key="qk-3" className={styles.listItem}>
-                <span>Дневная норма</span>
-                <span className={styles.listItemValue}>{dailyRate} ккал</span>
-              </li>
-              <li key="qk-4" className={styles.listItem}>
-                <span>n% от нормы</span>
-                <span className={styles.listItemValue}>
-                  {isNaN(percentOfRate) || percentOfRate === Infinity
-                    ? 0
-                    : percentOfRate}
-                  %
-                </span>
-              </li>
-            </ul>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.panelContainerInner}>
+          <div className={styles.contentBlock}>
+            <div className={styles.informationListBlock}>
+              <h5 className={styles.informationListTitle}>Сводка за {date}</h5>
+              <ul className={styles.list}>
+                {displayRemaining(remaining)}
+                <li key="qk-2" className={styles.listItem}>
+                  <span>Употреблено</span>
+                  <span className={styles.listItemValue}>{eating} ккал</span>
+                </li>
+                <li key="qk-3" className={styles.listItem}>
+                  <span>Дневная норма</span>
+                  <span className={styles.listItemValue}>{dailyRate} ккал</span>
+                </li>
+                <li key="qk-4" className={styles.listItem}>
+                  <span>n% от нормы</span>
+                  <span className={styles.listItemValue}>
+                    {isNaN(percentOfRate) || percentOfRate === Infinity
+                      ? 0
+                      : percentOfRate}
+                    %
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className={styles.productsBlock}>
+            <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
+            <span className={styles.products}>{notAllowedProductsString}</span>
           </div>
         </div>
-        <div className={styles.productsBlock}>
-          <h5 className={styles.productsTitle}>Нерекомендуемые продукты</h5>
-          <span className={styles.products}>{notAllowedProductsString}</span>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -260,6 +260,8 @@
 }
 
 .modalLoader {
+  position: relative;
+  height: 100px;
   @include for-size(desktop) {
     margin-right: 70px;
   }

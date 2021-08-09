@@ -61,6 +61,11 @@ export default function DailyCaloriesForm() {
       actions.updateDailyCaloriesIntake(countDailyCalorieIntake(parameters)),
     );
 
+  notAllowedProducts.length !== 0 &&
+    localStorage.setItem(
+      'user',
+      JSON.stringify({ ...userInfo, productsNotAllowed: notAllowedProducts }),
+    );
   isAuthenticated &&
     notAllowedProducts.length !== 0 &&
     sendUserParameters({ ...userInfo, productsNotAllowed: notAllowedProducts });

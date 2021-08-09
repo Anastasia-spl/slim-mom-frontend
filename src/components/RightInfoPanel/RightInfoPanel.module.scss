@@ -243,6 +243,7 @@
   line-height: 35px;
   letter-spacing: 0.04em;
   color: $secondary-text-color;
+
   @include for-size(tablet) {
     display: flex;
     flex-direction: row;
@@ -252,6 +253,7 @@
     min-width: 280px;
   }
 }
+
 .contentBlock {
   display: flex;
   flex-direction: column;
