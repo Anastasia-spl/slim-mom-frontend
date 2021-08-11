@@ -1,0 +1,66 @@
+@import '../../assets/baseStyles.scss';
+
+.background {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  top: 0;
+  @include for-size(tablet) {
+    min-height: 100vh;
+    background-image: url('../../assets/pictures/shapeGrayAuthTablet.svg');
+    background-position: bottom 0px right 0px;
+    background-repeat: no-repeat;
+    background-size: 70% auto;
+  }
+
+  @include for-size(desktop) {
+    min-height: 100vh;
+    background-image: url('../../assets/pictures/shapeGrayAuth.svg');
+    background-position: bottom 0px right 0px;
+    background-repeat: no-repeat;
+    background-size: 62% auto;
+  }
+}
+
+.strowberry {
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: -85px;
+    bottom: 200px;
+    pointer-events: none;
+  }
+  @include for-size(desktop) {
+    right: 45px;
+    top: 150px;
+  }
+}
+
+.banana {
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: -300px;
+    bottom: -100px;
+    pointer-events: none;
+  }
+  @include for-size(desktop) {
+    right: -220px;
+    bottom: -50px;
+  }
+}
+
+.leaves {
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 250px;
+    pointer-events: none;
+  }
+  @include for-size(desktop) {
+    right: 250px;
+    bottom: 0px;
+  }
+}

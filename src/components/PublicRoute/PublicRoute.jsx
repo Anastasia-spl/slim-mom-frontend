@@ -1,24 +1,25 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-// import { usersSelectors } from '../redux/users';
-/**
- * - Если маршрут ограниченный, и пользователь залогинен, рендерит редирект на /todos
- * - В противном случае рендерит компонент
- */
+import { authSelectors } from '../../redux/auth';
+import Loader from '../Loader';
+
 const PublicRoute = ({ component: Component, redirectTo, ...routeProps }) => {
-  //ПРИМЕР
-  // const isAuthenticated = useSelector(usersSelectors.getIsAuthenticated);
-  const isAuthenticated = false;
+  const isLoggedOn = useSelector(authSelectors.getLoggedOn);
+  const isLoading = useSelector(authSelectors.getLoading);
 
   return (
     <Route
       {...routeProps}
       render={props =>
-        isAuthenticated && routeProps.restricted ? (
-          <Redirect to={redirectTo} />
-        ) : (
+        isLoading ? (
+          <div>
+            <Loader type="Rings" color="#999999" height={80} width={80} />
+          </div>
+        ) : !isLoggedOn ? (
           <Component {...props} />
+        ) : (
+          <Redirect to={redirectTo} />
         )
       }
     />

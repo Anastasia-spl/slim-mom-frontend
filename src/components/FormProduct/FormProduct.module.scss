@@ -1,0 +1,86 @@
+@import '../../assets/baseStyles.scss';
+@import '../../pages/Diary/Diary.module.scss';
+
+.diary__nameProduct {
+  width: 242px;
+  margin-right: 30px;
+  padding-bottom: 19px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+
+  outline: none;
+
+  color: $secondary-text-color;
+  vertical-align: top;
+
+  @include font(700, 14px, 17px, $primary-font, $primary-letter-spacing);
+
+  &:focus {
+    color: $primary-text-color;
+  }
+  @include for-size(tablet-only) {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+.diary__volumProduct {
+  width: 106px;
+  margin-right: 75px;
+  padding-bottom: 19px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  outline: none;
+
+  color: $secondary-text-color;
+  text-align: right;
+
+  @include font(700, 14px, 17px, $primary-font, $primary-letter-spacing);
+
+  &:focus {
+    color: $primary-text-color;
+  }
+  @include for-size(tablet-only) {
+    margin-top: 30px;
+    margin-right: 0;
+    margin-bottom: 60px;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.diary__btnAddProduct {
+  @include orangeBtn();
+  width: 50px;
+  height: 50px;
+  @include font(300, 30px, 17px, $secondary-font, $primary-letter-spacing);
+
+  @include for-size(tablet-only) {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    @include orangeBtn();
+  }
+}
+
+.btnClearInput {
+  position: absolute;
+  top: 10px;
+  left: 240px;
+  border: none;
+  outline: none;
+  background-color: white;
+
+  cursor: pointer;
+
+  @include for-size(tablet-only) {
+    top: 2px;
+    left: 270px;
+  }
+}
+
+.iconClearInput:hover path {
+  fill: #fc842d;
+
+  transition: fill $cubic;
+}

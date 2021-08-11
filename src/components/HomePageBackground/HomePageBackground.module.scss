@@ -1,0 +1,96 @@
+@import '../../assets/baseStyles.scss';
+
+.background {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  transition: 250ms cubic-bezier(linear);
+  @include for-size(tablet) {
+    min-height: 100vh;
+    height: 1024px;
+    background-image: url('../../assets/pictures/shapeGrayAuthTablet.svg');
+    background-position: bottom 0px right 0px, 0 30px;
+    background-repeat: no-repeat;
+    background-size: 70%;
+  }
+  @include for-size(desktop) {
+    min-height: 100vh;
+    background-image: url('../../assets/pictures/shapeGrayAuth.svg'),
+      url('../../assets/pictures/diary-leaves-tablet@2x.png');
+    background-position: bottom -7px right -220px, 880px -53px;
+    background-repeat: no-repeat;
+    background-size: 62%, 10%;
+  }
+}
+
+.strawberry {
+  display: none;
+  transition: 250ms cubic-bezier(linear);
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: 15px;
+    bottom: -80px;
+  }
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    right: 70px;
+    top: 567px;
+  }
+}
+
+.banana {
+  display: none;
+  transition: 250ms cubic-bezier(linear);
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: -237px;
+    bottom: -185px;
+    pointer-events: none;
+  }
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    right: -13%;
+    bottom: 400px;
+    pointer-events: none;
+  }
+}
+
+.leaves {
+  display: none;
+  transition: 250ms cubic-bezier(linear);
+  @include for-size(tablet) {
+    display: block;
+    position: absolute;
+    right: 310px;
+    bottom: -90px;
+    pointer-events: none;
+  }
+
+  @media screen and (min-width: 758px) {
+    right: 30%;
+    bottom: -270px;
+  }
+
+  @media screen and (min-width: 926px) {
+    right: 389px;
+    bottom: -370px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    right: 319px;
+    bottom: -130px;
+  }
+
+  @include for-size(desktop) {
+    display: block;
+    position: absolute;
+    right: 285px;
+    bottom: 50px;
+    pointer-events: none;
+  }
+}

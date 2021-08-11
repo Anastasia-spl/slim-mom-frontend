@@ -1,22 +1,22 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import { usersSelectors } from '../redux/users';
+import { authSelectors } from '../../redux/auth';
+import Loader from '../Loader';
 
-/**
- * - Если маршрут приватный и пользователь залогинен, рендерит компонент
- * - В противном случае рендерит Redirect на /login
- */
 const PrivateRoute = ({ component: Component, redirectTo, ...routeProps }) => {
-  //ПРИМЕР
-  // const isAuthenticated = useSelector(usersSelectors.getIsAuthenticated);
-  const isAuthenticated = false;
+  const isLoggedOn = useSelector(authSelectors.getLoggedOn);
+  const isLoading = useSelector(authSelectors.getLoading);
 
   return (
     <Route
       {...routeProps}
       render={props =>
-        isAuthenticated ? (
+        isLoading ? (
+          <div>
+            <Loader type="Rings" color="#999999" height={80} width={80} />
+          </div>
+        ) : isLoggedOn ? (
           <Component {...props} />
         ) : (
           <Redirect to={redirectTo} />

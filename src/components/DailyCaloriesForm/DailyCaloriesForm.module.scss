@@ -1,0 +1,162 @@
+@import '../../assets/baseStyles.scss';
+
+.formWrapper {
+  width: 100%;
+  padding: 110px 15px 80px 15px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+
+  @include for-size(tablet) {
+    padding: 122px 67px 60px 87px;
+    margin-top: 78px;
+  }
+  @include for-size(desktop) {
+    padding: 292px 0 60px 115px;
+    width: 60vw;
+    margin-top: 0;
+  }
+}
+
+.header {
+  font-family: Verdana;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: normal;
+  margin: 0;
+  padding-bottom: 30px;
+  padding-right: 5%;
+  @include for-size(tablet) {
+    @include font(700, 30px, 1.21);
+    padding: 0 0 60px 0;
+    letter-spacing: normal;
+  }
+  @include for-size(desktop) {
+    @include font(700, 34px, 1.21);
+    padding: 0 5% 68px 0;
+    letter-spacing: normal;
+  }
+}
+
+.formUser {
+  font-family: Verdana;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: $primary-letter-spacing;
+  color: $secondary-text-color;
+}
+
+.form {
+  @include for-size(tablet) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  @include for-size(desktop) {
+    width: 83%;
+  }
+}
+
+.input::placeholder,
+.label {
+  @include font(700, 14px, 1.21);
+  color: $secondary-text-color;
+}
+
+.input {
+  display: block;
+  width: 80%;
+  padding: 5px;
+  margin: 0 0 40px 0;
+  border: none;
+  border-bottom: 1px solid $light-gray;
+  background: transparent;
+  @include font(500, 14px, 1.41);
+  outline: transparent;
+
+  @include for-size(tablet) {
+    padding: 19px 19px 19px 0;
+    width: 100%;
+  }
+
+  &:focus {
+    border-bottom: 2px solid $secondary-text-color;
+  }
+}
+
+.notification {
+  position: relative;
+  top: -20px;
+  margin: 0;
+  width: 150px;
+  @include font(400, 10px, 1.16);
+  color: rgb(184, 0, 0);
+}
+
+.btnSubmit {
+  margin: 40px auto 0 auto;
+  @include orangeBtn;
+
+  @include for-size(tablet) {
+    margin: 30px 0 0 0;
+    grid-row: 4 / span 1;
+  }
+  @include for-size(desktop) {
+    grid-column: 2 / 3;
+    margin: 0 auto 20px auto;
+  }
+}
+
+.age {
+  @include for-size(tablet) {
+    grid-row: 2 / span 1;
+  }
+}
+
+.weight {
+  @include for-size(tablet) {
+    grid-row: 3 / span 1;
+  }
+}
+
+.radiogroup {
+  width: 80%;
+  @include flexbox($jc: space-between);
+  padding-top: 10px;
+  @include for-size(tablet) {
+    margin-top: 10px;
+  }
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid $light-gray;
+  outline: none;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  vertical-align: text-top;
+  &:checked {
+    outline: none;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    border: 2px solid $light-gray;
+  }
+
+  &:checked:after {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: relative;
+    background-color: $accent-color;
+    content: '';
+    display: block;
+    visibility: visible;
+  }
+}

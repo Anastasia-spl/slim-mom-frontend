@@ -1,0 +1,21 @@
+@import '../../assets/baseStyles.scss';
+
+.boxBtn {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 45px;
+  @include for-size(tablet) {
+    display: none;
+  }
+}
+
+.openModal {
+  @include orangeBtn;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  @include font(300, 30px, 17px, $secondary-font, $primary-letter-spacing);
+}

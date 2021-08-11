@@ -1,36 +1,44 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST,
-PURGE, REGISTER } from 'redux-persist';
+import { configureStore } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 
-/* ПРИМЕР ИМПОРТА РЕДЬЮСЕРОВ*/
+import { reducer } from './products';
+import { authSlice } from './auth';
 
-import { usersReducer } from './users';
-// import { someReducer } from './folderName';
+const middleware = getDefaultMiddleware =>
+  getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+    logger,
+  });
 
-const middleWare = [
-  ...getDefaultMiddleware({
-	serializableCheck: {
-		ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-}}), logger];
-
-const usersPersistConfig = {
+const authPersistConfig = {
   key: 'authToken',
   storage,
   whitelist: ['token'],
-}
+};
 
-// const store = configureStore({
-//   reducer: {
-//     // foodOrDate: someReducer,
-//     auth: persistReducer(usersPersistConfig, usersReducer)
-//   },
-//   middleWare,
-//   devTools: process.env.NODE_ENV === "development",
-// });
+const store = configureStore({
+  reducer: {
+    auth: persistReducer(authPersistConfig, authSlice.reducer),
+    products: reducer,
+  },
+  middleware,
+  devTools: process.env.NODE_ENV === 'development',
+});
 
-// const persistor = persistStore(store);
+const persistor = persistStore(store);
 
 // eslint-disable-next-line
-// export { store, persistor };
+export { store, persistor };

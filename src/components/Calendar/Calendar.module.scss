@@ -1,0 +1,22 @@
+@import '../../assets/baseStyles.scss';
+
+.calendar {
+  position: relative;
+  width: 260px;
+  height: 38px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  @include font(700, 34px, 41px, $primary-font, $primary-letter-spacing);
+
+  @include for-size(tablet-only) {
+    width: 138px;
+    height: 20px;
+    @include font(700, 18px, 22px, $primary-font, $primary-letter-spacing);
+  }
+}
+
+.react-datepicker-popper {
+  inset: 100px 100px 100px 100px;
+}

@@ -1,5 +1,10 @@
-import Container from '../components/Container';
+import HomePageBackground from '../components/HomePageBackground';
+import DailyCaloriesForm from '../components/DailyCaloriesForm';
 
 export default function HomePage() {
-  return <div>asdf</div>;
+  return (
+    <HomePageBackground>
+      <DailyCaloriesForm />
+    </HomePageBackground>
+  );
 }

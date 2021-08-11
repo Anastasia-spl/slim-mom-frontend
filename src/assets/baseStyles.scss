@@ -1,0 +1,174 @@
+/*========================= FONTS =======================*/
+@font-face {
+  font-family: 'Verdana', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  src: local('Verdana'), url('./fonts/Verdana.ttf') format('truetype'),
+    url('./fonts/Verdana.eot') format('embedded-opentype'),
+    url('./fonts/Verdana.woff2') format('woff2'),
+    url('./fonts/Verdana.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Verdana', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  src: local('Verdana'), url('./fonts/Verdana-Bold.ttf') format('truetype'),
+    url('./fonts/Verdana-Bold.eot') format('embedded-opentype'),
+    url('./fonts/Verdana-Bold.woff2') format('woff2'),
+    url('./fonts/Verdana-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'GothamPro', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  src: local('GothamPro'), url('./fonts/GothamPro-Light.ttf') format('truetype'),
+    url('./fonts/GothamPro-Light.eot') format('embedded-opentype'),
+    url('./fonts/GothamPro-Light.woff2') format('woff2'),
+    url('./fonts/GothamPro-Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Gotham Pro', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  src: local('GothamPro'), url('./fonts/GothamPro-Bold.ttf') format('truetype'),
+    url('./fonts/GothamPro-Bold.eot') format('embedded-opentype'),
+    url('./fonts/GothamPro-Bold.woff2') format('woff2'),
+    url('./fonts/GothamPro-Bold.woff') format('woff');
+}
+
+/*==================== VARIABLES =======================*/
+
+// Fonts
+$primary-font: 'Verdana', sans-serif;
+$secondary-font: 'Gotham Pro', sans-serif;
+$primary-letter-spacing: 0.04em;
+
+// Colors
+$primary-text-color: #212121;
+$secondary-text-color: #9b9faa;
+$accent-text-color: #ffffff;
+$light-gray: #e0e0e0;
+
+$accent-color: #fc842d;
+
+$primary-bg-color: #ffffff;
+$secondary-bg-color: #f0f1f3;
+
+$decorative-color: #264061;
+//используется для фона бургер-меню и для текста суточной нормы ккал
+
+// transition
+$cubic: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+/*==================== MIXINS ==================*/
+
+@mixin for-size($range) {
+  $mobile: 320px;
+  $tablet: 768px;
+  $desktop: 1280px;
+
+  @if $range == mobile-only {
+    @media (max-width: #{$mobile}) {
+      @content;
+    }
+  } @else if $range == mobile {
+    @media (min-width: $mobile) {
+      @content;
+    }
+  } @else if $range == tablet-only {
+    @media (max-width: #{$tablet - 1}) {
+      @content;
+    }
+  } @else if $range == tablet {
+    @media (min-width: $tablet) {
+      @content;
+    }
+  } @else if $range == desktop-only {
+    @media (max-width: #{$desktop - 1}) {
+      @content;
+    }
+  } @else if $range == desktop {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  }
+}
+
+@mixin flexbox($jc: center, $ai: center) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+}
+
+@mixin font(
+  $weight,
+  $size,
+  $line-height,
+  $font-family: $primary-font,
+  $letter-spacing: $primary-letter-spacing
+) {
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $line-height;
+  font-family: $font-family;
+  letter-spacing: $letter-spacing;
+}
+
+/*==================== INPUT-AUTOFILL ==================*/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+}
+
+@mixin orangeBtn {
+  width: 176px;
+  background-color: $accent-color;
+  color: $accent-text-color;
+  padding: 13px 0;
+  display: block;
+  @include font(700, 14px, 1.21);
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+  border-radius: 30px;
+  transition: $cubic;
+
+  &:disabled {
+    background-color: $secondary-text-color;
+    box-shadow: 0px 4px 10px rgba(102, 102, 102, 0.5);
+  }
+  &:hover:not([disabled]) {
+    background-color: $accent-text-color;
+    color: $accent-color;
+    border: 2px solid $accent-color;
+  }
+}
+
+@mixin outlinedBtn {
+  width: 176px;
+  background-color: $accent-text-color;
+  color: $accent-color;
+  border: 2px solid $accent-color;
+  padding: 13px 0;
+  display: block;
+  @include font(700, 14px, 1.21);
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+  border-radius: 30px;
+  transition: $cubic;
+
+  &:hover {
+    background-color: $accent-color;
+    color: $accent-text-color;
+    border: 2px solid $accent-color;
+  }
+}

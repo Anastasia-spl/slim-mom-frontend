@@ -1,0 +1,60 @@
+@import '../../assets/baseStyles.scss';
+
+.diary__form {
+  &Mobile {
+    position: relative;
+    display: flex;
+    margin-top: 60px;
+    align-items: center;
+    @include for-size(tablet-only) {
+      display: none;
+    }
+  }
+
+  &Modal {
+    position: relative;
+    @include for-size(tablet-only) {
+      display: block;
+      margin-top: 80px;
+      align-items: center;
+    }
+  }
+}
+
+.diary {
+  min-height: 43%;
+  @include for-size(desktop) {
+    padding-top: 292px;
+    padding-left: 115px;
+    padding-bottom: 45px;
+    padding-right: 30px;
+    width: 58.2vw;
+  }
+
+  @include for-size(desktop-only) {
+    padding-bottom: 45px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 589px;
+  }
+
+  @include for-size(tablet-only) {
+    align-items: center;
+    padding-bottom: 45px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 320px;
+  }
+}
+.flexContainer {
+  height: 100vh;
+  @include for-size(mobile) {
+    padding-top: 160px;
+  }
+  @include for-size(desktop) {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,121 @@
+@import '../../assets/baseStyles.scss';
+
+.loginisation {
+  max-height: 100vh;
+  height: 100%;
+}
+
+.title {
+  @include font(700, 14px, 0.95, $secondary-font);
+  color: $accent-color;
+  text-transform: uppercase;
+  margin: 0 0 70px 0;
+}
+
+.form {
+  @include flexbox();
+  flex-direction: column;
+  margin-top: 110px;
+  padding: 10px;
+  z-index: 1;
+  @include for-size(tablet) {
+    display: block;
+    width: 400px;
+    margin-top: 261px;
+    margin-left: 80px;
+  }
+  @include for-size(desktop) {
+    margin-top: 352px;
+    margin-left: 105px;
+  }
+}
+
+.input__form {
+  position: relative;
+  width: 240px;
+  height: 45px;
+  margin-bottom: 40px;
+}
+
+.label {
+  @include font(700, 14px, 1.21);
+  color: $secondary-text-color;
+}
+
+.label__error {
+  @include font(700, 14px, 1.21);
+  color: rgb(184, 0, 0);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background: transparent;
+  @include font(400, 12px, 1.41);
+  outline: transparent;
+}
+
+.input__error {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin: 0 0 40px 0;
+  border: none;
+  border-bottom: 1px solid rgb(184, 0, 0);
+  background: transparent;
+  @include font(400, 12px, 1.41);
+  outline: transparent;
+}
+
+.notification {
+  position: absolute;
+  bottom: -30%;
+  left: 0;
+  margin: 0;
+  width: 150px;
+  @include font(400, 10px, 1.16);
+  color: rgb(184, 0, 0);
+}
+
+.buttons {
+  @include flexbox();
+  flex-direction: column;
+  @include for-size(tablet) {
+    @include flexbox(flex-start, flex-end);
+    flex-direction: row;
+    margin-top: 60px;
+  }
+}
+
+.btn__eye {
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+  @include flexbox();
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.img {
+  display: block;
+  width: 20px;
+}
+
+.btn__login {
+  margin-bottom: 20px;
+  @include orangeBtn();
+  @include for-size(tablet) {
+    margin: 0 60px 0 0;
+  }
+}
+
+.btn__register {
+  @include outlinedBtn();
+  @include flexbox();
+}

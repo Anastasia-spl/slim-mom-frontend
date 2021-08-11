@@ -1,0 +1,268 @@
+@import '../../assets/baseStyles.scss';
+
+.modalBackdrop {
+  z-index: 10;
+  position: absolute;
+  @include for-size(mobile) {
+    top: 700px;
+    left: 15px;
+  }
+
+  @media screen and (min-width: 321px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #21212112;
+    transform: scale(0);
+  }
+}
+
+.modalBackdrop.active {
+  transform: scale(1);
+}
+
+.modalRectangle {
+  @include for-size(mobile) {
+    background-color: #eff1f3;
+    width: 320px;
+    height: 40px;
+    position: absolute;
+    top: -620px;
+    left: -15px;
+    z-index: 10;
+  }
+  @include for-size(tablet) {
+    display: none;
+  }
+  @include for-size(desktop) {
+    display: none;
+  }
+}
+
+.modal {
+  background-color: $accent-text-color;
+  position: absolute;
+
+  @include for-size(mobile) {
+    max-width: 320px;
+    padding: 40px 0px 80px 0px;
+    top: -580px;
+    left: 0px;
+  }
+  @media screen and (min-width: 321px) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 22px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  @media screen and (min-width: 321px) and (max-width: 767px) {
+    max-width: 370px;
+    margin-top: 120px;
+    padding: 64px 64px 80px 64px;
+  }
+
+  @include for-size(tablet) {
+    max-width: 594px;
+    padding: 64px 64px 80px 64px;
+  }
+
+  @include for-size(desktop) {
+    max-width: 690px;
+    padding: 64px 110px;
+  }
+}
+
+.modalClose2 {
+  @include for-size(mobile) {
+    background: url(../../pictures/close2.svg) no-repeat;
+    position: absolute;
+    left: 0px;
+    top: -605px;
+    width: 30px;
+    height: 30px;
+    z-index: 11;
+  }
+  @include for-size(tablet) {
+    display: none;
+  }
+  @include for-size(desktop) {
+    display: none;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.modalClose {
+  @media screen and (min-width: 321px) {
+    background: url(../../pictures/close.svg) no-repeat;
+    position: absolute;
+  }
+  @media screen and (min-width: 321px) and (max-width: 767px) {
+    right: 34px;
+    top: 24px;
+    width: 11px;
+    height: 11px;
+  }
+  @media screen and (min-width: 768px) {
+    right: 24px;
+    top: 24px;
+    width: 11px;
+    height: 11px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.modalTitle {
+  font-family: $primary-font;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0px;
+  color: $primary-text-color;
+  line-height: 1.44;
+
+  @include for-size(mobile) {
+    font-size: 18px;
+  }
+
+  @media screen and (min-width: 321px) {
+    text-align: center;
+  }
+
+  @media screen and (min-width: 321px) and (max-width: 767px) {
+    font-size: 16px;
+  }
+
+  @include for-size(tablet) {
+    font-size: 15px;
+  }
+
+  @include for-size(desktop) {
+    font-size: 23px;
+    line-height: 1.2;
+  }
+}
+
+.modalData,
+.madalCalories {
+  font-family: $primary-font;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: $decorative-color;
+  margin: 40px 0px 0px 0px;
+
+  @include for-size(tablet) {
+    margin: 22px 0px 0px 0px;
+  }
+}
+.modalData {
+  font-size: 48px;
+}
+.madalCalories {
+  font-size: 22px;
+}
+
+.modalLine {
+  background-color: $light-gray;
+  height: 1px;
+
+  @include for-size(mobile) {
+    width: 290px;
+    margin: 40px auto 0px auto;
+  }
+
+  @media screen and (min-width: 321px) and (max-width: 767px) {
+    width: 240px;
+    margin: 30px 0px 0px 0px;
+  }
+
+  @include for-size(tablet) {
+    width: 290px;
+    margin: 30px 0px 0px 0px;
+  }
+
+  @include for-size(desktop) {
+    width: 330px;
+    margin: 40px auto 0px auto;
+  }
+}
+
+.modalText {
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: $primary-text-color;
+}
+
+.modalAlignment {
+  @include for-size(desktop) {
+    display: block;
+    margin-left: 70px;
+  }
+}
+.modalProducts {
+  font-family: $primary-font;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: $primary-text-color;
+  @include for-size(mobile) {
+    margin: 20px 0px 0px 0px;
+  }
+  @include for-size(desktop) {
+    margin: 12px 0px 0px 0px;
+  }
+}
+
+.modalBlockList {
+  padding: 0px 0px 0px 20px;
+  margin: 0px;
+}
+.modalBlockList li:nth-of-type(1n + 5) {
+  display: none;
+}
+
+.modalList {
+  font-family: $primary-font;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: $secondary-text-color;
+  text-transform: capitalize;
+  @include for-size(mobile) {
+    margin: 20px 0px 0px 0px;
+  }
+  @include for-size(desktop) {
+    margin: 22px 0px 0px 0px;
+  }
+}
+
+.modalButton {
+  margin: 40px auto 0px auto;
+  @include orangeBtn;
+  @media screen and (min-width: 321px) and (max-width: 767px) {
+    margin-bottom: 80px;
+  }
+}
+
+.modalLoader {
+  position: relative;
+  height: 100px;
+  @include for-size(desktop) {
+    margin-right: 70px;
+  }
+}

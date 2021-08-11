@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Худей легко!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Если хочешь похудеть, а держать в голове список съеденых продуктов не для тебя. Тогда быстрее регистрируйся в нашем приложении, и веди свой личный дневник похудения.
 
-## Available Scripts
+### Web-приложение [Slim Mom](https://slimmom5group.netlify.app/) предоставляет тебе возможность бесплатно хранить данные на сервере, иметь к ним доступ, и наглядно вести учет употребленных продуктов за день.
 
-In the project directory, you can run:
+#
 
-### `npm start`
+## Описание
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+При первом знакомстве с приложением, необходимо заполнить короткую форму, для
+корректной обработки данных именно под тебя). При успешной регистрации в личном
+дневнике: будет всегда выведена информация про список продуктов, от которых
+стоит воздержаться, и рекомендуемое количесто килокалорий в день.
 
-### `npm test`
+![фото модального окна ](modal.jpg)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Приложение предоставляет возможность подключится с любого удобного устройства:
+телефон, планшет, компьютер. Ежедневно ты сможешь добавлять и удалять в список:
+продукты и их количесто, употребленных за день. И подробный список продуктов,
+съеденных за весть день, будет сохранен для дальнейшего просмотра истории по
+дням.
 
-### `npm run build`
+![фото добавления продуктов ](addproducts.jpg)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Приложения будет доступно после авторизации пользователя !
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Фронт-часть приложения [Slim Mom](https://github.com/Anastasia-spl/slim-mom-frontend):
 
-### `npm run eject`
+## Бэк-часть приложения [Slim Mom](https://github.com/Anastasia-spl/slim-mom-backend):
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Для удобства можно просмотреть весь список путей, которые использываются в реализации этого приложения. Полное руководство описано на [slimmpm_api_docs](https://slim-mom-5group.herokuapp.com/api-docs/).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![фото перечня энд-поинтов ](swagger.jpg)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#
 
-## Learn More
+## Команда разработчиков:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![фото команды разработчиков ](team5.jpg)
 
-### Code Splitting
+- ## [Анастасия Левина ](https://github.com/Anastasia-spl/)
+- ## [Галина Грибова ](https://github.com/Axeliriya)
+- ## [Тумен Зориктуев ](https://github.com/TMNZKTV)
+- ## [Анастасия Бойко ](https://github.com/BoikoAnastasiia)
+- ## [Пётр Леснов ](https://github.com/Lesnov-Petr)
+- ## [Зинаида Разинькова ](https://github.com/Zinaida-Razinkova)
+- ## [Катерина Замятина ](https://github.com/Katerina-Zamiatina)
+- ## [Ирина Проценко ](https://github.com/PIrenka)
+- ## [Денис Тимофеев ](https://github.com/TMFV)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#
