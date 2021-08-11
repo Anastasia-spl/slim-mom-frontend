@@ -57,7 +57,6 @@ const RegisterForm = () => {
         validateOnBlur
         onSubmit={values => {
           onRegister({ ...values, ...dataUser });
-          console.log(dataUser);
         }}
         validationSchema={validationSchema}
       >

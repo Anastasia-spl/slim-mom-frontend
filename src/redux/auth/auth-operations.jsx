@@ -46,9 +46,9 @@ const logOut = () => async dispatch => {
 
   try {
     await apiService.logOutUser();
-
     token.unset();
     dispatch(authSlice.actions.logoutSuccess());
+    localStorage.setItem('user', JSON.stringify(null));
   } catch (error) {
     const err = error?.response?.data?.message || error?.response?.data?.status;
     toast.error(err);

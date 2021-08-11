@@ -249,7 +249,6 @@
     flex-direction: row;
   }
   @include for-size(desktop) {
-    // margin-bottom: 42px;
     min-width: 280px;
   }
 }

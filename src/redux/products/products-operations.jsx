@@ -1,7 +1,6 @@
 import serviceAPI from '../../service';
 import { toast } from 'react-toastify';
 import { actions } from '.';
-import { countDailyCalorieIntake } from '../../components/Modal/Formula';
 
 const {
   notificationAddNewProductSuccess,

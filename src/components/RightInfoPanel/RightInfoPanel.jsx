@@ -1,10 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { authSelectors } from '../../redux/auth';
+import { useEffect } from 'react';
 import { getUserInfo } from '../../redux/products/products-operations';
 import {
-  getUserParameters,
   getNotAllowedProducts,
   getCurrentDate,
   getCaloriesListPerDay,
@@ -12,8 +9,6 @@ import {
   getDailyCaloriesIntake,
 } from '../../redux/products/products-selectors';
 import Loader from '../Loader';
-// import { countDailyCalorieIntake } from '../Modal/Formula';
-// import { actions } from '../../redux/products/products-reducer';
 import styles from './RightInfoPanel.module.scss';
 
 const RightInfoPanel = () => {
@@ -24,10 +19,11 @@ const RightInfoPanel = () => {
   const isLoading = useSelector(getLoader);
 
   const dispatch = useDispatch();
-  const takeUserInfo = () => dispatch(getUserInfo());
 
   useEffect(() => {
+    const takeUserInfo = () => dispatch(getUserInfo());
     takeUserInfo();
+    // eslint-disable-next-line
   }, []);
 
   const notAllowedProductsString =
@@ -50,9 +46,7 @@ const RightInfoPanel = () => {
   const dailyRate = Math.round(dailyCaloriesIntake); //Дневная норма
   const remaining = Math.round(dailyRate) - eating; //Осталось
 
-  const percentOfRate = !authSelectors
-    ? '000'
-    : Math.trunc((eating / dailyRate) * 100); //n% от нормы
+  const percentOfRate = Math.trunc((eating / dailyRate) * 100); //n% от нормы
 
   const displayRemaining = remaining => {
     if (remaining !== '000' && remaining < 0) {

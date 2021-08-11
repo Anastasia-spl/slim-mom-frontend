@@ -46,10 +46,9 @@ const SignupSchema = Yup.object().shape({
 export default function DailyCaloriesForm() {
   const isAuthenticated = useSelector(authSelectors.getLoggedOn);
   const notAllowedProducts = useSelector(getNotAllowedProducts);
-
   const [modalActive, setModalActive] = useState(false);
   const [calories, setCalories] = useState('');
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(null);
   const [clientWidth, setClientWidth] = useState(
     document.documentElement.clientWidth,
   );
@@ -66,9 +65,15 @@ export default function DailyCaloriesForm() {
       'user',
       JSON.stringify({ ...userInfo, productsNotAllowed: notAllowedProducts }),
     );
-  isAuthenticated &&
-    notAllowedProducts.length !== 0 &&
-    sendUserParameters({ ...userInfo, productsNotAllowed: notAllowedProducts });
+
+  const shouldSendUserParameters =
+    isAuthenticated && userInfo && notAllowedProducts.length !== 0;
+
+  shouldSendUserParameters &&
+    sendUserParameters({
+      ...userInfo,
+      productsNotAllowed: notAllowedProducts,
+    });
 
   const handleResize = () => {
     const width = document.documentElement.clientWidth;
