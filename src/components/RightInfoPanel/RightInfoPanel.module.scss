@@ -13,7 +13,6 @@
   width: 100vw;
   padding-top: 40px;
   padding-bottom: 84px;
-  height: 57%;
   @include for-size(tablet) {
     width: 100vw;
     min-height: 350px;
@@ -37,6 +36,7 @@
     height: 100vh;
     min-height: 850px;
     padding-top: 292px;
+    height: 57%;
 
     background-repeat: no-repeat;
     background-position: top 0 right 0;
