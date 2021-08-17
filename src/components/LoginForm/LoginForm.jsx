@@ -9,6 +9,8 @@ import eyeCrossed from '../../assets/pictures/eye-crossed.svg';
 import * as yup from 'yup';
 import routes from '../../routes';
 
+import GoogleAuthBtn from '../GoogleAuth';
+
 const LoginForm = () => {
   const dispatch = useDispatch();
 
@@ -120,6 +122,8 @@ const LoginForm = () => {
                 {signup.label}
               </NavLink>
             </div>
+
+            <GoogleAuthBtn />
           </form>
         )}
       </Formik>
